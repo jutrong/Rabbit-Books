@@ -1,9 +1,0 @@
-@charset "utf-8";
-
-.id_card_box{display: none;}
-.id_card_box.active{display: block;}
-
-.id_card_box.small_business{background-color: #2f9f5b !important;}
-.id_card_box.mobile{background-color: #f45f5f !important;}
-.id_card_box.student{background-color: #5f93d9 !important;}
-.id_card_box.library{background-color: #f8ac00 !important;}

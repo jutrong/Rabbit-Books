@@ -1,0 +1,23 @@
+.login .header_menu{padding: 30px 100px 20px;}
+.login .header_menu .main_logo p{line-height: normal; font-size: 28px;}
+.login .main_logo a img{vertical-align: middle; width: 40px;}
+
+.login_container{height: calc(100vh - 160px);}
+.login_inner{position: relative; padding: 100px; display: flex; justify-content: space-between;}
+.login_left strong{margin-top: 50px; display: block; font-size: 50px;}
+.login_left p:not(.join_txt){padding-top: 5px; padding-bottom: 48px; font-size: 28px;}
+.login_left .join_txt{font-size: 16px;}
+.login_left .join_txt span{margin-left: 4px; color: #4D47C3; font-weight: 700; cursor: pointer;}
+.login_left img{display: block; width: 448px; position: absolute; left: 40%; transform: translateX(-50%); bottom: 0px; z-index: -1;}
+
+.login_form{width: 368px;}
+.login_form h2{font-size: 30px;}
+.login_form input[type=text] {margin-top: 28px; width: 100%; height: 62px; line-height: 62px; border-radius: 8px; background: #F0EFFF; border: 1px solid #F0EFFF;}
+.login_form input[type=text]::placeholder{color: #A7A3FF; font-size: 15px;}
+.login_features{display: flex; justify-content: space-between; margin-top: 22px;}
+.login_features *{font-size: 12px;}
+.login_form .blue_btn{margin-top: 46px; width: 100%; height: 60px; border-radius: 9px; box-shadow: 0px 4px 61px 0px rgba(77, 71, 195, 0.40);}
+.login_form p{margin-top: 32px; color: #4D4D4D; font-size: 12px; text-align: center;}
+
+.auth_login_list{margin-top: 32px; display: flex; gap:22px; justify-content: center;}
+.auth_login_list img{width: 42px;}

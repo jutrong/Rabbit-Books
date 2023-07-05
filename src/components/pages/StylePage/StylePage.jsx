@@ -35,7 +35,7 @@ const Style = () => {
                         >
                             <i></i>
                         </button>
-                        <input type="number" id="quantity" value="0" />
+                        <input type="number" id="quantity" />
                         <button type="button" id="plusBtn" className="plus_btn">
                             <i></i>
                         </button>
@@ -68,10 +68,10 @@ const Style = () => {
                     </div>
 
                     <select className="select w_156">
-                        <option value="0">select box</option>
-                        <option value="1">select option 1</option>
-                        <option value="2">select option 2</option>
-                        <option value="3">select option 3</option>
+                        <option>select box</option>
+                        <option>select option 1</option>
+                        <option>select option 2</option>
+                        <option>select option 3</option>
                     </select>
 
                     <br />
@@ -104,7 +104,6 @@ const Style = () => {
                         type="checkbox"
                         className="ch_check hide"
                         id="ipChk1"
-                        checked
                     />
                     <label htmlFor="ipChk1" className="label">
                         선택
@@ -136,7 +135,6 @@ const Style = () => {
                         name="inpRadio"
                         className="ch_radio hide"
                         id="inpRadio1"
-                        checked
                     />
                     <label htmlFor="inpRadio1" className="label">
                         선택
@@ -168,7 +166,6 @@ const Style = () => {
                         name="inpRadio2"
                         className="ch_radio hide"
                         id="inpRadio4"
-                        checked
                         disabled
                     />
                     <label htmlFor="inpRadio4" className="label">
@@ -519,7 +516,6 @@ const Style = () => {
                                     name="inquiry"
                                     className="ch_radio hide"
                                     id="inquiryRadio1"
-                                    checked
                                 />
                                 <label
                                     htmlFor="inquiryRadio1"
@@ -619,11 +615,7 @@ const Style = () => {
                         <tr>
                             <th>비밀 글 설정</th>
                             <td>
-                                <input
-                                    type="password"
-                                    className="w_200"
-                                    value="1234"
-                                />
+                                <input type="password" className="w_200" />
                                 <span className="grey_tag marleft_12">
                                     ※ 4자리 숫자입력
                                 </span>

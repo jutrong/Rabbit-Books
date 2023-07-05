@@ -1,11 +1,9 @@
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
-
     const navigate = useNavigate();
-
     const handleClick = () => {
-      navigate('/style');
+        navigate("/style");
     };
 
     return (
@@ -17,9 +15,7 @@ const Home = () => {
                 </li>
                 <li>
                     {/*<Link to="/style">스타일 가이드</Link>*/}
-                    <p onClick={handleClick}>
-                        스타일 가이드로 클릭!
-                    </p>
+                    <p onClick={handleClick}>스타일 가이드로 클릭!</p>
                 </li>
             </ul>
         </div>

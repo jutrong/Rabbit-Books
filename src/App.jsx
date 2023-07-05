@@ -3,6 +3,7 @@ import Style from './components/pages/StylePage/StylePage';
 import Home from './components/pages/HomePage/HomePage';
 import Layout from './components/atoms/Layout/Layout.jsx';
 import Login from './components/pages/LoginPage/LoginPage';
+import Mypage from './components/pages/Mypage/Mypage';
 
 const App = () => {
     return (
@@ -10,6 +11,7 @@ const App = () => {
             <Route path="/" element={<Layout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="style" element={<Style />} />
+                <Route path="mypage" element={<Mypage />} />
             </Route>
             <Route path="login" element={<Login />} />
         </Routes>

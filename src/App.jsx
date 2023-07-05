@@ -1,26 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/pages/HeaderPage/Header";
+import {Routes, Route} from "react-router-dom";
 import Style from "./components/pages/StylePage/StylePage";
-import Footer from "./components/pages/FooterPage/Footer";
 import Home from "./components/pages/HomePage/HomePage";
+import Layout from './components/atoms/Layout/Layout.jsx';
 
-function App() {
+const App = () => {
     return (
-        <>
-            <Header />
-            <div id="wrap">
-                <main>
-                    <Router>
-                        <Routes>
-                            <Route path="/" element={<Home />}></Route>
-                            <Route path="/style" element={<Style />}></Route>
-                        </Routes>
-                    </Router>
-                </main>
-                <Footer />
-            </div>
-        </>
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route path="/" element={<Home/>}/>
+                <Route path="style" element={<Style/>}/>
+            </Route>
+        </Routes>
     );
 }
-
-export default App;
+export default App

@@ -1,0 +1,81 @@
+/* reset css - 재설정 필요 */
+ul {
+  list-style: none;
+}
+a {
+  color: #333333;
+}
+
+.mypage_container {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  font-family: sans-serif;
+  margin-top: 100px;
+}
+/* main-container area */
+.main_container {
+  width: 800px;
+  height: 500px;
+}
+.main_container > h3 {
+  text-align: left;
+  font-size: 25px;
+  margin: 0;
+  margin-left: 20px;
+}
+.main_container > p {
+  text-align: left;
+  margin-bottom: 30px;
+  margin-left: 20px;
+}
+.main_container_box {
+  width: 750px;
+  height: 500px;
+  border: 1px solid #4D47C3;
+  border-radius: 15px;
+  margin-left: 20px;
+}
+/* side-bar area */
+.sidebar_container {
+  width: 200px;
+  height: 500px;
+  display: flex;
+  justify-content: left;
+}
+.sidebar_box {
+  width: 170px;
+  height: 500px;
+  border-radius: 15px;
+  border: 1px solid #4D47C3;
+}
+.sidebar_list {
+  text-align: left;
+  margin: 0;
+  margin-top: 30px;
+  padding: 0;
+}
+.sidebar_list_main,
+.sidebar_list_sub {
+  margin-bottom: 17px;
+  color: 333;
+}
+.sidebar_list_sub.focus {
+  background-color: #4d47c320;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+.sidebar_list_sub.focus a {
+  color: #4D47C3;
+}
+.sidebar_list_main {
+  font-weight: 600;
+  padding-left: 30px;
+  font-size: 16px;
+}
+
+.sidebar_list_sub {
+  padding-left: 40px;
+  font-size: 13px;
+}

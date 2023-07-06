@@ -53,17 +53,6 @@ const Login = () => {
                             </div>
                             <button className="blue_btn">로그인</button>
                             <p>SNS 계정으로 로그인하기</p>
-                            <ul className="auth_login_list">
-                                <li>
-                                    <img src={logoNaver} alt="네이버 로고" />
-                                </li>
-                                <li>
-                                    <img src={logoKakao} alt="카카오 로고" />
-                                </li>
-                                <li>
-                                    <img src={logoGoogle} alt="구글 로고" />
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

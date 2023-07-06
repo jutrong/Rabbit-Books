@@ -5,6 +5,8 @@ import Layout from './components/atoms/Layout/Layout.jsx';
 import Login from './components/pages/LoginPage/LoginPage';
 import List from './components/pages/ListPage/ListPage';
 import Mypage from './components/pages/Mypage/Mypage';
+import Join from './components/pages/JoinPage/JoinPage';
+import JoinComplete from './components/pages/JoinCompletePage/JoinCompletePage';
 
 const App = () => {
     return (
@@ -15,7 +17,9 @@ const App = () => {
                 <Route path="list" element={<List />} />
                 <Route path="mypage" element={<Mypage />} />
             </Route>
-            <Route path="login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/join" element={<Join />} />
+            <Route path="/joinComplete" element={<JoinComplete />} />
         </Routes>
     );
 };

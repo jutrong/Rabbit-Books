@@ -1,0 +1,13 @@
+.login {
+    .login_container .login_inner .login_form {
+        .blue_btn.w_96 {
+            width: 96px;
+            margin-left: 8px;
+            margin-top: 0;
+        }
+        .inp_btn_container input[type='text'] {
+            margin-top: 0;
+            width: calc(100% - 104px);
+        }
+    }
+}

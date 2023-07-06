@@ -1,4 +1,4 @@
-import './LoginPage.css';
+import './LoginPage.scss';
 import loginLogo from '../../../assets/images/rabbit.png';
 import loginBg from '../../../assets/images/login_bg.png';
 import logoNaver from '../../../assets/images/logo_naver.png';

@@ -16,7 +16,7 @@ const List = () => {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
-                    {/*<Link to="/style">스타일 가이드</Link>*/}
+                    {/* <Link to="/style">스타일 가이드</Link> */}
                     <p onClick={handleClick}>스타일 가이드로 클릭!</p>
                 </li>
                 <li>
@@ -24,6 +24,12 @@ const List = () => {
                 </li>
                 <li>
                     <Link to="/join">회원가입 클릭!</Link>
+                </li>
+                <li>
+                    <Link to="/joinComplete">회원가입 완료 클릭!</Link>
+                </li>
+                <li>
+                    <Link to="/mypage">마이페이지 클릭!</Link>
                 </li>
             </ul>
         </div>

@@ -1,8 +1,8 @@
-import './LoginPage.css';
+import './JoinPage.scss';
 import loginLogo from '../../../assets/images/rabbit.png';
 import loginBg from '../../../assets/images/login_bg.png';
 
-const Login = () => {
+const Join = () => {
     return (
         <div className="login">
             <div className="header_menu">
@@ -24,35 +24,40 @@ const Login = () => {
                                 예술문화 경험을 제공합니다.
                             </p>
                             <p className="join_txt">
-                                지금 바로 가입하고 혜택을 받으세요!
-                                <span>회원가입</span>
+                                이미 계정을 가지고 계신가요?
+                                <span>로그인</span>
                             </p>
                             <img src={loginBg} alt="로그인 백그라운드 이미지" />
                         </div>
 
                         <div className="login_form">
-                            <h2>로그인</h2>
-                            <input
-                                type="text"
-                                placeholder="이메일을 입력해주세요"
-                            />
+                            <h2>회원가입</h2>
+                            <div className="inp_btn_container">
+                                <input
+                                    type="text"
+                                    placeholder="이메일을 입력해주세요"
+                                />
+                                <button className="blue_btn w_96">
+                                    중복 확인
+                                </button>
+                            </div>
                             <input
                                 type="text"
                                 placeholder="비밀번호를 입력해주세요"
                             />
-                            <div className="login_features">
-                                <input
-                                    type="checkbox"
-                                    className="ch_check hide"
-                                    id="ipChk1"
-                                />
-                                <label htmlFor="ipChk1" className="label">
-                                    아이디 저장
-                                </label>
-                                <button>아이디 찾기 | 비밀번호 찾기</button>
-                            </div>
-                            <button className="blue_btn">로그인</button>
-                            <p>SNS 계정으로 로그인하기</p>
+                            <input
+                                type="text"
+                                placeholder="비밀번호를 한번 더 입력해주세요"
+                            />
+                            <input
+                                type="text"
+                                placeholder="이름을 입력해주세요"
+                            />
+                            <input
+                                type="text"
+                                placeholder="휴대폰 번호를 입력해주세요"
+                            />
+                            <button className="blue_btn">가입하기</button>
                         </div>
                     </div>
                 </div>
@@ -60,4 +65,4 @@ const Login = () => {
         </div>
     );
 };
-export default Login;
+export default Join;

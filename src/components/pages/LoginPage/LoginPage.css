@@ -20,4 +20,4 @@
 .login_form p{margin-top: 32px; color: #4D4D4D; font-size: 12px; text-align: center;}
 
 .auth_login_list{margin-top: 32px; display: flex; gap:22px; justify-content: center;}
-.auth_login_list img{width: 42px;}
+.auth_login_list img{width: 42px; cursor: pointer;}

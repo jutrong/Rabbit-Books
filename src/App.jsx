@@ -3,7 +3,8 @@ import Style from './components/pages/StylePage/StylePage';
 import Home from './components/pages/HomePage/HomePage';
 import Layout from './components/atoms/Layout/Layout.jsx';
 import Login from './components/pages/LoginPage/LoginPage';
-import Mypage from './components/pages/Mypage/Mypage';
+import Mypage from './components/pages/MyPage/MyPage';
+import Order from './components/pages/OrderPage/OrderPage';
 
 const App = () => {
     return (
@@ -12,6 +13,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="style" element={<Style />} />
                 <Route path="mypage" element={<Mypage />} />
+                <Route path="order" element={<Order />} />
             </Route>
             <Route path="login" element={<Login />} />
         </Routes>

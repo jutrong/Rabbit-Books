@@ -1,11 +1,9 @@
-import './Mypage.css';
+import './Mypage.scss';
 import Profile from '../../../assets/images/rabbit.png';
 import member from '../../../assets/images/icons/icon_member_active.png';
 import check from '../../../assets/images/icons/icon_check_shape.png';
 
-const modalClickEvent = () => {};
-
-export default function Mypage() {
+const Mypage = () => {
     return (
         <div className="mypage_container">
             <div className="sidebar_container">
@@ -166,4 +164,6 @@ export default function Mypage() {
             </div>
         </div>
     );
-}
+};
+
+export default Mypage;

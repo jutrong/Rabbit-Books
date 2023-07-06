@@ -42,11 +42,11 @@
     cursor: pointer;
 }
 .profile img:nth-child(2) {
-  position: absolute;
-  width: 30px;
-  height: 25px;
-  bottom: 5%;
-  right: 41%;
+    position: absolute;
+    width: 30px;
+    height: 25px;
+    bottom: 5%;
+    right: 41%;
 }
 /* input box area */
 .input_box {
@@ -59,14 +59,14 @@
 .mypage_phone_box {
     margin-left: 80px;
 }
-#mypage_name {
+#mypageName {
     width: 78%;
     margin-top: 20px;
     border: 2px solid #4d47c381;
 }
-#mypage_name::placeholder,
-#mypage_phone::placeholder,
-#mypage_email::placeholder {
+#mypageName::placeholder,
+#mypagePhone::placeholder,
+#mypageEmail::placeholder {
     color: #333;
 }
 .input_box_name,
@@ -77,15 +77,15 @@
     font-size: 18px;
 }
 .input_box_name {
-  position: relative;
+    position: relative;
 }
 .input_box_name::after,
 .input_box_email::after {
-  content: '*';
-  color: red;
-  font-size: 13px;
-  top: 0;
-  position: absolute;
+    content: '*';
+    color: red;
+    font-size: 13px;
+    top: 0;
+    position: absolute;
 }
 
 .mypage_email_box {
@@ -113,16 +113,16 @@
     left: 101px;
     font-weight: 700;
 }
-#mypage_email,
-#mypage_phone {
+#mypageEmail,
+#mypagePhone {
     flex: 4;
     margin-right: 20px;
     margin-top: 20px;
     border: 2px solid #4d47c381;
     transition: 0;
 }
-#mypage_email + button,
-#mypage_phone + button {
+#mypageEmail + button,
+#mypagePhone + button {
     flex: 1;
     margin-right: 10px;
 }

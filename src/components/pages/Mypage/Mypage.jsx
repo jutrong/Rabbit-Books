@@ -68,14 +68,14 @@ export default function Mypage() {
                                 <div className="name_wrap">
                                     <label
                                         className="input_box_name"
-                                        for="mypage_name"
+                                        htmlfor="mypage_name"
                                     >
                                         이름
                                     </label>
                                     <input
                                         type="text"
                                         className="w_276"
-                                        id="mypage_name"
+                                        id="mypageName"
                                         placeholder="토깽이"
                                     />
                                 </div>
@@ -83,7 +83,7 @@ export default function Mypage() {
                                     <div className="email_wrap">
                                         <label
                                             className="input_box_email"
-                                            for="mypage_email"
+                                            htmlfor="mypage_email"
                                         >
                                             이메일
                                         </label>
@@ -91,7 +91,7 @@ export default function Mypage() {
                                     <div>
                                         <input
                                             type="text"
-                                            id="mypage_email"
+                                            id="mypageEmail"
                                             placeholder="elice@tokki.io"
                                         />
                                         <button className="blue_btn w_100 modal_btn">
@@ -109,7 +109,7 @@ export default function Mypage() {
                                 <div className="mypage_phone_box">
                                     <label
                                         className="input_box_phone"
-                                        for="mypage_phone"
+                                        htmlfor="mypage_phone"
                                     >
                                         휴대폰 번호
                                     </label>
@@ -117,7 +117,7 @@ export default function Mypage() {
                                         <input
                                             type="number"
                                             className="w_276"
-                                            id="mypage_phone"
+                                            id="mypagePhone"
                                             placeholder="010-1234-1234"
                                         />
                                         <button className="blue_btn w_100 modal_btn">

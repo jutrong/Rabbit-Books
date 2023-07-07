@@ -7,6 +7,7 @@ import List from './components/pages/ListPage/ListPage';
 import Mypage from './components/pages/Mypage/Mypage';
 import Join from './components/pages/JoinPage/JoinPage';
 import JoinComplete from './components/pages/JoinCompletePage/JoinCompletePage';
+import Order from './components/pages/OrderPage/OrderPage';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                 <Route path="style" element={<Style />} />
                 <Route path="list" element={<List />} />
                 <Route path="mypage" element={<Mypage />} />
+                <Route path="order" element={<Order />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />

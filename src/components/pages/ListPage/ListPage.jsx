@@ -32,6 +32,12 @@ const List = () => {
                     <Link to="/search">검색 클릭!</Link>
                 </li>
                 <li>
+                    <Link to="/cart">장바구니</Link>
+                </li>
+                <li>
+                    <Link to="/mypagePw">장바구니</Link>
+                </li>
+                <li>
                     <Link to="/mypage">마이페이지 클릭!</Link>
                 </li>
                 <li>

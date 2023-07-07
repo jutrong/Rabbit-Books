@@ -126,6 +126,20 @@
                                     #ff9062 100%
                                 );
                             }
+                            &.pink {
+                                background: linear-gradient(
+                                    91deg,
+                                    rgba(255, 30, 165, 0.7) 0%,
+                                    rgba(132, 112, 255, 0.7) 100%
+                                );
+                            }
+                            &.yellow {
+                                background: linear-gradient(
+                                    91deg,
+                                    #ffb21e 0%,
+                                    #ffdf8e 100%
+                                );
+                            }
                         }
                     }
 
@@ -133,7 +147,7 @@
                         display: inline-block;
                         padding-top: 8px;
                         margin-bottom: 10px;
-                        font-size: 20px;
+                        font-size: 24px;
                         cursor: pointer;
                         &:hover {
                             text-decoration: underline;
@@ -152,18 +166,18 @@
                         padding-top: 10px;
                         em {
                             color: #4d47c3;
-                            font-size: 18px;
+                            font-size: 20px;
                             font-weight: 700;
                         }
                         strong {
                             padding-left: 8px;
                             display: inline-block;
-                            font-size: 18px;
+                            font-size: 20px;
                         }
                         span {
                             display: inline-block;
                             margin-left: 8px;
-                            font-size: 12px;
+                            font-size: 13px;
                             text-decoration: line-through;
                             color: #999;
                         }

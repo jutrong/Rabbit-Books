@@ -152,7 +152,7 @@ const Search = () => {
                                         <td>
                                             <div className="book_info_box">
                                                 <img
-                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791167901996.jpg"
+                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788990982704.jpg"
                                                     alt="책 이미지"
                                                 />
                                                 <div className="book_info">
@@ -164,7 +164,12 @@ const Search = () => {
                                                         </li>
                                                         <li>
                                                             <span className="green">
-                                                                MD의 선택
+                                                                무료배송
+                                                            </span>
+                                                        </li>
+                                                        <li>
+                                                            <span className="yellow">
+                                                                사은품
                                                             </span>
                                                         </li>
                                                         <li>
@@ -172,17 +177,22 @@ const Search = () => {
                                                                 이벤트
                                                             </span>
                                                         </li>
+                                                        <li>
+                                                            <span className="pink">
+                                                                소득공제
+                                                            </span>
+                                                        </li>
                                                     </ul>
                                                     <strong className="book_info_title">
-                                                        매스커레이드 게임
+                                                        용의자 X의 헌신
                                                     </strong>
                                                     <p className="author">
                                                         히가시노 게이고 저자(글)
-                                                        &#183; 양윤옥 번역
+                                                        &#183; 양억관 번역
                                                     </p>
                                                     <p>
-                                                        현대문학&#183; 2023년
-                                                        06월 23일
+                                                        재인&#183; 2017년 08월
+                                                        30일
                                                     </p>
                                                     <div className="pay">
                                                         <em>10%</em>
@@ -190,7 +200,7 @@ const Search = () => {
                                                         원<span>16,800원</span>
                                                     </div>
                                                     <span className="star_grade">
-                                                        9.89
+                                                        9.4
                                                     </span>
                                                 </div>
                                             </div>
@@ -226,7 +236,7 @@ const Search = () => {
                                         <td>
                                             <div className="book_info_box">
                                                 <img
-                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791167901996.jpg"
+                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788990982575.jpg"
                                                     alt="책 이미지"
                                                 />
                                                 <div className="book_info">
@@ -238,7 +248,7 @@ const Search = () => {
                                                         </li>
                                                         <li>
                                                             <span className="green">
-                                                                MD의 선택
+                                                                무료배송
                                                             </span>
                                                         </li>
                                                         <li>
@@ -246,17 +256,22 @@ const Search = () => {
                                                                 이벤트
                                                             </span>
                                                         </li>
+                                                        <li>
+                                                            <span className="pink">
+                                                                소득공제
+                                                            </span>
+                                                        </li>
                                                     </ul>
                                                     <strong className="book_info_title">
-                                                        매스커레이드 게임
+                                                        가면산장 살인사건
                                                     </strong>
                                                     <p className="author">
                                                         히가시노 게이고 저자(글)
-                                                        &#183; 양윤옥 번역
+                                                        &#183; 김난주 번역
                                                     </p>
                                                     <p>
-                                                        현대문학&#183; 2023년
-                                                        06월 23일
+                                                        재인&#183; 2014년 09월
+                                                        26일
                                                     </p>
                                                     <div className="pay">
                                                         <em>10%</em>
@@ -264,81 +279,7 @@ const Search = () => {
                                                         원<span>16,800원</span>
                                                     </div>
                                                     <span className="star_grade">
-                                                        9.89
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span className="speaker">
-                                                내일 (7/8, 토)
-                                            </span>
-                                            도착 예정
-                                        </td>
-                                        <td>
-                                            <button className="white_btn w_156">
-                                                장바구니
-                                            </button>
-                                            <button className="blue_btn w_156 martop_10">
-                                                바로구매
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                name="inpChk"
-                                                className="ch_check hide"
-                                                id="inpChk1"
-                                            />
-                                            <label
-                                                htmlFor="inpChk1"
-                                                className="label single"
-                                            ></label>
-                                        </td>
-                                        <td>
-                                            <div className="book_info_box">
-                                                <img
-                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791167901996.jpg"
-                                                    alt="책 이미지"
-                                                />
-                                                <div className="book_info">
-                                                    <ul className="book_tag_list">
-                                                        <li>
-                                                            <span className="sky">
-                                                                오늘의 선택
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="green">
-                                                                MD의 선택
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="orange">
-                                                                이벤트
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                    <strong className="book_info_title">
-                                                        매스커레이드 게임
-                                                    </strong>
-                                                    <p className="author">
-                                                        히가시노 게이고 저자(글)
-                                                        &#183; 양윤옥 번역
-                                                    </p>
-                                                    <p>
-                                                        현대문학&#183; 2023년
-                                                        06월 23일
-                                                    </p>
-                                                    <div className="pay">
-                                                        <em>10%</em>
-                                                        <strong>15,120</strong>
-                                                        원<span>16,800원</span>
-                                                    </div>
-                                                    <span className="star_grade">
-                                                        9.89
+                                                        9.4
                                                     </span>
                                                 </div>
                                             </div>

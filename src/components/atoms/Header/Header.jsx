@@ -39,9 +39,12 @@ const Header = () => {
                     </h1>
 
                     <div className="inp_search_wrap">
-                        <input type="text" placeholder="상품명만 검색 가능" />
+                        <input
+                            type="text"
+                            placeholder="검색어를 입력 해주세요"
+                        />
                         <button type="button" className="search_btn">
-                            <span className="hide">상품명 검색</span>
+                            <span className="hide">검색</span>
                         </button>
                     </div>
 

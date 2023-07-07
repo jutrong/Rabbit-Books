@@ -9,6 +9,8 @@ import Join from './components/pages/JoinPage/JoinPage';
 import JoinComplete from './components/pages/JoinCompletePage/JoinCompletePage';
 import Order from './components/pages/OrderPage/OrderPage';
 import Search from './components/pages/SearchPage/SearchPage';
+import Cart from './components/pages/CartPage/CartPage';
+import MypagePw from './components/pages/MypagePwPage/MypagePwPage';
 
 const App = () => {
     return (
@@ -18,6 +20,8 @@ const App = () => {
                 <Route path="style" element={<Style />} />
                 <Route path="list" element={<List />} />
                 <Route path="search" element={<Search />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="mypagePw" element={<MypagePw />} />
                 <Route path="mypage" element={<Mypage />} />
                 <Route path="order" element={<Order />} />
             </Route>

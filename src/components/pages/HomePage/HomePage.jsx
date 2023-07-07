@@ -444,6 +444,41 @@ const Home = () => {
                 >
                     <SwiperSlide>
                         <div className="img_box">
+                            <img src={authorImg4} alt="작가 이미지" />
+                            <div className="img_hover">
+                                <p>
+                                    새는 알에서 나오기 위해 투쟁한다. <br />
+                                    알은 새의 세계이다. <br />
+                                    누구든지 태어나려고 하는 자는 <br />
+                                    하나의 세계를 파괴하여야 한다. <br />
+                                    새는 신을 향해 날아간다. <br />그 신의
+                                    이름은 아브락사스이다.
+                                </p>
+                            </div>
+                        </div>
+                        <p>헤르만 헤세</p>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="img_box">
+                            <img
+                                src="https://i.namu.wiki/i/RR6juoH6yWKtFhFSpRSh0CxHeN5Bm7e3XvG5Ja76R8iVuU0WX1D1l06RGmF7i0Cu5eBFr6TsKYk0jp-RhT556w.webp"
+                                alt="작가 이미지"
+                            />
+                            <div className="img_hover">
+                                <p>
+                                    당신을 잃은 뒤, 우리들의 시간은 <br />
+                                    저녁이 되었습니다. 우리들의 <br />
+                                    집과 거리가 저녁이 되었습니다. <br />
+                                    더이상 어두워지지도, 다시 밝아지지도 않는
+                                    저녁 속에서 주이들은 밥을 먹고 <br />
+                                    걸음을 걷고 잠을 잡니다.
+                                </p>
+                            </div>
+                        </div>
+                        <p>한강</p>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="img_box">
                             <img src={authorImg1} alt="작가 이미지" />
                             <div className="img_hover">
                                 <p>
@@ -486,22 +521,7 @@ const Home = () => {
                         </div>
                         <p>최진영</p>
                     </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="img_box">
-                            <img src={authorImg4} alt="작가 이미지" />
-                            <div className="img_hover">
-                                <p>
-                                    새는 알에서 나오기 위해 투쟁한다. <br />
-                                    알은 새의 세계이다. <br />
-                                    누구든지 태어나려고 하는 자는 <br />
-                                    하나의 세계를 파괴하여야 한다. <br />
-                                    새는 신을 향해 날아간다. <br />그 신의
-                                    이름은 아브락사스이다.
-                                </p>
-                            </div>
-                        </div>
-                        <p>헤르만 헤세</p>
-                    </SwiperSlide>
+
                     <SwiperSlide>
                         <div className="img_box">
                             <img src={authorImg5} alt="작가 이미지" />

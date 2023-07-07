@@ -5,9 +5,12 @@
             margin-left: 8px;
             margin-top: 0;
         }
-        .inp_btn_container input[type='text'] {
-            margin-top: 0;
-            width: calc(100% - 104px);
+        .inp_btn_container {
+            margin-top: 28px;
+            input[type='text'] {
+                margin-top: 0;
+                width: calc(100% - 104px);
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import Mypage from './components/pages/Mypage/Mypage';
 import Join from './components/pages/JoinPage/JoinPage';
 import JoinComplete from './components/pages/JoinCompletePage/JoinCompletePage';
 import Order from './components/pages/OrderPage/OrderPage';
+import Search from './components/pages/SearchPage/SearchPage';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="style" element={<Style />} />
                 <Route path="list" element={<List />} />
+                <Route path="search" element={<Search />} />
                 <Route path="mypage" element={<Mypage />} />
                 <Route path="order" element={<Order />} />
             </Route>

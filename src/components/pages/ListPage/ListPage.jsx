@@ -29,7 +29,13 @@ const List = () => {
                     <Link to="/joinComplete">회원가입 완료 클릭!</Link>
                 </li>
                 <li>
+                    <Link to="/search">검색 클릭!</Link>
+                </li>
+                <li>
                     <Link to="/mypage">마이페이지 클릭!</Link>
+                </li>
+                <li>
+                    <Link to="/order">주문/결제 클릭!</Link>
                 </li>
             </ul>
         </div>

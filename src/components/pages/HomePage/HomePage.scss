@@ -233,4 +233,19 @@
             cursor: pointer;
         }
     }
+
+    .marquee_section {
+        .swiper-wrapper {
+            // -webkit-transition-timing-function: linear !important;
+            transition-timing-function: linear !important;
+            // position: relative;
+        }
+        .swiper-slide {
+            width: 260px !important;
+            img {
+                width: 100%;
+                display: block;
+            }
+        }
+    }
 }

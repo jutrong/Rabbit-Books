@@ -281,6 +281,220 @@ const Home = () => {
                     alt="광고 배너"
                 />
             </section>
+
+            <section className="marquee_section">
+                <Swiper
+                    loop={true}
+                    allowTouchMove={false}
+                    // disableOnInteraction={true}
+                    slidesPerView={4}
+                    spaceBetween={30}
+                    className="marqueeSwiper"
+                    speed={1000}
+                    autoplay={{
+                        delay: 0,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    }}
+                    modules={[Autoplay]}
+                >
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000356228.jpg"
+                                alt="책 이미지"
+                            />
+                            <p>뉴필로소퍼</p>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190109178.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000351094.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788970414201.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791197488665.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000345864.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000342375.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000357744.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791198108517.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791160360516.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191645231.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000346502.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    {/* 임시 구분용 아래는 복붙해서 양 2배로 */}
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000356228.jpg"
+                                alt="책 이미지"
+                            />
+                            <p>뉴필로소퍼</p>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190109178.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000351094.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788970414201.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791197488665.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000345864.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000342375.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000357744.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791198108517.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791160360516.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191645231.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className="today_img">
+                            <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000346502.jpg"
+                                alt="책 이미지"
+                            />
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
+            </section>
         </div>
     );
 };

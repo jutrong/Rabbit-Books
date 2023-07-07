@@ -1,0 +1,160 @@
+.productinfo {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    .left {
+        border-right: 1px dotted #4d47c310;
+        flex: 1;
+        .book_img {
+            padding: 140px;
+            position: relative;
+            img:first-child {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.327);
+            }
+            img:nth-child(2) {
+                width: 30px;
+                height: 27px;
+                margin-top: 10px;
+                position: absolute;
+                bottom: 104px;
+                left: 47%;
+                transform: translateX(-50%);
+                cursor: pointer;
+            }
+            p {
+                position: absolute;
+                left: 51%;
+                bottom: 107px;
+                font-size: 5px;
+                border: 1px solid #4D47C3;
+                border-radius: 10px;
+                padding: 2px 5px;
+                color: #4D47C3;
+                font-weight: bold;
+                box-shadow: 0 0 10px #4d47c339;
+                cursor: pointer;
+            }
+        }
+    }
+    .right {
+        flex: 1;
+        margin-left: 50px;
+        .main_title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-top: 130px;
+        }
+        .delivery_info {
+            margin-top: 60px;
+            display: flex;
+            font-size: 13px;
+            p:first-child {
+                margin-right: 50px;
+            }
+            p:last-child {
+                font-weight: bold;
+            }
+        }
+        .delivery_fee {
+            margin-top: 20px;
+            display: flex;
+            font-size: 13px;
+            p:first-child {
+                margin-right: 61px;
+            }
+        }
+        .sub_title {
+            margin-top: 4px;
+        }
+        .price {
+            margin-top: 30px;
+            font-size: 23px;
+            font-weight: bold;
+            span {
+                margin-right: 10px;
+                font-size: 18px;
+            }
+        }
+        .plus_fee {
+            margin-top: 5px;
+            font-size: 13px;
+            margin-left: 98px;
+        }
+        .book_counter {
+            box-shadow: 0 0 10px #4d47c30e;
+            background-color: #4d47c30e;
+            margin-top: 40px;
+            border-radius: 10px;
+            p {
+                font-size: 15px;
+                margin-bottom: 33px;
+                margin-left: 20px;
+                padding-top: 10px;
+            }
+            div {
+                display: flex;
+                justify-content: space-between;
+                .increase_box {
+                    margin-left: 20px;
+                    margin-bottom: 10px;
+                    border: none;
+                }
+                .count_price {
+                    font-size: 18px;
+                    margin-right: 20px;
+                }
+            }
+        }
+        .all_price {
+            text-align: right;
+            margin-top: 30px;
+            span {
+                color: #4d47c3;
+                margin-left: 15px;
+                font-size: 25px;
+                opacity: 1;
+                font-weight: bold;
+            }
+        }
+        .order_box {
+            display: flex;
+            margin-top: 40px;
+            button {
+                border: 1px solid #4d47c3;
+                border-radius: 10px;
+                padding: 5px 10px;
+                margin: 0 20px;
+                flex: 1;
+            }
+            button:first-child {
+                opacity: 0.9;
+                transition: 0.3s;
+                position: relative;
+                overflow: hidden;
+                img {
+                    position: absolute;
+                    left: 60px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 20px;
+                    height: 20px;
+                    transition: 0.7s;
+
+                }
+                &:hover img {
+                    left: 250px;
+                }
+
+            }
+            button:last-child {
+                background-color: #4d47c3;
+                color: white;
+                opacity: 0.8;
+                transition: 0.3s;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

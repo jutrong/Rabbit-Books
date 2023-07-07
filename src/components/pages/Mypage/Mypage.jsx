@@ -1,4 +1,4 @@
-import './Mypage.scss';
+import './MyPage.scss';
 import Profile from '../../../assets/images/rabbit.png';
 import member from '../../../assets/images/icons/icon_member_active.png';
 import check from '../../../assets/images/icons/icon_check_shape.png';

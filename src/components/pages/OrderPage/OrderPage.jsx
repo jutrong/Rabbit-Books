@@ -1,7 +1,7 @@
 import './OrderPage.scss';
 import one from '../../../assets/images/icons/icon_01.png';
 import order from '../../../assets/images/icons/icon_mypage_order.png';
-import book from '../../../assets/images/book_img.jpeg';
+import book from '../../../assets/images/book1.jpg';
 import radioOn from '../../../assets/images/icons/radio_on.png';
 import radioOff from '../../../assets/images/icons/radio_off.png';
 

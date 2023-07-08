@@ -1,21 +1,17 @@
 import './ProductListPage.scss';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import cart from '../../../assets/images/icons/icon_gnb_basket.png';
 import wish from '../../../assets/images/icons/icon_wish.png';
 import wishActive from '../../../assets/images/icons/icon_wish_active.png';
-import book1 from '../../../assets/images/book1.jpg';
-import book2 from '../../../assets/images/book2.jpeg';
-import book3 from '../../../assets/images/book3.jpeg';
-import book4 from '../../../assets/images/book4.jpeg';
-import book5 from '../../../assets/images/book5.jpeg';
-import book6 from '../../../assets/images/book6.jpeg';
-import book7 from '../../../assets/images/book7.jpg';
-import book8 from '../../../assets/images/book8.jpeg';
-import book9 from '../../../assets/images/book9.jpeg';
-import book10 from '../../../assets/images/book10.jpeg';
-import book11 from '../../../assets/images/book11.jpeg';
-import book12 from '../../../assets/images/book12.jpeg';
+import bookData from '../../dummydata/BookData.json';
 
 const ProductList = () => {
+    let [books] = useState(bookData);
+    let { id } = useParams();
+
+  
+
     return (
         <div className="productlist">
             <div className="list_content">
@@ -73,9 +69,9 @@ const ProductList = () => {
                             <input
                                 type="checkbox"
                                 className="ch_check hide"
-                                id="ipChk1"
+                                id="ipChkAll2"
                             />
-                            <label htmlFor="ipChk1" className="label">
+                            <label htmlFor="ipChkAll2" className="label">
                                 전체 선택
                             </label>
                         </div>
@@ -87,355 +83,18 @@ const ProductList = () => {
                         </div>
                     </div>
                     <div className="book_list">
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide allcheck"
-                                id="inpChk1"
-                            />
-                            <label
-                                htmlFor="inpChk1"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book2} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button className="active">
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide allcheck"
-                                id="inpChk1"
-                            />
-                            <label
-                                htmlFor="inpChk1"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book1} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide allcheck"
-                                id="inpChk1"
-                            />
-                            <label
-                                htmlFor="inpChk1"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book3} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide allcheck"
-                                id="inpChk1"
-                            />
-                            <label
-                                htmlFor="inpChk1"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book4} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book5} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book6} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book7} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book8} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book9} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book10} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book11} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="items">
-                            <input
-                                type="checkbox"
-                                name="inpChk"
-                                className="ch_check hide"
-                                id="inpChk10"
-                            />
-                            <label
-                                htmlFor="inpChk10"
-                                className="label single"
-                            ></label>
-                            <a href="#">
-                                <img src={book12} alt="책이미지1" id="book1" />
-                            </a>
-                            <div className="book_content">
-                                <p className="book_title">
-                                    자바스크립트 완벽 가이드
-                                </p>
-                                <p className="author">
-                                    데이비드 플래너건 · 인사이트
-                                </p>
-                                <div>
-                                    <p className="price">37,800원</p>
-                                    <button>
-                                        <img src={wish} alt="찜하기" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        {/*  책 데이터를 가져와 그 수많큼 items 생성 */}
+                        {books.map((book) => {
+                            return (
+                                <BookItem
+                                    key={book.id}
+                                    book={book}
+                                    id={book.id}
+                                ></BookItem>
+                            );
+                        })}
                     </div>
+
                     <div className="paging txt_center clear martop_20 pagenation">
                         <ul>
                             <li>
@@ -502,6 +161,41 @@ const ProductList = () => {
                             </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+const BookItem = (props) => {
+    let { id } = props;
+    
+    // 페이지 동적 라우팅
+
+    const navigate = useNavigate();
+    const navigateToItem = () => {
+        navigate(`/productlist/${id}`);
+    };
+
+    return (
+        <div className="items">
+            <input
+                type="checkbox"
+                name="inpChk"
+                className="ch_check hide allcheck"
+                id="inpChk1"
+            />
+            <label htmlFor="inpChk1" className="label single"></label>
+            <a href="#" onClick={navigateToItem}>
+                <img src={props.book.imgLink} alt="책이미지1" id="book1" />
+            </a>
+            <div className="book_content" onClick={navigateToItem}>
+                <p className="book_title">{props.book.productName}</p>
+                <p className="author">{props.book.author}</p>
+                <div>
+                    <p className="price">{props.book.price}</p>
+                    <button className="active">
+                        <img src={wish} alt="찜하기" />
+                    </button>
                 </div>
             </div>
         </div>

@@ -1,53 +1,13 @@
-import './MyPage.scss';
+import './Mypage.scss';
 import Profile from '../../../assets/images/rabbit.png';
 import member from '../../../assets/images/icons/icon_member_active.png';
 import check from '../../../assets/images/icons/icon_check_shape.png';
+import Sidebar from '../../atoms/Sidebar/Sidebar';
 
 const Mypage = () => {
     return (
         <div className="mypage_container">
-            <div className="sidebar_container">
-                <div className="sidebar_box">
-                    <ul className="sidebar_list">
-                        <li className="sidebar_list_main">
-                            <a href="#">내 정보 관리</a>
-                        </li>
-                        <li className="sidebar_list_sub focus">
-                            <a href="#">개인정보 수정</a>
-                        </li>
-                        <li className="sidebar_list_sub">
-                            <a href="#">회원 탈퇴</a>
-                        </li>
-                        <li className="sidebar_list_main">
-                            <a href="#">주문 내역</a>
-                        </li>
-                        <li className="sidebar_list_sub">
-                            <a href="#">주문 조회</a>
-                        </li>
-                        <li className="sidebar_list_sub">
-                            <a href="#">주문 변경/취소</a>
-                        </li>
-                        <li className="sidebar_list_main">
-                            <a href="#">혜택/포인트</a>
-                        </li>
-                        <li className="sidebar_list_sub">
-                            <a href="#">쿠폰</a>
-                        </li>
-                        <li className="sidebar_list_sub">
-                            <a href="#">포인트</a>
-                        </li>
-                        <li className="sidebar_list_main">
-                            <a href="#">고객센터</a>
-                        </li>
-                        <li className="sidebar_list_sub">
-                            <a href="#">자주 묻는 질문 FAQ</a>
-                        </li>
-                        <li className="sidebar_list_sub">
-                            <a href="#">1:1 고객상담</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <Sidebar></Sidebar>
             <div className="main_container">
                 <div className="main_container_wrap">
                     <h3>계정 관리</h3>

@@ -8,7 +8,7 @@
         width: 800px;
         &_wrap > h3 {
             text-align: left;
-            font-size: 25px;
+            font-size: 30px;
             margin: 0;
             margin-left: 20px;
             margin-bottom: 40px;
@@ -72,11 +72,7 @@
             align-items: end;
         }
     }
-    .name_wrap,
-    .email_wrap,
-    .email_wrap + div,
-    .mypage_phone_box {
-    }
+
     #mypageName {
         width: 78%;
         margin-top: 20px;
@@ -127,7 +123,7 @@
         margin-top: 90px;
         text-align: right;
         button {
-            margin-left: 20px;
+            margin-left: 0px;
             border-radius: 6px;
             width: 120px;
         }
@@ -196,54 +192,5 @@
         font-size: 20px;
         font-weight: 400;
     }
-    .sidebar_container {
-        width: 200px;
-        height: 100%;
-        display: flex;
-        justify-content: left;
-    }
-    .sidebar_box {
-        width: 200px;
-        border-radius: 15px;
-        border: 1px solid #4d47c3;
-        padding-bottom: 20px;
-        background-color: #4d47c307;
-    }
-    .sidebar_list {
-        text-align: left;
-        margin: 0;
-        margin-top: 30px;
-        padding: 0;
-        &_main,
-        &_sub {
-            margin-bottom: 19px;
-            color: 333;
-        }
-        &_sub:hover a {
-            color: #4d47c3;
-            transition: 0.3s;
-            font-weight: 500;
-        }
-        &_sub.focus {
-            background-color: #4d47c320;
-            box-sizing: border-box;
-            width: 100%;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px #4d47c310;
-            a {
-                color: #4d47c3;
-            }
-        }
-        &_main {
-            font-weight: 600;
-            padding-left: 30px;
-            font-size: 16px;
-        }
-        &_sub {
-            padding-left: 40px;
-            font-size: 13px;
-        }
-    }
+    
 }

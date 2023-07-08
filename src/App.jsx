@@ -10,7 +10,7 @@ import JoinComplete from './components/pages/JoinCompletePage/JoinCompletePage';
 import Order from './components/pages/OrderPage/OrderPage';
 import ProductList from './components/pages/ProductListPage/ProductListPage';
 import ProductInfo from './components/pages/ProductInfo/ProductInfo';
-
+import OrderCheck from './components/pages/OrderCheck/OrderCheck';
 
 const App = () => {
     return (
@@ -23,7 +23,7 @@ const App = () => {
                 <Route path="order" element={<Order />} />
                 <Route path="productlist" element={<ProductList />} />
                 <Route path="productinfo" element={<ProductInfo />} />
-
+                <Route path="ordercheck" element={<OrderCheck />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />

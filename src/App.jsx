@@ -8,6 +8,9 @@ import Mypage from './components/pages/Mypage/Mypage';
 import Join from './components/pages/JoinPage/JoinPage';
 import JoinComplete from './components/pages/JoinCompletePage/JoinCompletePage';
 import Order from './components/pages/OrderPage/OrderPage';
+import Search from './components/pages/SearchPage/SearchPage';
+import Cart from './components/pages/CartPage/CartPage';
+import MypagePw from './components/pages/MypagePwPage/MypagePwPage';
 import ProductList from './components/pages/ProductListPage/ProductListPage';
 import ProductInfo from './components/pages/ProductInfo/ProductInfo';
 import OrderCheck from './components/pages/OrderCheck/OrderCheck';
@@ -19,6 +22,9 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="style" element={<Style />} />
                 <Route path="list" element={<List />} />
+                <Route path="search" element={<Search />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="mypagePw" element={<MypagePw />} />
                 <Route path="mypage" element={<Mypage />} />
                 <Route path="order" element={<Order />} />
                 <Route path="productlist" element={<ProductList />} />

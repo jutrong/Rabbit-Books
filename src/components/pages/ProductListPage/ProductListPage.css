@@ -1,0 +1,174 @@
+.productlist {
+  max-width: 1200px;
+  margin: 100px auto;
+}
+.productlist .list_content {
+  display: flex;
+}
+.productlist .list_content .list_left {
+  width: 190px;
+}
+.productlist .list_content .list_left h3 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.productlist .list_content div h4 {
+  font-size: 20px;
+  padding-left: 20px;
+  position: relative;
+}
+.productlist .list_content div h4::before {
+  content: "";
+  position: absolute;
+  background-image: url(../../../assets/images/icons/icon_prev.png);
+  background-repeat: no-repeat;
+  background-size: 25px;
+  width: 100%;
+  height: 100%;
+  top: 3px;
+  left: -3px;
+  cursor: pointer;
+}
+.productlist .list_content div ul {
+  margin-top: 30px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+.productlist .list_content div ul li {
+  margin-bottom: 10px;
+  opacity: 0.7;
+  transform: 0.1s;
+}
+.productlist .list_content div ul li:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+.productlist .list_content .list_right {
+  width: 950px;
+  margin-left: 60px;
+}
+.productlist .list_content .list_right header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(77, 71, 195, 0.0549019608);
+  padding: 20px 50px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(77, 71, 195, 0.0549019608);
+}
+.productlist .list_content .list_right header p {
+  font-size: 20px;
+  font-weight: bold;
+}
+.productlist .list_content .list_right header select {
+  border: 1px solid rgba(0, 0, 0, 0.158);
+  padding: 5px 20px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+}
+.productlist .list_content .list_right .boundary {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.159);
+  padding-bottom: 15px;
+}
+.productlist .list_content .list_right .boundary div:first-child {
+  display: flex;
+  align-items: end;
+}
+.productlist .list_content .list_right .boundary div:first-child label {
+  font-size: 1rpx;
+  margin-left: 6px;
+  font-weight: bold;
+  opacity: 0.8;
+}
+.productlist .list_content .list_right .boundary div:last-child {
+  border: 1px solid rgba(0, 0, 0, 0.218);
+  padding: 8px 20px;
+  border-radius: 10px;
+  margin-right: 11px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.productlist .list_content .list_right .boundary div:last-child:hover {
+  border: 1px solid black;
+}
+.productlist .list_content .list_right .boundary div:last-child a {
+  display: flex;
+  align-items: center;
+}
+.productlist .list_content .list_right .boundary div:last-child img {
+  width: 22px;
+  height: 22px;
+}
+.productlist .list_content .list_right .book_list {
+  width: 950px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.productlist .list_content .list_right .book_list .items {
+  flex: 1;
+  flex-basis: 200px;
+  width: 200px;
+  margin-bottom: 80px;
+  position: relative;
+}
+.productlist .list_content .list_right .book_list .items .label {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 30px;
+  left: 15px;
+  opacity: 0.3;
+}
+.productlist .list_content .list_right .book_list .items > a {
+  display: flex;
+  justify-content: left;
+}
+.productlist .list_content .list_right .book_list .items #book1 {
+  width: 200px;
+  height: 230px;
+  margin: 0 auto;
+  margin-top: 30px;
+  transition: 0.3s;
+  overflow: hidden;
+}
+.productlist .list_content .list_right .book_list .items #book1:hover {
+  transform: scale(1.05);
+}
+.productlist .list_content .list_right .book_list .items .book_content {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.productlist .list_content .list_right .book_list .items .book_content .book_title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 17px;
+  cursor: pointer;
+}
+.productlist .list_content .list_right .book_list .items .book_content .book_title:hover {
+  text-decoration: underline;
+}
+.productlist .list_content .list_right .book_list .items .book_content .author {
+  font-size: 13px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.productlist .list_content .list_right .book_list .items .book_content div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.productlist .list_content .list_right .book_list .items .book_content div .price {
+  font-weight: bold;
+  color: #4d47c3;
+  cursor: pointer;
+  bottom: 10px;
+}
+.productlist .list_content .list_right .book_list .items .book_content div img {
+  width: 22px;
+  height: 22px;
+  margin-right: 15px;
+}/*# sourceMappingURL=ProductListPage.css.map */

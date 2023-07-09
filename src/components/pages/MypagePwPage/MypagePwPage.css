@@ -1,0 +1,23 @@
+.cart_password {
+  display: flex;
+  height: calc(100vh - 345px);
+  justify-content: center;
+  align-items: center;
+}
+.cart_password .cart_password_box {
+  width: 300px;
+}
+.cart_password strong {
+  padding-bottom: 30px;
+  font-size: 30px;
+  display: block;
+  text-align: center;
+}
+.cart_password .cart_password_txt {
+  text-align: center;
+}
+.cart_password .cart_password_txt span {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4d47c3;
+}/*# sourceMappingURL=MypagePwPage.css.map */

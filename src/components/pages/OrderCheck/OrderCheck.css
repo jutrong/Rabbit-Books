@@ -1,0 +1,148 @@
+.ordercheck {
+  margin: 100px auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+}
+.ordercheck .ordercheck_right {
+  width: 900px;
+}
+.ordercheck .ordercheck_right > p {
+  font-size: 30px;
+  font-weight: 600;
+  margin-left: 30px;
+}
+.ordercheck .ordercheck_right .no_order {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 0;
+  margin-top: 50px;
+  display: none;
+}
+.ordercheck .ordercheck_right .no_order p:first-child {
+  font-size: 60px;
+  font-weight: bold;
+}
+.ordercheck .ordercheck_right .no_order p:nth-child(2) {
+  font-size: 20px;
+  margin-top: 10px;
+  font-style: italic;
+}
+.ordercheck .ordercheck_right .no_order button {
+  background-color: rgba(77, 71, 195, 0.2352941176);
+  margin-top: 50px;
+  padding: 10px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(77, 71, 195, 0.2431372549);
+}
+.ordercheck .ordercheck_right .no_order button a {
+  color: #4d47c3;
+}
+.ordercheck .ordercheck_right .yes_order {
+  padding-bottom: 120px;
+  margin-top: 50px;
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+.ordercheck .ordercheck_right .yes_order .order_date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  border: 1px solid rgba(77, 71, 195, 0.3764705882);
+  background-color: rgba(77, 71, 195, 0.0274509804);
+  padding: 20px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.ordercheck .ordercheck_right .yes_order .order_date div {
+  display: flex;
+  align-items: center;
+}
+.ordercheck .ordercheck_right .yes_order .order_date div a {
+  font-weight: 400;
+  margin-left: 10px;
+}
+.ordercheck .ordercheck_right .yes_order .order_date div a:hover {
+  text-decoration: underline;
+}
+.ordercheck .ordercheck_right .yes_order .order_date div img {
+  margin-top: 2px;
+  margin-left: -2px;
+  cursor: pointer;
+}
+.ordercheck .ordercheck_right .yes_order .order_date p {
+  font-size: 21px;
+}
+.ordercheck .ordercheck_right .yes_order .order_date div:last-child img {
+  width: 30px;
+  height: 30px;
+  margin-right: -7px;
+}
+.ordercheck .ordercheck_right .yes_order .order_date div:last-child > a {
+  font-size: 15px;
+  font-weight: 400;
+  border: 1px solid #4d47c3;
+  padding: 5px 18px;
+  border-radius: 15px;
+  color: #4d47c3;
+  background-color: rgba(77, 71, 195, 0.0705882353);
+}
+.ordercheck .ordercheck_right .yes_order .order_product {
+  margin-top: 40px;
+  margin-left: 20px;
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_img img {
+  width: 140px;
+  height: 180px;
+  cursor: pointer;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_book {
+  margin-left: -70px;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_book p:nth-of-type(1) {
+  background-color: rgba(77, 71, 195, 0.2352941176);
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #4d47c3;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_book p:nth-of-type(2) {
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_book p:last-child {
+  font-size: 12px;
+  margin-top: 6px;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_progress p {
+  color: #4d47c3;
+  font-weight: 600;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_button {
+  display: flex;
+  flex-direction: column;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_button button {
+  border: 1px solid #4d47c3;
+  padding: 5px 25px;
+  border-radius: 5px;
+  margin: 7px 0;
+  color: rgba(77, 71, 195, 0.9137254902);
+  transition: 0.25s;
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_button button:hover {
+  box-shadow: 0 0 10px rgba(77, 71, 195, 0.337254902);
+}
+.ordercheck .ordercheck_right .yes_order .order_product .order_button button:last-child {
+  color: rgba(220, 20, 60, 0.857);
+}/*# sourceMappingURL=OrderCheck.css.map */

@@ -1,0 +1,158 @@
+.productinfo {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+}
+.productinfo .left {
+  border-right: 1px dotted rgba(77, 71, 195, 0.062745098);
+  flex: 1;
+}
+.productinfo .left .book_img {
+  padding: 140px;
+  position: relative;
+}
+.productinfo .left .book_img img:first-child {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.327);
+}
+.productinfo .left .book_img img:nth-child(2) {
+  width: 30px;
+  height: 27px;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 104px;
+  left: 47%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+.productinfo .left .book_img p {
+  position: absolute;
+  left: 51%;
+  bottom: 107px;
+  font-size: 5px;
+  border: 1px solid #4d47c3;
+  border-radius: 10px;
+  padding: 2px 5px;
+  color: #4d47c3;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(77, 71, 195, 0.2235294118);
+  cursor: pointer;
+}
+.productinfo .right {
+  flex: 1;
+  margin-left: 50px;
+}
+.productinfo .right .main_title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 130px;
+}
+.productinfo .right .delivery_info {
+  margin-top: 60px;
+  display: flex;
+  font-size: 13px;
+}
+.productinfo .right .delivery_info p:first-child {
+  margin-right: 50px;
+}
+.productinfo .right .delivery_info p:last-child {
+  font-weight: bold;
+}
+.productinfo .right .delivery_fee {
+  margin-top: 20px;
+  display: flex;
+  font-size: 13px;
+}
+.productinfo .right .delivery_fee p:first-child {
+  margin-right: 61px;
+}
+.productinfo .right .sub_title {
+  margin-top: 4px;
+}
+.productinfo .right .price {
+  margin-top: 30px;
+  font-size: 23px;
+  font-weight: bold;
+}
+.productinfo .right .price span {
+  margin-right: 10px;
+  font-size: 18px;
+}
+.productinfo .right .plus_fee {
+  margin-top: 5px;
+  font-size: 13px;
+  margin-left: 98px;
+}
+.productinfo .right .book_counter {
+  box-shadow: 0 0 10px rgba(77, 71, 195, 0.0549019608);
+  background-color: rgba(77, 71, 195, 0.0549019608);
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.productinfo .right .book_counter p {
+  font-size: 15px;
+  margin-bottom: 33px;
+  margin-left: 20px;
+  padding-top: 10px;
+}
+.productinfo .right .book_counter div {
+  display: flex;
+  justify-content: space-between;
+}
+.productinfo .right .book_counter div .increase_box {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border: none;
+}
+.productinfo .right .book_counter div .count_price {
+  font-size: 18px;
+  margin-right: 20px;
+}
+.productinfo .right .all_price {
+  text-align: right;
+  margin-top: 30px;
+}
+.productinfo .right .all_price span {
+  color: #4d47c3;
+  margin-left: 15px;
+  font-size: 25px;
+  opacity: 1;
+  font-weight: bold;
+}
+.productinfo .right .order_box {
+  display: flex;
+  margin-top: 40px;
+}
+.productinfo .right .order_box button {
+  border: 1px solid #4d47c3;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 0 20px;
+  flex: 1;
+}
+.productinfo .right .order_box button:first-child {
+  opacity: 0.9;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.productinfo .right .order_box button:first-child img {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  transition: 0.7s;
+}
+.productinfo .right .order_box button:first-child:hover img {
+  left: 250px;
+}
+.productinfo .right .order_box button:last-child {
+  background-color: #4d47c3;
+  color: white;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+.productinfo .right .order_box button:last-child:hover {
+  opacity: 1;
+}/*# sourceMappingURL=ProductInfo.css.map */

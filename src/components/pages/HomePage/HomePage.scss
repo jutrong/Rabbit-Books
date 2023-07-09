@@ -3,13 +3,14 @@
         position: relative;
         height: 400px;
         width: 100%;
-        overflow: hidden;
+        // overflow: hidden;
         z-index: 2;
 
         .swiper {
             position: relative;
             width: 100%;
             height: 100%;
+            overflow: visible;
         }
 
         .swiper-slide {
@@ -18,6 +19,29 @@
             align-items: center;
             cursor: pointer;
 
+            i {
+                display: inline-block;
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                background: url('../../../assets/images/coil.png') no-repeat
+                    center / contain;
+                right: 100px;
+                bottom: -70px;
+                border-radius: 50%;
+                animation: 3s test linear infinite;
+            }
+            @keyframes test {
+                0% {
+                    transform: scale(0.9);
+                }
+                50% {
+                    transform: scale(1);
+                }
+                100% {
+                    transform: scale(0.9);
+                }
+            }
             img {
                 display: block;
                 width: 1200px;
@@ -177,12 +201,19 @@
                 max-width: 285px;
                 padding-bottom: 140%;
                 position: relative;
+                overflow: hidden;
+
                 img {
                     position: absolute;
                     display: block;
                     width: 100%;
                     height: 100%;
-                    // object-fit: cover;
+                    transition: transform 0.3s ease 0s, opacity 0.1s linear 0s;
+                }
+                &:hover {
+                    img {
+                        transform: scale(1.05) rotate(0.001deg);
+                    }
                 }
             }
             em {
@@ -238,77 +269,6 @@
         }
     }
 
-    // .marquee_section {
-    //     margin-top: 100px;
-
-    //     h2 {
-    //         padding-bottom: 30px;
-    //         font-size: 30px;
-    //     }
-    //     .list_container {
-    //         position: relative;
-    //         padding: 40px 0;
-    //         border-top: 1px solid #bbb;
-    //         border-bottom: 1px solid #bbb;
-
-    //         .marqueeSwiper {
-    //             display: flex;
-    //             align-items: center;
-    //             flex-wrap: nowrap;
-
-    //             .swiper-wrapper {
-    //                 -webkit-transition-timing-function: linear !important;
-    //                 transition-timing-function: linear !important;
-    //                 position: relative;
-    //                 display: flex;
-    //                 align-items: center;
-    //             }
-    //             .swiper-slide {
-    //                 width: 240px !important;
-    //                 position: relative;
-    //                 transition: 0.3s;
-    //                 cursor: pointer;
-
-    //                 &.small {
-    //                     width: 240px !important;
-    //                 }
-    //                 &.big {
-    //                     width: 280px !important;
-    //                 }
-    //                 img {
-    //                     width: 100%;
-    //                     display: block;
-    //                 }
-    //             }
-    //             .swiper-slide:hover {
-    //                 transform: scale(0.96);
-    //                 &::after {
-    //                     content: '';
-    //                     position: absolute;
-    //                     top: 0;
-    //                     left: 0;
-    //                     bottom: 0;
-    //                     right: 0;
-    //                     width: 100%;
-    //                     height: 100%;
-    //                     background-color: rgba(0, 0, 0, 0.2);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     .list_container::before {
-    //         content: '';
-    //         display: block;
-    //         width: 100%;
-    //         height: 1px;
-    //         position: absolute;
-    //         top: 50%;
-    //         left: 50%;
-    //         transform: translate(-50%, -50%);
-    //         background-color: #bbb;
-    //         z-index: 1;
-    //     }
-    // }
     .marquee_section {
         margin-top: 80px;
 
@@ -342,10 +302,10 @@
             .marquee-wrapper {
                 .js-marquee {
                     display: flex;
+
                     .slider {
                         width: 3960px;
                         transform: translateX(0px);
-
                         &.original {
                             animation: 88s linear infinite normal none running
                                 marqueeAnimation;
@@ -357,6 +317,7 @@
                         &.clone.stopped {
                             animation-play-state: paused;
                         }
+
                         li {
                             display: inline-block;
                             vertical-align: middle;
@@ -436,13 +397,12 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            align-content: flex-start;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 30px;
+            // align-content: flex-start;
+            // justify-content: center;
+            // align-items: flex-start;
+            gap: 20px;
             li {
-                width: calc(33.3333% - 1.1vw);
-
+                width: calc(100% / 3 - 13.4px);
                 .event_box {
                     position: relative;
                     display: flex;
@@ -455,7 +415,15 @@
 
                     img {
                         width: 150px;
+                        transition: transform 0.3s ease 0s,
+                            opacity 0.1s linear 0s;
                     }
+                    &:hover {
+                        img {
+                            transform: scale(1.1) rotate(0.001deg);
+                        }
+                    }
+
                     .event_txt {
                         width: calc(100% - 150px);
                         color: #fff;
@@ -510,6 +478,7 @@
                 display: block;
                 object-fit: cover;
                 object-position: right top;
+                filter: grayscale(100%);
             }
             .img_hover {
                 opacity: 0;

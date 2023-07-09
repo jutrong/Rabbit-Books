@@ -51,11 +51,11 @@ const Home = () => {
                     spaceBetween={0}
                     centeredSlides={true}
                     loop={true}
-                    speed={1400}
-                    autoplay={{
-                        delay: 2500,
-                        disableOnInteraction: false,
-                    }}
+                    speed={2300}
+                    // autoplay={{
+                    //     delay: 2500,
+                    //     disableOnInteraction: false,
+                    // }}
                     pagination={{
                         clickable: true,
                     }}
@@ -84,6 +84,7 @@ const Home = () => {
                                 </strong>
                                 <p>우주라이크소설 SF 장르전</p>
                             </div>
+                            <i></i>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide className="slide_blue">

@@ -1,6 +1,6 @@
 import './ProductListPage.scss';
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import cart from '../../../assets/images/icons/icon_gnb_basket.png';
 import wish from '../../../assets/images/icons/icon_wish.png';
 // import wishActive from '../../../assets/images/icons/icon_wish_active.png';
@@ -9,6 +9,11 @@ import bookData from '../../dummydata/BookData.json';
 const ProductList = () => {
     const [books, setBooks] = useState(bookData);
     const [selectAll, setSelectAll] = useState(false);
+
+    // 체크한 요소의 id값을 로컬스토리지에 저장해주는 로직 짜줘
+    //  1. 체크박스에 체크한 것을 변수에 저장하기
+    //  2. 변수에 저장된 것을 각각 로컬스토리지에 저장하기
+
     // 전체 선택/해제 처리
     const handleSelectAll = () => {
         const updatedCheck = books.map((book) => ({
@@ -40,7 +45,7 @@ const ProductList = () => {
             setSelectAll(false);
         }
     };
-    //상세페이지로 이동
+    //클릭시 상세페이지로 이동
     const navigate = useNavigate();
     const navigateToItem = (id) => {
         navigate(`/productlist/${id}`);
@@ -114,7 +119,9 @@ const ProductList = () => {
                         <div>
                             <a href="#">
                                 <img src={cart} alt="장바구니" />
-                                <p>장바구니</p>
+                                <p>
+                                    장바구니
+                                </p>
                             </a>
                         </div>
                     </div>
@@ -202,7 +209,13 @@ const ProductList = () => {
     );
 };
 
-const BookItem = ({ book, onCheckboxChange, onDeselect, navigateToItem }) => {
+const BookItem = ({
+    book,
+    onCheckboxChange,
+    onDeselect,
+    navigateToItem,
+    selectCheckbox,
+}) => {
     const handleCheckboxChange = () => {
         onCheckboxChange(book.id);
         onDeselect();

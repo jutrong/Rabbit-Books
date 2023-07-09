@@ -6,6 +6,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import mainBanner1 from '../../../assets/images/main_banner1.webp';
 import mainBanner2 from '../../../assets/images/main_banner2.webp';
 import mainBanner3 from '../../../assets/images/main_banner3.webp';
@@ -29,7 +32,7 @@ import authorImg7 from '../../../assets/images/author7.jpg';
 import authorImg8 from '../../../assets/images/author8.webp';
 import authorImg9 from '../../../assets/images/author9.jpg';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Mook from './Mook';
 
 const Home = () => {
@@ -42,6 +45,10 @@ const Home = () => {
     const authorSectionPrevBtn = useRef();
     const authorSectionNextBtn = useRef();
 
+    useEffect(() => {
+        AOS.init();
+    }, []);
+
     return (
         <div className="home">
             <section className="slide_section">
@@ -51,7 +58,7 @@ const Home = () => {
                     spaceBetween={0}
                     centeredSlides={true}
                     loop={true}
-                    speed={2300}
+                    speed={1800}
                     // autoplay={{
                     //     delay: 2500,
                     //     disableOnInteraction: false,
@@ -71,7 +78,11 @@ const Home = () => {
                     <SwiperSlide className="slide_black">
                         <div className="slide_container">
                             <div className="blur_bg"></div>
-                            <img src={mainBanner1} alt="슬라이드 이미지" />
+                            <img
+                                src={mainBanner1}
+                                className="main_img"
+                                alt="슬라이드 이미지"
+                            />
                             <div className="slide_txt">
                                 <ul>
                                     <li>ORIGINAL</li>
@@ -84,13 +95,21 @@ const Home = () => {
                                 </strong>
                                 <p>우주라이크소설 SF 장르전</p>
                             </div>
-                            <i></i>
+                            {/* <img
+                                src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791170521730.jpg"
+                                className="mini_img"
+                                alt="책 이미지"
+                            /> */}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide className="slide_blue">
                         <div className="slide_container">
                             <div className="blur_bg"></div>
-                            <img src={mainBanner2} alt="슬라이드 이미지" />
+                            <img
+                                src={mainBanner2}
+                                className="main_img"
+                                alt="슬라이드 이미지"
+                            />
                             <div className="slide_txt">
                                 <ul>
                                     <li>10%할인</li>
@@ -110,7 +129,11 @@ const Home = () => {
                     <SwiperSlide className="slide_pink">
                         <div className="slide_container">
                             <div className="blur_bg"></div>
-                            <img src={mainBanner3} alt="슬라이드 이미지" />
+                            <img
+                                src={mainBanner3}
+                                className="main_img"
+                                alt="슬라이드 이미지"
+                            />
                             <div className="slide_txt">
                                 <ul>
                                     <li>NEW</li>
@@ -127,7 +150,11 @@ const Home = () => {
                     <SwiperSlide className="slide_green">
                         <div className="slide_container">
                             <div className="blur_bg"></div>
-                            <img src={mainBanner4} alt="슬라이드 이미지" />
+                            <img
+                                src={mainBanner4}
+                                className="main_img"
+                                alt="슬라이드 이미지"
+                            />
                             <div className="slide_txt">
                                 <ul>
                                     <li>10%할인</li>
@@ -146,7 +173,11 @@ const Home = () => {
                     <SwiperSlide className="slide_purple">
                         <div className="slide_container">
                             <div className="blur_bg"></div>
-                            <img src={mainBanner5} alt="슬라이드 이미지" />
+                            <img
+                                src={mainBanner5}
+                                className="main_img"
+                                alt="슬라이드 이미지"
+                            />
                             <div className="slide_txt">
                                 <ul>
                                     <li>세트</li>
@@ -175,7 +206,11 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="today_section con_wrap">
+            <section
+                className="today_section con_wrap"
+                data-aos="fade-up"
+                data-aos-duration="600"
+            >
                 <h2>오늘, 토끼의 발견!</h2>
                 <Swiper
                     className="todaySwiper"
@@ -294,7 +329,11 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="banner_section con_wrap">
+            <section
+                className="banner_section con_wrap"
+                data-aos="fade-up"
+                data-aos-duration="600"
+            >
                 <img
                     src="https://contents.kyobobook.co.kr/display/i_1200_150_471e118f2e9d48f3ac71c37b91b5f631.jpg"
                     alt="배너 이미지"
@@ -427,7 +466,11 @@ const Home = () => {
             </section> */}
             <Mook />
 
-            <section className="author_section con_wrap">
+            <section
+                className="author_section con_wrap"
+                data-aos="fade-up"
+                data-aos-duration="600"
+            >
                 <h2>이 달의 작가</h2>
                 <Swiper
                     className="todaySwiper"
@@ -602,7 +645,11 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="event_section con_wrap">
+            <section
+                className="event_section con_wrap"
+                data-aos="fade-up"
+                data-aos-duration="600"
+            >
                 <h2 className="con_wrap">이벤트</h2>
 
                 <ul>
@@ -705,13 +752,17 @@ const Home = () => {
                 </ul>
             </section>
 
-            <section className="ad_section con_wrap">
+            <section
+                className="ad_section con_wrap"
+                data-aos="fade-up"
+                data-aos-duration="600"
+            >
                 <img
                     src="http://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/06/28/46833/WELCOMEMAIND.jpg"
                     alt="광고 배너"
                 />
                 <img
-                    src="http://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/06/28/61856/2-5.jpg"
+                    src="http://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/06/30/2/welcome_PC_595x180.jpg"
                     alt="광고 배너"
                 />
             </section>

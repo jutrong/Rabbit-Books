@@ -19,34 +19,34 @@
             align-items: center;
             cursor: pointer;
 
-            i {
+            .mini_img {
                 display: inline-block;
                 position: absolute;
-                width: 200px;
-                height: 200px;
-                background: url('../../../assets/images/coil.png') no-repeat
-                    center / contain;
-                right: 100px;
-                bottom: -70px;
+                width: 220px;
+                height: 220px;
                 border-radius: 50%;
-                animation: 3s test linear infinite;
+                right: 180px;
+                bottom: -50px;
+                object-fit: cover;
+                border: 2px solid #fff;
             }
-            @keyframes test {
-                0% {
-                    transform: scale(0.9);
-                }
-                50% {
-                    transform: scale(1);
-                }
-                100% {
-                    transform: scale(0.9);
-                }
-            }
-            img {
+            // @keyframes test {
+            //     0% {
+            //         transform: scale(0.9);
+            //     }
+            //     50% {
+            //         transform: scale(1);
+            //     }
+            //     100% {
+            //         transform: scale(0.9);
+            //     }
+            // }
+            .main_img {
                 display: block;
                 width: 1200px;
                 height: 100%;
                 object-fit: contain;
+                margin: 0 auto;
             }
             .blur_bg {
                 position: absolute;
@@ -60,6 +60,7 @@
                 width: 1200px;
                 margin: 0 auto;
                 height: 400px;
+
                 // outline: 1px solid #fff;
 
                 .slide_txt {

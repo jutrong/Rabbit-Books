@@ -14,3 +14,24 @@
         }
     }
 }
+
+.login.join {
+    .login_container {
+        .login_inner {
+            padding-top: 60px;
+            padding-bottom: 0;
+
+            .login_form {
+                input[type='text'],
+                input[type='password'],
+                input[type='number'] {
+                    margin-top: 16px;
+                }
+
+                .blue_btn:not(.w_96) {
+                    margin-top: 22px;
+                }
+            }
+        }
+    }
+}

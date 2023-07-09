@@ -325,7 +325,7 @@ table.type1.type3 thead th ~ th,
 table.type1.type3 tbody td ~ td{border-left: 1px solid #e0e0e0;}
 
 /* 전체공통 */
-main{overflow-x: hidden; min-height: calc(100vh - 265px);}
+main{overflow: hidden; min-height: calc(100vh - 265px);}
 main:not(.index){padding-bottom: 80px;}
 
 .con_wrap{width: 1200px; margin: 0 auto;}
@@ -402,7 +402,7 @@ main:not(.index){padding-bottom: 80px;}
 
 /* header */
 /* header{position:fixed;top:0;left:0;z-index:10;width:100%;background-color:#fff;} */
-header{background-color:#fff;}
+header{background-color:#fff; min-width: 1400px;}
 header.active{box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);}
 .service_menu{display: flex; justify-content: end;}
 .service_menu li{position: relative; float: left;}
@@ -443,17 +443,17 @@ header.active{box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);}
 .gnb_bar > li .gnb{position: relative; display: block; padding: 16px 0; margin: 0 auto; width: 100%; font-size: 16px; color: #333333; font-weight: 700; line-height: 22px;}
 .gnb_bar > li .gnb.category{padding-left: 32px; background: url('../images/icons/menu.png') no-repeat left 25% center / 32px;}
 
-.gnb_bar .sub_nav{display: none; padding: 24px 52px 24px 0; position: absolute; left: 0; top: 54px; width: 100%; min-height: 446px; height: auto; border: 1px solid #ededed; background-color: #fff; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1); z-index: 99;}
+.gnb_bar .sub_nav {opacity: 0;overflow: hidden;padding: 0;position: absolute;top: 54px;left: 0;width: 100%;height: 0;border: 1px solid #ededed;background-color: #fff;box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);transition: all .4s;z-index: 99;}
 .gnb_bar > li:hover .sub_nav,
-.gnb_bar > li .sub_nav.active{display: block;}
+.gnb_bar > li .sub_nav.active { opacity: 1; height: 446px; padding: 24px 52px 24px 0;}
 
 .gnb_bar > li .gnb:before{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background-color:transparent; transition: width .2s;}
 .gnb_bar > li .gnb:hover,
 .gnb_bar > li .gnb.active{color: #4D47C3;}
 .gnb_bar > li .gnb:hover:before,
 .gnb_bar > li .gnb.active:before{width:100%; background-color:#4D47C3; outline: 1px solid #000;}
-.gnb_bar>li .gnb.category:hover{background-image: url('../images/icons/menu_hover.png');}
-.gnb_bar>li .gnb.category.active {
+.gnb_bar > li .gnb.category:hover{background-image: url('../images/icons/menu_hover.png');}
+.gnb_bar > li .gnb.category.active {
     background-image: url('../images/icons/menu_hover.png');
 }
 

@@ -7,7 +7,7 @@ import logoGoogle from '../../../assets/images/logo_google.png';
 
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getSaveId, setSaveId } from '../../../utils';
+import { getSaveId, removeSaveId, setSaveId } from '../../../utils';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Login = () => {
         setIdSave((prev) => !prev);
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         // 유효성 검사
@@ -46,11 +46,22 @@ const Login = () => {
             return;
         }
 
-        // 유효성 검증 통과
-        // fetch() 작성
+        // 유효성 통과 후 로직(Get)
+        // const response = await fetch(
+        //     `http://localhost:3000/users?email=${email}&password=${password}`,
+        // );
+        // const jsonData = await response.json();
+        // console.log(jsonData);
+
+        // 이메일(아이디) 저장 체크용
+        if (idSave) setSaveId(email);
+        else {
+            if (getSaveId()) {
+                removeSaveId();
+            }
+        }
 
         // 회원가입 완료 시
-        setSaveId(email);
         navigate('/');
     };
 
@@ -119,7 +130,7 @@ const Login = () => {
                                         onChange={onChange}
                                     />
                                     <label htmlFor="ipChk1" className="label">
-                                        아이디 저장
+                                        이메일 저장
                                     </label>
                                     <button>아이디 찾기 | 비밀번호 찾기</button>
                                 </div>

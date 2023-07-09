@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     // 서비스 메뉴
     const [serviceMenus] = useState([
-        { name: '회원 가입', target: '#', class: 'col_blue' },
-        { name: '로그인', target: '#', class: '' },
+        { name: '회원 가입', target: '/join', class: 'col_blue' },
+        { name: '로그인', target: '/login', class: '' },
         { name: '고객센터', target: '#', class: '' },
     ]);
 
@@ -25,7 +25,7 @@ const Header = () => {
                 </div>
                 <div className="header_menu">
                     <h1 className="main_logo">
-                        <a href="HeaderPage#none">
+                        <Link to="/">
                             <img
                                 src="/src/assets/images/rabbit.png"
                                 alt="로고"
@@ -35,7 +35,7 @@ const Header = () => {
                                 <br />
                                 책방
                             </p>
-                        </a>
+                        </Link>
                     </h1>
 
                     <div className="inp_search_wrap">
@@ -50,13 +50,13 @@ const Header = () => {
 
                     <ul className="move_list">
                         <li className="basket">
-                            <a href="HeaderPage#none"></a>
+                            <Link to="/cart"></Link>
                         </li>
                         <li className="my">
-                            <a href="HeaderPage#none"></a>
+                            <Link to="/mypage"></Link>
                         </li>
                         <li className="delivery">
-                            <a href="HeaderPage#none"></a>
+                            <Link to="/ordercheck"></Link>
                         </li>
                     </ul>
                 </div>
@@ -108,6 +108,7 @@ const Header = () => {
 export default Header;
 
 const CreateGnbMenus = () => {
+    const [menuNum, setMenuNum] = useState(0);
     const [gnbMenus] = useState([
         {
             id: 'korBooks',
@@ -171,6 +172,9 @@ const CreateGnbMenus = () => {
         },
     ]);
 
+    const hoverMenuFunc = (idx) => setMenuNum(idx);
+    const leaveMenuFunc = () => setMenuNum(0);
+
     const renderGnb = () => {
         const categorys = [];
         const per = 11;
@@ -191,9 +195,17 @@ const CreateGnbMenus = () => {
                 );
             }
             categorys.push(
-                <li key={id}>
+                <li
+                    key={id}
+                    onMouseEnter={() => hoverMenuFunc(i)}
+                    onMouseLeave={leaveMenuFunc}
+                >
                     <Link to={target}>{gnbCategory}</Link>
-                    <div className={i === 0 ? 'sub_menu active' : 'sub_menu'}>
+                    <div
+                        className={
+                            i === menuNum ? 'sub_menu active' : 'sub_menu'
+                        }
+                    >
                         {menusArr}
                     </div>
                 </li>,

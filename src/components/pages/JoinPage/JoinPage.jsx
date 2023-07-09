@@ -5,7 +5,7 @@ import loginBg from '../../../assets/images/login_bg.png';
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { setSaveJoinName } from '../../../utils';
+import { postFetch, setSaveJoinName } from '../../../utils';
 
 const Join = () => {
     const navigate = useNavigate();
@@ -14,6 +14,7 @@ const Join = () => {
     const passwordRef = useRef();
     const nameRef = useRef();
     const phoneRef = useRef();
+    const addressRef = useRef();
 
     const [duplicateEmail, setDuplicateEmail] = useState(false);
     const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ const Join = () => {
     const [rePassword, setRePassword] = useState('');
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
 
     // 필드별 입력 처리 (공통 메소드)
     const onInput = (e) => {
@@ -31,6 +33,7 @@ const Join = () => {
         else if (targetName === 'rePassword') setRePassword(targetValue);
         else if (targetName === 'name') setName(targetValue);
         else if (targetName === 'phone') setPhone(targetValue);
+        else if (targetName === 'address') setAddress(targetValue);
     };
 
     // 아이디 중복체크
@@ -38,10 +41,12 @@ const Join = () => {
         // fetch() 작성
 
         setDuplicateEmail(true);
+        alert('사용 가능한 이메일입니다.');
+        // alert('이미 사용중인 이메일입니다.');
     };
 
     // 회원가입
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         // 유효성 검사
@@ -81,8 +86,16 @@ const Join = () => {
             return;
         }
 
-        // 유효성 통과 후 로직
-        // fetch() 작성
+        // const data = {
+        //     email,
+        //     password,
+        //     username: name,
+        //     phone,
+        // };
+
+        // 유효성 통과 후 로직(Post)
+        // const JOIN_URL = 'http://localhost:3000/join';
+        // const jsonData = await postFetch(JOIN_URL, data);
 
         setSaveJoinName(name);
         // 회원가입 완료 시 완료 화면 전환
@@ -101,7 +114,7 @@ const Join = () => {
     };
 
     return (
-        <div className="login">
+        <div className="login join">
             <div className="header_menu">
                 <h1 className="main_logo">
                     <Link to="/">
@@ -185,6 +198,14 @@ const Join = () => {
                                     value={phone}
                                     onChange={onInput}
                                     ref={phoneRef}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="주소를 입력해주세요."
+                                    name="address"
+                                    value={address}
+                                    onChange={onInput}
+                                    ref={addressRef}
                                 />
                                 <button className="blue_btn">가입하기</button>
                             </form>

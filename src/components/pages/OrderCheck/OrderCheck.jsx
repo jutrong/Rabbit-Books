@@ -3,6 +3,7 @@ import Sidebar from '../../atoms/Sidebar/Sidebar';
 import last from '../../../assets/images/icons/icon_last.png';
 import gnbbox from '../../../assets/images/icons/icon_gnb_box.png';
 import book2 from '../../../assets/images/book2.jpeg';
+
 const OrderCheck = () => {
     return (
         <div className="ordercheck">

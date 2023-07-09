@@ -26,10 +26,10 @@
                 left: 51%;
                 bottom: 107px;
                 font-size: 5px;
-                border: 1px solid #4D47C3;
+                border: 1px solid #4d47c3;
                 border-radius: 10px;
                 padding: 2px 5px;
-                color: #4D47C3;
+                color: #4d47c3;
                 font-weight: bold;
                 box-shadow: 0 0 10px #4d47c339;
                 cursor: pointer;
@@ -133,18 +133,16 @@
                 overflow: hidden;
                 img {
                     position: absolute;
-                    left: 60px;
+                    left: 30px;
                     top: 50%;
                     transform: translateY(-50%);
                     width: 20px;
                     height: 20px;
                     transition: 0.7s;
-
                 }
                 &:hover img {
                     left: 250px;
                 }
-
             }
             button:last-child {
                 background-color: #4d47c3;

@@ -1,4 +1,5 @@
 .productlist {
+    position: relative;
     max-width: 1200px;
     margin: 100px auto;
     .list_content {
@@ -170,6 +171,39 @@
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+    .cart_modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 500px;
+        padding: 40px 40px;
+        background-color: #4d47c3e3;
+        border-radius: 15px;
+        box-shadow: 0 0 10px #4d47c33c;
+        .modal {
+            h4 {
+                color: white;
+                font-size: 24px;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            div {
+                display: flex;
+                justify-content: space-evenly;
+                button {
+                    color: white;
+                    border: 1px solid white;
+
+                    padding: 5px 10px;
+                    border-radius: 10px;
+                    font-size: 14px;
+                    background-color: #4d47c328;
                 }
             }
         }

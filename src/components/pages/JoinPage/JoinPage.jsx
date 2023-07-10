@@ -190,6 +190,7 @@ const Join = () => {
                                     type="text"
                                     placeholder="이름을 입력해주세요"
                                     name="name"
+                                    minLength={2}
                                     maxLength={10}
                                     value={name}
                                     onChange={onInput}

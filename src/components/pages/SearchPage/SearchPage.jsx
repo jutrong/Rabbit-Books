@@ -55,7 +55,7 @@ const Search = () => {
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>선택</th>
+                                        <th>No.</th>
                                         <th>상품 정보</th>
                                         <th>배송 정보</th>
                                         <th>구매 하기</th>
@@ -63,18 +63,7 @@ const Search = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                name="inpChk"
-                                                className="ch_check hide"
-                                                id="inpChk1"
-                                            />
-                                            <label
-                                                htmlFor="inpChk1"
-                                                className="label single"
-                                            ></label>
-                                        </td>
+                                        <td>1</td>
                                         <td>
                                             <div className="book_info_box">
                                                 <img
@@ -137,18 +126,7 @@ const Search = () => {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                name="inpChk"
-                                                className="ch_check hide"
-                                                id="inpChk1"
-                                            />
-                                            <label
-                                                htmlFor="inpChk1"
-                                                className="label single"
-                                            ></label>
-                                        </td>
+                                        <td>2</td>
                                         <td>
                                             <div className="book_info_box">
                                                 <img
@@ -221,18 +199,7 @@ const Search = () => {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                name="inpChk"
-                                                className="ch_check hide"
-                                                id="inpChk1"
-                                            />
-                                            <label
-                                                htmlFor="inpChk1"
-                                                className="label single"
-                                            ></label>
-                                        </td>
+                                        <td>3</td>
                                         <td>
                                             <div className="book_info_box">
                                                 <img

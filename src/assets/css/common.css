@@ -83,6 +83,7 @@ input[type=text]::-ms-clear{display: none;}
 select{-webkit-appearance:none; -moz-appearance:none; appearance:none;}
 select::-ms-expand{display:none;}
 
+input[type=number][readonly],
 input[type=tel][readonly],
 input[type=text][readonly],
 input[type=password][readonly],
@@ -210,7 +211,7 @@ textarea.re_none{resize: none;}
 .bg_grey{background-color: #f8f8f9;}
 
 /* 폰트 사이즈 */
-.fs_12{font-size: 12px;}
+.fs_12{font-size: 12px !important;}
 .fs_14{font-size: 14px;}
 .fs_16{font-size: 16px;}
 .fs_18{font-size: 18px;}

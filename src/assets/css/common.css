@@ -179,24 +179,28 @@ textarea.re_none{resize: none;}
 .w_100{width: 100px;}
 .w_120{width: 120px;}
 .w_156{width: 156px;}
+.w_200{width: 200px;}
 .w_276{width: 276px;}
 .w_400{width: 400px;}
 .w_full{width: 100%;}
-/* .w_minus78{width:calc(100% - 78px);} */
+.w_minus210{width:calc(100% - 210px);}
 
 /* 세로사이즈 */
 /* .h_180{height: 180px;} */
 
 /* margin, padding */
 .marleft_4{margin-left: 4px;}
+.marleft_6{margin-left: 6px;}
 .marleft_10{margin-left: 10px;}
 .marleft_12{margin-left: 12px;}
 .marleft_40{margin-left: 40px;}
 
+.martop_4{margin-top: 4px;}
 .martop_8{margin-top: 8px;}
 .martop_10{margin-top: 10px;}
 .martop_20{margin-top: 20px;}
 .martop_24{margin-top: 24px;}
+.martop_40{margin-top: 40px;}
 
 /* 폰트컬러 */
 .col_blue{color:#4D47C3;}
@@ -332,6 +336,12 @@ main:not(.index){padding-bottom: 80px;}
 #mainDimLayer{display:block; width:100%; height:100%; background-color: rgba(0, 0, 0, 0.4); position:fixed; left:0; top:0px; margin:0; padding:0;z-index:101;}
 /* .subDimLayer{display: block;width: 100%;height:100%; background-color: rgba(0, 0, 0, 0.2); position: fixed;left: 0;top: 0px;margin: 0;padding: 0;z-index: 103;} */
 
+.grey_tag {
+    display: inline-block;
+    color: #666;
+    font-size: 12px;
+}
+
 /* tab */
 .tab_menu_type1 li{float: left; width: calc(100% / 2);}
 .tab_menu_type1 li button{padding: 18px 0; width: 100%; text-align: center;}
@@ -437,7 +447,7 @@ header.active{box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);}
 
 
 /* GNB */
-.gnb_menu{border-top: 1px solid #ededed; border-bottom: 1px solid #ededed; z-index: 1; box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;}
+.gnb_menu{border-top: 1px solid #ededed; border-bottom: 1px solid #ededed; z-index: 1; box-shadow:rgba(0, 0, 0, 0.02) 0px 10px 10px 0px;}
 .gnb_bar{position: relative; display: flex; justify-content: space-between; align-items: center;}
 .gnb_bar > li{flex: 1;}
 .gnb_bar > li .gnb{position: relative; display: block; padding: 16px 0; margin: 0 auto; width: 100%; font-size: 16px; color: #333333; font-weight: 700; line-height: 22px;}

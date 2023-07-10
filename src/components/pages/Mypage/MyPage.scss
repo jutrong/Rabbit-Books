@@ -1,33 +1,85 @@
 .mypage_container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 80px;
-    .main_container {
-        width: 800px;
-        &_wrap > h3 {
-            text-align: left;
-            font-size: 30px;
-            margin: {
-                top: 0;
-                right: 0;
-                left: 20px;
-                bottom: 20px;
+    .mypage_status {
+        margin: 60px 0 40px;
+        padding: 30px 0;
+        // background-color: #f4f4f4;
+        border-radius: 16px;
+        text-align: center;
+        background-color: #4d47c307;
+        border: 1px solid #4d47c3;
+
+        ul {
+            display: flex;
+            li {
+                position: relative;
+                padding: 0 10px;
+                width: calc(100% / 5);
+
+                em {
+                    position: relative;
+                    display: block;
+                    padding-top: 78px;
+                    background-position: center top;
+                    background-repeat: no-repeat;
+                    background-size: 56px;
+                }
+
+                em.rank {
+                    background-image: url('../../../assets/images/icons/icon_mypage_rank.png');
+                }
+                em.order {
+                    background-image: url('../../../assets/images/icons/icon_mypage_order.png');
+                }
+                em.qa {
+                    background-image: url('../../../assets/images/icons/icon_mypage_qa.png');
+                }
+                em.payment {
+                    background-image: url('../../../assets/images/icons/icon_mypage_payment.png');
+                }
+                em.point {
+                    background-image: url('../../../assets/images/icons/icon_mypage_point.png');
+                }
+                em.custom {
+                    background-image: url('../../../assets/images/icons/icon_mypage_custom.png');
+                }
+                strong {
+                    display: inline-block;
+                    padding-top: 16px;
+                    font-size: 22px;
+                    span {
+                        font-weight: 400;
+                        font-size: 14px;
+                    }
+                }
+            }
+            li ~ li::before {
+                content: '';
+                width: 1px;
+                height: 72px;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: #e0e0e0;
             }
         }
-        &_wrap > p {
-            text-align: left;
-            margin-bottom: 30px;
-            margin-left: 20px;
+    }
+
+    .tab_menu_type3 {
+        li {
+            width: calc(100% / 5);
+        }
+    }
+
+    .main_container {
+        &_wrap > strong {
+            display: inline-block;
+            padding: 24px 0 18px;
             font-size: 20px;
-            font-weight: 400;
         }
         &_box {
-            width: 800px;
             border: 1px solid #4d47c3;
             border-radius: 15px;
-            margin-left: 20px;
             background-color: #4d47c307;
             .profile {
                 text-align: center;
@@ -132,7 +184,6 @@
         }
     }
     .psd_change_container {
-        width: 800px;
         margin-top: 80px;
         > p {
             margin-bottom: 30px;
@@ -141,7 +192,6 @@
             font-weight: 400;
         }
         .psd_change_box {
-            width: 800px;
             border: 1px solid #4d47c3;
             border-radius: 15px;
             margin-left: 20px;
@@ -177,7 +227,6 @@
             font-weight: 400;
         }
         .account_delete_box {
-            width: 800px;
             border: 1px solid #4d47c3;
             border-radius: 15px;
             margin-left: 20px;

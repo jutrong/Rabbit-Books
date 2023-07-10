@@ -2,123 +2,151 @@ import './Mypage.scss';
 import Profile from '../../../assets/images/rabbit.png';
 import member from '../../../assets/images/icons/icon_member_active.png';
 import check from '../../../assets/images/icons/icon_check_shape.png';
-import Sidebar from '../../atoms/Sidebar/Sidebar';
+// import Sidebar from '../../atoms/Sidebar/Sidebar';
 
 const Mypage = () => {
     return (
-        <div className="mypage_container">
-            <Sidebar></Sidebar>
+        <div className="mypage_container con_wrap">
+            <div className="mypage_status">
+                <ul>
+                    <li>
+                        <em className="rank">회원 등급</em>
+                        <strong>일반</strong>
+                    </li>
+                    <li>
+                        <em className="order">주문·배송 건수</em>
+                        <strong>30</strong>
+                    </li>
+                    <li>
+                        <em className="qa">내 문의 건수</em>
+                        <strong>3</strong>
+                    </li>
+                    <li>
+                        <em className="payment">총 주문 금액 (월)</em>
+                        <strong>
+                            3,500,000 <span>원</span>
+                        </strong>
+                    </li>
+                    <li>
+                        <em className="point">적립 포인트</em>
+                        <strong>
+                            10,500 <span>P</span>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+
+            <ul className="tab_menu_type3 clear">
+                <li className="active">
+                    <a>회원 정보</a>
+                </li>
+                <li>
+                    <a>주문·배송 조회</a>
+                </li>
+                <li>
+                    <a>내 문의 조회</a>
+                </li>
+                <li>
+                    <a>포인트 조회</a>
+                </li>
+                <li>
+                    <a>배송지 관리</a>
+                </li>
+            </ul>
+
             <div className="main_container">
                 <div className="main_container_wrap">
-                    <h3>계정 관리</h3>
-                    <p>회원정보</p>
-                    <div className="main_container_box">
-                        <div className="profile">
-                            <img
-                                src={Profile}
-                                alt="profile"
-                                className="profile_img"
-                            />
-                            <img src={member} alt="아이콘" />
-                        </div>
-                        <div className="input_box">
-                            <form action="">
-                                <div className="name_wrap">
-                                    <label
-                                        className="input_box_name"
-                                        htmlFor="mypageName"
-                                    >
-                                        이름
-                                    </label>
+                    <strong>기본정보</strong>
+                    <table className="type2 txt_left">
+                        <colgroup>
+                            <col width="200px" />
+                            <col width="*" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>아이디</th>
+                                <td>yuna@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <th>비밀번호</th>
+                                <td>
+                                    <input
+                                        type="password"
+                                        className="w_full"
+                                        placeholder="현재 비밀번호"
+                                    />
+                                    <input
+                                        type="password"
+                                        className="w_full martop_8"
+                                        placeholder="새 비밀번호"
+                                    />
+                                    <input
+                                        type="password"
+                                        className="w_full martop_8"
+                                        placeholder="새 비밀번호 재입력"
+                                    />
+                                    <p className="grey_tag martop_4">
+                                        ※ 10 ~ 20자의 영문 소문자, 숫자 및
+                                        특수문자 모두 사용 가능
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>이름</th>
+                                <td>
                                     <input
                                         type="text"
-                                        className="w_276"
-                                        id="mypageName"
-                                        placeholder="토깽이"
+                                        className="w_full"
+                                        value="박유나"
                                     />
-                                </div>
-                                <div className="mypage_email_box">
-                                    <div className="email_wrap">
-                                        <label
-                                            className="input_box_email"
-                                            htmlFor="mypageEmail"
-                                        >
-                                            이메일
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="text"
-                                            id="mypageEmail"
-                                            placeholder="elice@tokki.io"
-                                        />
-                                        <button className="blue_btn w_100 modal_btn">
-                                            이메일 변경
-                                        </button>
-                                    </div>
-                                    <img
-                                        src={check}
-                                        alt="인증완료"
-                                        className="check_img"
+                                    <p className="grey_tag martop_4">
+                                        ※ 2 ~ 10자의 한글 사용 가능
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>휴대전화 번호</th>
+                                <td>
+                                    <input
+                                        type="number"
+                                        className="w_full"
+                                        placeholder="- 없이 입력"
                                     />
-                                    <p>인증 완료</p>
-                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td>
+                                    <input
+                                        type="text"
+                                        className="w_minus210"
+                                        value="123456"
+                                        readOnly={true}
+                                    />
+                                    <button className="blue_btn w_200 marleft_6">
+                                        주소 검색
+                                    </button>
+                                    <input
+                                        type="text"
+                                        className="w_minus210 martop_8"
+                                        value="서울시 종로구 새문안로 76"
+                                        readOnly={true}
+                                    />
+                                    <input
+                                        type="text"
+                                        className="w_minus210 martop_8"
+                                        value="콘코디언 빌딩 6~10층"
+                                    />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                                <div className="mypage_phone_box">
-                                    <label
-                                        className="input_box_phone"
-                                        htmlFor="mypagePhone"
-                                    >
-                                        휴대폰 번호
-                                    </label>
-                                    <div>
-                                        <input
-                                            type="number"
-                                            className="w_276"
-                                            id="mypagePhone"
-                                            placeholder="010-1234-1234"
-                                        />
-                                        <button className="blue_btn w_100 modal_btn">
-                                            휴대폰 인증
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="input_btn_box">
-                                    <button className="cancle_btn black_btn big w_100">
-                                        취소
-                                    </button>
-                                    <button className="save_btn blue_btn big w_100">
-                                        저장
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div className="psd_change_container">
-                    <p>비밀번호</p>
-                    <div className="psd_change_box">
-                        <div className="psd_change_left">
-                            <span>최근 업데이트 : 2023-07-15</span>
-                            <p>비밀번호</p>
-                        </div>
-                        <div className="psd_change_right ">
-                            <button className="blue_btn w_100 modal_btn">
-                                비밀번호 변경
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="account_delete_container">
-                    <p>계정 삭제</p>
-                    <div className="account_delete_box">
-                        <span>
-                            계정 삭제 시 프로필 및 응시한 테스트 정보가 삭제
-                            됩니다.
-                        </span>
-                        <button className="blue_btn w_100 modal_btn">
-                            삭제하기
+                    <div className="btn_center martop_40">
+                        <button className="blue_btn w_200 big">
+                            회원 정보 수정
                         </button>
+                        <button className="white_btn w_100">회원 탈퇴</button>
                     </div>
                 </div>
             </div>

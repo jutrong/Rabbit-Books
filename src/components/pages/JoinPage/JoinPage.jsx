@@ -85,6 +85,11 @@ const Join = () => {
             phoneRef.current.focus();
             return;
         }
+        if (address.length === 0) {
+            alert('주소를 입력해주세요');
+            addressRef.current.focus();
+            return;
+        }
 
         // const data = {
         //     email,

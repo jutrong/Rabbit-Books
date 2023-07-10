@@ -1,16 +1,55 @@
 import './ProductListPage.scss';
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import cart from '../../../assets/images/icons/icon_gnb_basket.png';
 import wish from '../../../assets/images/icons/icon_wish.png';
-import wishActive from '../../../assets/images/icons/icon_wish_active.png';
+// import wishActive from '../../../assets/images/icons/icon_wish_active.png';
 import bookData from '../../dummydata/BookData.json';
 
 const ProductList = () => {
-    let [books] = useState(bookData);
-    let { id } = useParams();
+    const [books, setBooks] = useState(bookData);
+    const [selectAll, setSelectAll] = useState(false);
 
-  
+    // 체크한 요소의 id값을 로컬스토리지에 저장해주는 로직 짜줘
+    //  1. 체크박스에 체크한 것을 변수에 저장하기
+    //  2. 변수에 저장된 것을 각각 로컬스토리지에 저장하기
+
+    // 전체 선택/해제 처리
+    const handleSelectAll = () => {
+        const updatedCheck = books.map((book) => ({
+            ...book,
+            checked: !selectAll,
+        }));
+        setBooks(updatedCheck);
+        setSelectAll(!selectAll);
+    };
+    // 개별 체크박스 변경 처리
+    const handleCheckboxChange = (check) => {
+        //선택 상태 토글
+        const updatedCheck = books.map((book) => {
+            if (book.id === check) {
+                return { ...book, checked: !book.checked };
+            }
+            return book;
+        });
+        setBooks(updatedCheck);
+        // 모든 책이 선택된 경우 전체 선택 상태로 설정
+        const allChecked = updatedCheck.every((book) => book.checked);
+        setSelectAll(allChecked);
+    };
+    // 개별 선택 해제 시 전체 선택 체크 해제
+    const handleIndividualDeselect = () => {
+        const allChecked = books.every((book) => book.checked);
+        // 모든 책이 선택된 경우 전체 선택 체크 해제
+        if (allChecked) {
+            setSelectAll(false);
+        }
+    };
+    //클릭시 상세페이지로 이동
+    const navigate = useNavigate();
+    const navigateToItem = (id) => {
+        navigate(`/productlist/${id}`);
+    };
 
     return (
         <div className="productlist">
@@ -70,6 +109,8 @@ const ProductList = () => {
                                 type="checkbox"
                                 className="ch_check hide"
                                 id="ipChkAll2"
+                                checked={selectAll}
+                                onChange={handleSelectAll}
                             />
                             <label htmlFor="ipChkAll2" className="label">
                                 전체 선택
@@ -78,21 +119,22 @@ const ProductList = () => {
                         <div>
                             <a href="#">
                                 <img src={cart} alt="장바구니" />
-                                <p>장바구니</p>
+                                <p>
+                                    장바구니
+                                </p>
                             </a>
                         </div>
                     </div>
                     <div className="book_list">
-                        {/*  책 데이터를 가져와 그 수많큼 items 생성 */}
-                        {books.map((book) => {
-                            return (
-                                <BookItem
-                                    key={book.id}
-                                    book={book}
-                                    id={book.id}
-                                ></BookItem>
-                            );
-                        })}
+                        {books.map((book) => (
+                            <BookItem
+                                key={book.id}
+                                book={book}
+                                onCheckboxChange={handleCheckboxChange}
+                                onDeselect={handleIndividualDeselect}
+                                navigateToItem={navigateToItem}
+                            />
+                        ))}
                     </div>
 
                     <div className="paging txt_center clear martop_20 pagenation">
@@ -166,14 +208,17 @@ const ProductList = () => {
         </div>
     );
 };
-const BookItem = (props) => {
-    let { id } = props;
-    
-    // 페이지 동적 라우팅
 
-    const navigate = useNavigate();
-    const navigateToItem = () => {
-        navigate(`/productlist/${id}`);
+const BookItem = ({
+    book,
+    onCheckboxChange,
+    onDeselect,
+    navigateToItem,
+    selectCheckbox,
+}) => {
+    const handleCheckboxChange = () => {
+        onCheckboxChange(book.id);
+        onDeselect();
     };
 
     return (
@@ -182,17 +227,19 @@ const BookItem = (props) => {
                 type="checkbox"
                 name="inpChk"
                 className="ch_check hide allcheck"
-                id="inpChk1"
+                id={book.id}
+                checked={book.checked}
+                onChange={handleCheckboxChange}
             />
-            <label htmlFor="inpChk1" className="label single"></label>
-            <a href="#" onClick={navigateToItem}>
-                <img src={props.book.imgLink} alt="책이미지1" id="book1" />
+            <label htmlFor={book.id} className="label single"></label>
+            <a href="#" onClick={() => navigateToItem(book.id)}>
+                <img src={book.imgLink} alt="책이미지1" id="book1" />
             </a>
-            <div className="book_content" onClick={navigateToItem}>
-                <p className="book_title">{props.book.productName}</p>
-                <p className="author">{props.book.author}</p>
+            <div className="book_content">
+                <p className="book_title">{book.productName}</p>
+                <p className="author">{book.author}</p>
                 <div>
-                    <p className="price">{props.book.price}</p>
+                    <p className="price">{book.price}</p>
                     <button className="active">
                         <img src={wish} alt="찜하기" />
                     </button>

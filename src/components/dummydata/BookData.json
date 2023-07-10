@@ -39,9 +39,10 @@
         "imgLink": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192987101.jpg",
         "author": "왕정"
     },
+
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 4,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",
@@ -51,7 +52,7 @@
     },
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 5,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",
@@ -61,7 +62,7 @@
     },
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 6,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",
@@ -71,7 +72,7 @@
     },
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 7,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",
@@ -81,7 +82,7 @@
     },
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 8,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",
@@ -91,7 +92,7 @@
     },
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 9,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",
@@ -101,7 +102,7 @@
     },
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 10,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",
@@ -111,7 +112,7 @@
     },
     {
         "categoryName": "컴퓨터공학",
-        "id": 3,
+        "id": 11,
         "productName": "디자인 패턴의 아름다움",
         "price": "31,500원",
         "description": "객체지향 패러다임부터 설계 원칙, 코딩 규칙, 리팩터링 기법, 디자인 패턴까지",

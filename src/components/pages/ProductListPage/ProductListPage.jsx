@@ -8,13 +8,25 @@ import bookData from '../../dummydata/BookData.json';
 
 const ProductList = () => {
     const [books, setBooks] = useState(bookData);
+    const [modalOpen, setModalOpen] = useState(false);
     const [selectAll, setSelectAll] = useState(false);
 
-    // 체크한 요소의 id값을 로컬스토리지에 저장해주는 로직 짜줘
-    //  1. 체크박스에 체크한 것을 변수에 저장하기
-    //  2. 변수에 저장된 것을 각각 로컬스토리지에 저장하기
-
-    // 전체 선택/해제 처리
+    const showModal = () => {
+        setModalOpen(true);
+    };
+    //선택된 상품을 로컬 스토리지에 저장
+    const inputStorage = (check) => {
+        const updatedCheck = books.map((book) => {
+            if (book.id === check) {
+                return { ...book, checked: !book.checked };
+            }
+            return book;
+        });
+        setBooks(updatedCheck);
+        const cartItems = updatedCheck.filter((book) => book.checked);
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    };
+    // 함수는 전체 선택/해제 기능
     const handleSelectAll = () => {
         const updatedCheck = books.map((book) => ({
             ...book,
@@ -23,9 +35,11 @@ const ProductList = () => {
         setBooks(updatedCheck);
         setSelectAll(!selectAll);
     };
-    // 개별 체크박스 변경 처리
+    // 개별 체크박스 선택 상태를 토글
+    //
     const handleCheckboxChange = (check) => {
         //선택 상태 토글
+        // 모든 체크박스가 선택된 경우 selectAll 상태 변수를 true로 설정
         const updatedCheck = books.map((book) => {
             if (book.id === check) {
                 return { ...book, checked: !book.checked };
@@ -37,6 +51,7 @@ const ProductList = () => {
         const allChecked = updatedCheck.every((book) => book.checked);
         setSelectAll(allChecked);
     };
+
     // 개별 선택 해제 시 전체 선택 체크 해제
     const handleIndividualDeselect = () => {
         const allChecked = books.every((book) => book.checked);
@@ -116,12 +131,15 @@ const ProductList = () => {
                                 전체 선택
                             </label>
                         </div>
-                        <div>
+                        <div
+                            onClick={() => {
+                                inputStorage();
+                                showModal();
+                            }}
+                        >
                             <a href="#">
                                 <img src={cart} alt="장바구니" />
-                                <p>
-                                    장바구니
-                                </p>
+                                <p>장바구니</p>
                             </a>
                         </div>
                     </div>
@@ -205,6 +223,9 @@ const ProductList = () => {
                     </div>
                 </div>
             </div>
+            {modalOpen && (
+                <CartModal closeModal={() => setModalOpen(false)} navigateToCart={() => navigate('/cart')} />
+            )}
         </div>
     );
 };
@@ -226,10 +247,11 @@ const BookItem = ({
             <input
                 type="checkbox"
                 name="inpChk"
+                key={book.id}
                 className="ch_check hide allcheck"
                 id={book.id}
                 checked={book.checked}
-                onChange={handleCheckboxChange}
+                onChange={() => handleCheckboxChange(book.id)}
             />
             <label htmlFor={book.id} className="label single"></label>
             <a href="#" onClick={() => navigateToItem(book.id)}>
@@ -248,5 +270,19 @@ const BookItem = ({
         </div>
     );
 };
+const CartModal = ({ closeModal, navigateToCart }) => {
 
+    return (
+
+        <div className="cart_modal"  >
+            <div className="modal">
+                <h4>장바구니에 추가되었습니다.</h4>
+                <div>
+                    <button onClick={closeModal}>계속 장보기</button>
+                    <button onClick={navigateToCart}>장바구니로 이동하기</button>
+                </div>
+            </div>
+        </div>
+    );
+};
 export default ProductList;

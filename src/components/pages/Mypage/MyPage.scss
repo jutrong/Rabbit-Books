@@ -85,6 +85,77 @@
                     font-weight: 700;
                 }
             }
+
+            .search.tracking > .search_container {
+                padding-top: 0;
+
+                .search_box {
+                    margin-top: 0;
+
+                    .table_box {
+                        margin-top: 0;
+                    }
+
+                    .shiping {
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+
+                    .book_info_box {
+                        padding: 0 20px;
+                        > .book_info {
+                            .book_info_title {
+                                margin-bottom: 0;
+                            }
+                            .pay {
+                                padding-top: 0;
+                                strong {
+                                    padding-left: 0;
+                                    font-size: 18px;
+                                }
+                            }
+                            .order_title {
+                                background: url('../../../assets/images/icons/icon_check_shape.png')
+                                    no-repeat left top 60% / 12px;
+                                margin-top: 10px;
+                                padding-left: 18px;
+                                padding-top: 10px;
+                                padding-bottom: 6px;
+                                font-size: 15px;
+                                color: #4d47c3;
+                                font-weight: 600;
+                            }
+                            .order_list {
+                                li {
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                }
+                                b {
+                                    font-weight: 400;
+                                }
+                                li:not(:last-child) {
+                                    display: inline-block;
+                                }
+                                li:nth-child(1) {
+                                    position: relative;
+                                    padding-right: 10px;
+                                    margin-right: 10px;
+                                    &::after {
+                                        content: '';
+                                        position: absolute;
+                                        right: 0;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        width: 1px;
+                                        height: 8px;
+                                        background-color: #cacaca;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         &_wrap > strong {
             display: inline-block;

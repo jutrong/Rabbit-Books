@@ -299,6 +299,7 @@ table tr.disabled *:not(.col_blue a, .col_blue a){color: #c4c4c4;}
 
 table.txt_left *,
 table.txt_left1 tbody tr th:nth-child(1),
+table.txt_left1 tbody tr td:nth-child(1),
 table.txt_left2 tbody tr td:nth-child(2),
 table.txt_left3 tbody tr td:nth-child(3),
 table.txt_left4 tbody tr td:nth-child(4){text-align: left;}

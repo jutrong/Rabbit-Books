@@ -5,7 +5,7 @@ import loginBg from '../../../assets/images/login_bg.png';
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { postFetch, setSaveJoinName } from '../../../utils';
+import { SERVER_URL, postFetch, setSaveJoinName } from '../../../utils';
 
 const Join = () => {
     const navigate = useNavigate();
@@ -37,12 +37,24 @@ const Join = () => {
     };
 
     // 아이디 중복체크
-    const onDuplicateChk = () => {
-        // fetch() 작성
+    const onDuplicateChk = async () => {
+        const data = { email };
+        const json = await postFetch(
+            `${SERVER_URL}/api/auth/duplicateChkId`,
+            data,
+        );
+        if (json) {
+            if (json.result === 'success') {
+                setDuplicateEmail(true);
+                alert('사용 가능한 이메일입니다');
+            } else {
+                alert('이미 가입된 이메일입니다');
+            }
+        } else {
+            alert('알 수 없는 오류가 발생했습니다\n다시 시도해주세요');
+        }
 
-        setDuplicateEmail(true);
-        alert('사용 가능한 이메일입니다.');
-        // alert('이미 사용중인 이메일입니다.');
+        //
     };
 
     // 회원가입
@@ -91,20 +103,25 @@ const Join = () => {
             return;
         }
 
-        // const data = {
-        //     email,
-        //     password,
-        //     username: name,
-        //     phone,
-        // };
+        const data = {
+            email,
+            password,
+            username: name,
+            phone,
+            address,
+        };
 
         // 유효성 통과 후 로직(Post)
-        // const JOIN_URL = 'http://localhost:3000/join';
-        // const jsonData = await postFetch(JOIN_URL, data);
-
-        setSaveJoinName(name);
-        // 회원가입 완료 시 완료 화면 전환
-        navigate('/joinComplete');
+        const json = await postFetch(`${SERVER_URL}/api/auth/join`, data);
+        if (json && json.username) {
+            setSaveJoinName(json.username);
+            // 회원가입 완료 시 완료 화면 전환
+            navigate('/joinComplete');
+        } else {
+            alert(
+                '회원 가입에 실패했습니다\n동일한 오류가 발생시 관리자에게 문의바랍니다',
+            );
+        }
     };
 
     // 한글 정규식

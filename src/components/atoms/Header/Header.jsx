@@ -1,26 +1,46 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getSaveToken, removeToken } from '../../../utils';
 
 const Header = () => {
-    // 서비스 메뉴
-    const [serviceMenus] = useState([
-        { name: '회원 가입', target: '/join', class: 'col_blue' },
-        { name: '로그인', target: '/login', class: '' },
-        { name: '고객센터', target: '#', class: '' },
-    ]);
+    const navigate = useNavigate();
+    const [token, setToken] = useState(getSaveToken() ? getSaveToken() : '');
+    const onLogout = () => {
+        removeToken();
+        setToken('');
+        alert('로그아웃 되었습니다');
+        navigate('/'); // 로그아웃 시 메인 이동
+    };
 
     return (
         <header>
             <div className="con_wrap">
                 <div className="service_menu">
                     <ul>
-                        {serviceMenus.map((menu, i) => (
+                        {/* {serviceMenus.map((menu, i) => (
                             <li key={i}>
                                 <Link to={menu.target} className={menu.class}>
                                     {menu.name}
                                 </Link>
                             </li>
-                        ))}
+                        ))} */}
+                        <li>
+                            <Link to="/join" className="col_blue">
+                                회원가입
+                            </Link>
+                        </li>
+                        {token !== '' ? (
+                            <li>
+                                <a onClick={onLogout}>로그아웃</a>
+                            </li>
+                        ) : (
+                            <li>
+                                <Link to="/login">로그인</Link>
+                            </li>
+                        )}
+                        <li>
+                            <Link to="#">고객센터</Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="header_menu">

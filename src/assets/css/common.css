@@ -419,7 +419,7 @@ header.active{box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);}
 .service_menu li{position: relative; float: left;}
 .service_menu li ~ li{padding-left: 16px; margin-left: 16px;}
 .service_menu li ~ li::before{content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 8px; background-color: #e0e0e0;}
-.service_menu li a{padding: 9px 0; display: block; color: #666666; font-size: 12px;}
+.service_menu li a{padding: 9px 0; display: block; color: #666666; font-size: 12px; cursor: pointer;}
 .service_menu li a.col_blue{color:#4D47C3;}
 
 .header_menu{display: flex; justify-content: space-between; align-items: center; padding: 20px 0;} 

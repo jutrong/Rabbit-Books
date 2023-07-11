@@ -119,3 +119,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,react,vuejs,visualstudiocode
+
+# 환경변수 올라가지 않도록 설정
+.env

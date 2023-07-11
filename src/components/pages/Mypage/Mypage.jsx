@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react';
 import './Mypage.scss';
-// import Sidebar from '../../atoms/Sidebar/Sidebar';
+import { useRef, useState } from 'react';
+import { postFetch } from '../../../utils';
+
+import updateImg from '../../../assets/images/img_tbu.png';
 
 const Mypage = () => {
     const newPasswordRef = useRef();
@@ -71,8 +73,12 @@ const Mypage = () => {
             return;
         }
 
+        const data = {};
         // 유효성 통과 후
-        // fetch();
+        // const SERVER_URL = 'http://kdt-sw-5-team05.elicecoding.com/';
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+        console.log(SERVER_URL);
+        postFetch(`${SERVER_URL}/api/auth/join`, data);
         onModify();
     };
 
@@ -130,6 +136,10 @@ const Mypage = () => {
 
             <div className="main_container">
                 <div className="main_container_wrap">
+                    <div className="update_box">
+                        <img src={updateImg} alt="추후 업데이트 예정입니다" />
+                        <p>추후 업데이트 예정입니다</p>
+                    </div>
                     <strong>기본정보</strong>
                     {readMode ? (
                         <>

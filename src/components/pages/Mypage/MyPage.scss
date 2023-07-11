@@ -68,10 +68,24 @@
     .tab_menu_type3 {
         li {
             width: calc(100% / 5);
+            cursor: pointer;
         }
     }
 
     .main_container {
+        &_wrap {
+            .update_box {
+                padding: 100px 0 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                p {
+                    padding-left: 20px;
+                    font-size: 22px;
+                    font-weight: 700;
+                }
+            }
+        }
         &_wrap > strong {
             display: inline-block;
             padding: 24px 0 18px;

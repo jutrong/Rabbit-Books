@@ -7,7 +7,14 @@ import logoGoogle from '../../../assets/images/logo_google.png';
 
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getSaveId, removeSaveId, setSaveId } from '../../../utils';
+import {
+    SERVER_URL,
+    getSaveId,
+    postFetch,
+    removeSaveId,
+    setSaveId,
+    setSaveToken,
+} from '../../../utils';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -46,23 +53,38 @@ const Login = () => {
             return;
         }
 
-        // 유효성 통과 후 로직(Get)
-        // const response = await fetch(
-        //     `http://localhost:3000/users?email=${email}&password=${password}`,
-        // );
-        // const jsonData = await response.json();
-        // console.log(jsonData);
+        const data = {
+            email,
+            password,
+        };
 
-        // 이메일(아이디) 저장 체크용
-        if (idSave) setSaveId(email);
-        else {
-            if (getSaveId()) {
-                removeSaveId();
+        // 유효성 통과 후
+        const json = await postFetch(`${SERVER_URL}/api/auth/login`, data);
+        console.log(json);
+
+        if (json) {
+            if (json.error) {
+                alert(json.error);
+            } else if (json.token) {
+                // 이메일(아이디) 저장 체크용
+                if (idSave) setSaveId(email);
+                else {
+                    if (getSaveId()) {
+                        removeSaveId();
+                    }
+                }
+
+                // 서버에서 전달받은 토큰을 로컬에 저장
+                setSaveToken(json.token);
+
+                // 로그인 완료 시
+                navigate('/');
+            } else {
+                alert('알 수 없는 오류가 발생했습니다');
             }
+        } else {
+            alert('알 수 없는 오류가 발생했습니다');
         }
-
-        // 회원가입 완료 시
-        navigate('/');
     };
 
     // 이메일 정규식
@@ -132,20 +154,45 @@ const Login = () => {
                                     <label htmlFor="ipChk1" className="label">
                                         이메일 저장
                                     </label>
-                                    <button>아이디 찾기 | 비밀번호 찾기</button>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            alert('추후 업데이트 예정입니다')
+                                        }
+                                    >
+                                        아이디 찾기 | 비밀번호 찾기
+                                    </button>
                                 </div>
                                 <button className="blue_btn">로그인</button>
                             </form>
                             <p>SNS 계정으로 로그인하기</p>
                             <ul className="auth_login_list">
                                 <li>
-                                    <img src={logoNaver} alt="네이버 로고" />
+                                    <img
+                                        src={logoNaver}
+                                        onClick={() =>
+                                            alert('추후 업데이트 예정입니다')
+                                        }
+                                        alt="네이버 로고"
+                                    />
                                 </li>
                                 <li>
-                                    <img src={logoKakao} alt="카카오 로고" />
+                                    <img
+                                        src={logoKakao}
+                                        onClick={() =>
+                                            alert('추후 업데이트 예정입니다')
+                                        }
+                                        alt="카카오 로고"
+                                    />
                                 </li>
                                 <li>
-                                    <img src={logoGoogle} alt="구글 로고" />
+                                    <img
+                                        src={logoGoogle}
+                                        onClick={() =>
+                                            alert('추후 업데이트 예정입니다')
+                                        }
+                                        alt="구글 로고"
+                                    />
                                 </li>
                             </ul>
                         </div>

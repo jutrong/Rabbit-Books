@@ -1,5 +1,5 @@
 import './ProductListPage.scss';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cart from '../../../assets/images/icons/icon_gnb_basket.png';
 import wish from '../../../assets/images/icons/icon_wish.png';
@@ -7,14 +7,23 @@ import wish from '../../../assets/images/icons/icon_wish.png';
 import bookData from '../../dummydata/BookData.json';
 
 const ProductList = () => {
-    const [books, setBooks] = useState(bookData);
+    const [books, setBooks] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectAll, setSelectAll] = useState(false);
+
+    useEffect(() => {
+        // 새로운 속성인 checked를 추가하고 기본값으로 false를 설정합니다.
+        const initialBooks = bookData.map((book) => ({
+            ...book,
+            checked: false,
+        }));
+        setBooks(initialBooks);
+    }, []);
 
     const showModal = () => {
         setModalOpen(true);
     };
-    //선택된 상품을 로컬 스토리지에 저장
+    // 선택된 상품을 로컬 스토리지에 저장
     const inputStorage = (check) => {
         const updatedCheck = books.map((book) => {
             if (book.id === check) {
@@ -23,10 +32,21 @@ const ProductList = () => {
             return book;
         });
         setBooks(updatedCheck);
-        const cartItems = updatedCheck.filter((book) => book.checked);
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+        // 로컬 스토리지에서 기존 항목을 가져오거나 빈 배열을 초기화
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const checkedItems = updatedCheck.filter((book) => book.checked);
+
+        // 이미 로컬 스토리지에 있는 항목은 필터링
+        const newItems = checkedItems.filter(
+            (book) => !cartItems.some((item) => item.id === book.id),
+        );
+
+        // 기존 항목과 새로운 항목을 결합
+        const updatedItems = [...cartItems, ...newItems];
+        localStorage.setItem('cart', JSON.stringify(updatedItems));
     };
-    // 함수는 전체 선택/해제 기능
+
+    // 함수는 전체 선택, 해제 기능
     const handleSelectAll = () => {
         const updatedCheck = books.map((book) => ({
             ...book,
@@ -36,10 +56,7 @@ const ProductList = () => {
         setSelectAll(!selectAll);
     };
     // 개별 체크박스 선택 상태를 토글
-    //
     const handleCheckboxChange = (check) => {
-        //선택 상태 토글
-        // 모든 체크박스가 선택된 경우 selectAll 상태 변수를 true로 설정
         const updatedCheck = books.map((book) => {
             if (book.id === check) {
                 return { ...book, checked: !book.checked };
@@ -52,14 +69,6 @@ const ProductList = () => {
         setSelectAll(allChecked);
     };
 
-    // 개별 선택 해제 시 전체 선택 체크 해제
-    const handleIndividualDeselect = () => {
-        const allChecked = books.every((book) => book.checked);
-        // 모든 책이 선택된 경우 전체 선택 체크 해제
-        if (allChecked) {
-            setSelectAll(false);
-        }
-    };
     //클릭시 상세페이지로 이동
     const navigate = useNavigate();
     const navigateToItem = (id) => {
@@ -124,6 +133,7 @@ const ProductList = () => {
                                 type="checkbox"
                                 className="ch_check hide"
                                 id="ipChkAll2"
+                                value={''}
                                 checked={selectAll}
                                 onChange={handleSelectAll}
                             />
@@ -149,7 +159,7 @@ const ProductList = () => {
                                 key={book.id}
                                 book={book}
                                 onCheckboxChange={handleCheckboxChange}
-                                onDeselect={handleIndividualDeselect}
+                                // onDeselect={handleIndividualDeselect}
                                 navigateToItem={navigateToItem}
                             />
                         ))}
@@ -224,22 +234,18 @@ const ProductList = () => {
                 </div>
             </div>
             {modalOpen && (
-                <CartModal closeModal={() => setModalOpen(false)} navigateToCart={() => navigate('/cart')} />
+                <CartModal
+                    closeModal={() => setModalOpen(false)}
+                    navigateToCart={() => navigate('/cart')}
+                />
             )}
         </div>
     );
 };
 
-const BookItem = ({
-    book,
-    onCheckboxChange,
-    onDeselect,
-    navigateToItem,
-    selectCheckbox,
-}) => {
+const BookItem = ({ book, onCheckboxChange,  navigateToItem }) => {
     const handleCheckboxChange = () => {
         onCheckboxChange(book.id);
-        onDeselect();
     };
 
     return (
@@ -249,6 +255,7 @@ const BookItem = ({
                 name="inpChk"
                 key={book.id}
                 className="ch_check hide allcheck"
+                value={''}
                 id={book.id}
                 checked={book.checked}
                 onChange={() => handleCheckboxChange(book.id)}
@@ -271,15 +278,15 @@ const BookItem = ({
     );
 };
 const CartModal = ({ closeModal, navigateToCart }) => {
-
     return (
-
-        <div className="cart_modal"  >
+        <div className="cart_modal">
             <div className="modal">
                 <h4>장바구니에 추가되었습니다.</h4>
                 <div>
                     <button onClick={closeModal}>계속 장보기</button>
-                    <button onClick={navigateToCart}>장바구니로 이동하기</button>
+                    <button onClick={navigateToCart}>
+                        장바구니로 이동하기
+                    </button>
                 </div>
             </div>
         </div>

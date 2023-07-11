@@ -1,11 +1,17 @@
 import './OrderPage.scss';
+import { useParams } from 'react-router-dom';
+import React, { useState} from 'react';
 import one from '../../../assets/images/icons/icon_01.png';
 import order from '../../../assets/images/icons/icon_mypage_order.png';
 import book from '../../../assets/images/book1.jpg';
 import radioOn from '../../../assets/images/icons/radio_on.png';
 import radioOff from '../../../assets/images/icons/radio_off.png';
+import bookData from '../../dummydata/BookData.json';
 
 const Order = () => {
+    const { id } = useParams();
+    const [books] = useState(bookData);
+
     return (
         <div className="order">
             <OrderProcedure></OrderProcedure>

@@ -1,30 +1,26 @@
 import './CartPage.scss';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NoCart from './NoCartPage';
 
 const Cart = () => {
-    const [isData] = useState(true);
+    const navigate = useNavigate();
+    const [isData, setIsData] = useState(true);
     const [cartItems, setCartItems] = useState([]);
     const [selectAll, setSelectAll] = useState(true);
-
-    // 상품리스트에서 장바구니 버튼 누르면 추가되면서 장바구니 페이지 이동 OK
-
-    // 로컬스토리지에 있는 데이터를 배열로 OK
-    // JSON 형태의 데이터를 화면에 뿌려줌 OK
-
-    // x박스 누르면 화면에서 없어지고 로컬스토리지에서도 삭제 OK
-    // 체크된 것 삭제 버튼 누르면 화면에서 없어지고 로컬스토리지에서도 삭제 OK
-    // 수량 카운트 부분 - OK
-    // 구매 버튼 누르면 주문페이지 이동
 
     useEffect(() => {
         // 로컬 스토리지에서 저장된 카트 아이템을 가져와서 초기화
         const storedCartItems = localStorage.getItem('cart');
         if (storedCartItems) {
             setCartItems(JSON.parse(storedCartItems));
-        }
+            setIsData(true);
+        } else setIsData(false);
     }, []);
 
+    const goOrder = () => {
+        navigate('/order');
+    };
     const removeProduct = (itemId) => {
         // // 로컬 스토리지에서 항목 삭제
         const deleteItem = cartItems.filter(
@@ -38,6 +34,11 @@ const Cart = () => {
                 return item.id !== itemId;
             }),
         );
+        // 카트가 비어있으면 로컬 스토리지도 초기화
+        if (cartItems.length === 0) {
+            setIsData(false);
+            localStorage.clear();
+        }
     };
 
     const checkAll = () => {
@@ -51,21 +52,21 @@ const Cart = () => {
     };
 
     const toggleCheckbox = (itemId, checked) => {
-        // 이전 상태를 기반으로 새로운 배열(updatedItems) 생성
+        // 이전 상태를 기반으로 새로운 배열생성
         setCartItems((prevItems) => {
             const updatedItems = prevItems.map((item) => {
                 if (item.id === itemId) {
-                    // 현재 항목의 id가 매개변수로 전달된 itemId와 일치하는 경우
-                    // 새로운 객체를 생성하여 checked 속성을 전달된 checked 값으로 업데이트
+                    //  현재 항목의 id가 매개변수로 전달된 itemId와 일치하는 경우
+                    //  새로운 객체를 생성하여 checked 속성을 전달된 checked 값으로 업데이트
                     return {
                         ...item,
                         checked: checked,
                     };
                 }
-                return item; // 일치하지 않는 경우, 항목을 그대로 반환
+                return item;
             });
 
-            // 전체 선택/해제 체크박스 상태 업데이트
+            // 전체 선택,해제 체크박스 상태 업데이트
             // 모든 항목이 check된 경우 selectAll 상태를 true로 업데이트
             const allChecked = updatedItems.every((item) => item.checked);
             setSelectAll(allChecked);
@@ -79,6 +80,9 @@ const Cart = () => {
 
         // 화면에서 모든 항목 삭제
         setCartItems([]);
+
+        localStorage.clear();
+        setIsData(false);
     };
     const deleteChecked = () => {
         // 선택된 상품의 id 배열 가져오기
@@ -90,8 +94,13 @@ const Cart = () => {
         const updatedItems = cartItems.filter(
             (item) => !selectedIds.includes(item.id),
         );
-        localStorage.setItem('cart', JSON.stringify(updatedItems));
-
+        if (updatedItems.length === 0) {
+            // 로컬 스토리지를 비움
+            setIsData(false);
+            localStorage.clear();
+        } else {
+            localStorage.setItem('cart', JSON.stringify(updatedItems));
+        }
         // 화면에서 선택된 상품 삭제
         setCartItems(updatedItems);
     };
@@ -122,9 +131,9 @@ const Cart = () => {
             totalPrice += book.price * book.quantity;
             totalCount += book.quantity;
         }
-        return {totalPrice, totalCount};
-     };
-     const { totalPrice, totalCount } = calculateTotalPrice();
+        return { totalPrice, totalCount };
+    };
+    const { totalPrice, totalCount } = calculateTotalPrice();
     return (
         <div className="cart con_wrap">
             {isData ? (
@@ -156,7 +165,7 @@ const Cart = () => {
                                                 name="inpChk"
                                                 className="ch_check hide"
                                                 id="checkAll"
-                                                onClick={checkAll}
+                                                onChange={checkAll}
                                                 checked={selectAll}
                                             />
                                             <label
@@ -218,10 +227,14 @@ const Cart = () => {
                                             <td>
                                                 <div className="order_box">
                                                     <strong>
-                                                        <em>{totalPrice}</em>원
+                                                        <em>
+                                                            {totalPrice.toLocaleString()}
+                                                        </em>
+                                                        원
                                                     </strong>
                                                     <p>
-                                                        총 <em>{totalCount}</em>개
+                                                        총 <em>{totalCount}</em>
+                                                        개
                                                     </p>
                                                 </div>
                                             </td>
@@ -229,7 +242,7 @@ const Cart = () => {
                                                 <div className="ship_box">
                                                     <i className="plus_ship_btn"></i>
                                                     <strong>
-                                                        <em>3000</em>원
+                                                        <em>3,000</em>원
                                                     </strong>
                                                     <i className="minus_ship_btn"></i>
                                                 </div>
@@ -237,13 +250,27 @@ const Cart = () => {
                                             <td>
                                                 <div className="order_box">
                                                     <strong>
-                                                        <em>{totalPrice + 3000}</em>원
+                                                        <em>
+                                                            {(
+                                                                totalPrice +
+                                                                3000
+                                                            ).toLocaleString()}
+                                                        </em>
+                                                        원
                                                     </strong>
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div className="order_btn">
+                                <button
+                                    className="blue_btn w_156 martop_10"
+                                    onClick={goOrder}
+                                >
+                                    주문하기
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -266,6 +293,10 @@ const Tablerow = ({
         const checked = checkbox.checked;
         toggleCheckbox(item.id, checked);
     };
+    const navigate = useNavigate();
+    const navigateToDetailPage = () => {
+        navigate(`/productlist/${item.id}`);
+    };
 
     return (
         <tr className="cart_info">
@@ -274,16 +305,21 @@ const Tablerow = ({
                     type="checkbox"
                     name="inpChk"
                     className="ch_check hide individual"
+                    value={item.id}
                     id={item.id}
                     checked={item.checked}
-                    onClick={handleCheckbox}
+                    onChange={handleCheckbox}
                 />
                 <label htmlFor={item.id} className="label single"></label>
             </td>
             <td>
                 <div className="book_info_box">
-                    <img src={item.imgLink} alt="책 이미지" />
-                    <div className="book_info">
+                    <img
+                        src={item.imgLink}
+                        alt="책 이미지"
+                        onClick={navigateToDetailPage}
+                    />
+                    <div className="book_info" onClick={navigateToDetailPage}>
                         <strong className="book_info_title">
                             {item.productName}
                         </strong>
@@ -291,8 +327,10 @@ const Tablerow = ({
                         <p>창비&#183; 2022년 03월 28일</p>
                         <div className="pay">
                             <em>10%</em>
-                            <strong>{item.price}</strong>원
-                            <span>{item.price}</span>
+                            <strong>
+                                {((item.price * 9) / 10).toLocaleString()}
+                            </strong>
+                            원<span>{item.price.toLocaleString()}</span>
                         </div>
                     </div>
                     <button
@@ -315,7 +353,12 @@ const Tablerow = ({
                     >
                         <i></i>
                     </button>
-                    <input type="number" id="quantity" value={item.quantity} />
+                    <input
+                        type="number"
+                        id="quantity"
+                        value={item.quantity}
+                        readOnly
+                    />
                     <button
                         type="button"
                         id="plusBtn"
@@ -329,12 +372,15 @@ const Tablerow = ({
                 </div>
             </td>
             <td>
-                <strong className="amount">{item.price * item.quantity}</strong>
+                <strong className="amount">
+                    {(item.price * item.quantity).toLocaleString()}
+                </strong>
                 <button className="blue_btn w_156 martop_10">바로구매</button>
             </td>
             <td>
                 <span className="speaker">7월 10일(월)</span>
                 도착 예정
+                <p className="delivery_fee">3,000원</p>
             </td>
         </tr>
     );

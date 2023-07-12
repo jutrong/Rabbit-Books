@@ -1,16 +1,44 @@
 import './OrderPage.scss';
-import { useParams } from 'react-router-dom';
-import React, { useState} from 'react';
-import one from '../../../assets/images/icons/icon_01.png';
-import order from '../../../assets/images/icons/icon_mypage_order.png';
-import book from '../../../assets/images/book1.jpg';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import radioOn from '../../../assets/images/icons/radio_on.png';
 import radioOff from '../../../assets/images/icons/radio_off.png';
-import bookData from '../../dummydata/BookData.json';
 
 const Order = () => {
-    const { id } = useParams();
-    const [books] = useState(bookData);
+    const navigate = useNavigate();
+    const [cartData, setCartData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://kdt-sw-5-team05.elicecoding.com/orders', {
+            method: 'post',
+            header: {}
+            body: JSON.stringify({
+                
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.success) {
+                    alert('저장완료');
+                }
+            });
+    }, []);
+    useEffect(() => {
+        // 로컬스토리지에서 cart 가져오기
+        const storedCartData = localStorage.getItem('cart');
+        if (storedCartData) {
+            const parsedCartData = JSON.parse(storedCartData);
+            setCartData(parsedCartData);
+        }
+    }, []);
+    const totalAmount = cartData.reduce(
+        (accumulator, item) => accumulator + item.price * item.quantity,
+        0,
+    );
+    const totalNumber = cartData.reduce(
+        (total, item) => total + item.quantity,
+        0,
+    );
 
     return (
         <div className="order">
@@ -47,17 +75,14 @@ const Order = () => {
                             <div className="product_header">
                                 <span>주문상품</span>
                                 <p>
-                                    총 <span>1</span>개
+                                    총 <span>{totalNumber}</span>개
                                 </p>
                             </div>
-                            <div className="product_content">
-                                <img src={book} alt="주문책" />
-                                <p>[국내도서] 영화는 두 번 시작된다</p>
-                                <p>토끼책방배송</p>
-                                <p>1개</p>
-                                <p>38,200원</p>
-                            </div>
+                            {cartData.map((item) => (
+                                <OrderProduct item={item} key={item.id} />
+                            ))}
                         </div>
+
                         <div className="coupon_area">
                             <p>할인쿠폰</p>
                             <p>사용 가능한 쿠폰이 없습니다.</p>
@@ -93,7 +118,7 @@ const Order = () => {
                         <div className="sidebar_container">
                             <div className="price">
                                 <span>상품금액</span>
-                                <span>38,200원</span>
+                                <span>{totalAmount.toLocaleString()}원</span>
                             </div>
                             <div className="delivery_fee">
                                 <span>배송비</span>
@@ -109,7 +134,9 @@ const Order = () => {
                             </div>
                             <div className="final_fee">
                                 <span>최종결제금액</span>
-                                <span>41,200원</span>
+                                <span>
+                                    {(totalAmount + 3000).toLocaleString()}원
+                                </span>
                             </div>
                             <button className="blue_btn w_276">결제하기</button>
                         </div>
@@ -119,7 +146,19 @@ const Order = () => {
         </div>
     );
 };
-
+const OrderProduct = ({ item }) => {
+    return (
+        <div className="product_box">
+            <div className="product_content">
+                <img src={item.imgLink} alt="주문책" />
+                <p>{item.productName}</p>
+                <p>토끼책방배송</p>
+                <p>{item.quantity}개</p>
+                <p>{item.price.toLocaleString()}원</p>
+            </div>
+        </div>
+    );
+};
 const OrderProcedure = () => {
     return (
         <header>

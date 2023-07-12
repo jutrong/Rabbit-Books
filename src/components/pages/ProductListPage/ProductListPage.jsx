@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import cart from '../../../assets/images/icons/icon_gnb_basket.png';
 import wish from '../../../assets/images/icons/icon_wish.png';
 // import wishActive from '../../../assets/images/icons/icon_wish_active.png';
-import bookData from '../../dummydata/BookData.json';
+// import bookData from '../../dummydata/BookData.json';
 
 const ProductList = () => {
     const [books, setBooks] = useState([]);
@@ -12,6 +12,12 @@ const ProductList = () => {
     const [selectAll, setSelectAll] = useState(false);
 
     useEffect(() => {
+        fetch('http://kdt-sw-5-team05.elicecoding.com/orders')
+            .then((res) => res.json())
+            .then((data) => {
+                setBooks([data.results]);
+                console.log(...books)
+            });
         // 새로운 속성인 checked를 추가하고 기본값으로 false를 설정합니다.
         const initialBooks = bookData.map((book) => ({
             ...book,
@@ -37,6 +43,7 @@ const ProductList = () => {
         const checkedItems = updatedCheck.filter((book) => book.checked);
 
         // 이미 로컬 스토리지에 있는 항목은 필터링
+        // 현재 book의 id와 동일한 id를 가진 요소가 없을 경우 true를 반환
         const newItems = checkedItems.filter(
             (book) => !cartItems.some((item) => item.id === book.id),
         );
@@ -243,7 +250,7 @@ const ProductList = () => {
     );
 };
 
-const BookItem = ({ book, onCheckboxChange,  navigateToItem }) => {
+const BookItem = ({ book, onCheckboxChange, navigateToItem }) => {
     const handleCheckboxChange = () => {
         onCheckboxChange(book.id);
     };

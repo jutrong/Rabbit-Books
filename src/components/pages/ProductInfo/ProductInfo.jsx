@@ -11,25 +11,31 @@ const ProductInfo = () => {
     const [quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
 
-    const navigateToCartPage = () => {
-        navigate('/cart');
-    };
     const navigateToOrder = () => {
         const selectedBook = books.find((book) => book.id === parseInt(id));
-        navigate('/order', {
-            state: {
-                author: selectedBook.author,
-                categoryName: selectedBook.categoryName,
-                checked: true,
-                description: '설명부분',
-                id: selectedBook.id,
-                imgLink: selectedBook.imgLink,
-                price: selectedBook.price,
-                productName: selectedBook.productName,
-                quantity: quantity,
-                stock: selectedBook.stock,
-            },
-        });
+        const orderData = {
+            author: selectedBook.author,
+            categoryName: selectedBook.categoryName,
+            checked: true,
+            description: '설명부분',
+            id: selectedBook.id,
+            imgLink: selectedBook.imgLink,
+            price: selectedBook.price,
+            productName: selectedBook.productName,
+            quantity: quantity,
+            stock: selectedBook.stock,
+        };
+
+        // 로컬스토리지에서 기존의 카트 아이템을 가져옴
+        const existingCartItems = localStorage.getItem('cart');
+        let cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
+
+        // 새로운 주문 데이터를 카트 아이템에 추가
+        cartItems.push(orderData);
+
+        // 업데이트된 카트 아이템을 로컬스토리지에 저장
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+        navigate('/order');
     };
     const saveToLocalStorage = () => {
         const selectedBook = books.find((book) => book.id === parseInt(id));
@@ -63,7 +69,7 @@ const ProductInfo = () => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
 
         // 카트 페이지로 이동
-        navigateToCartPage();
+        navigate('/cart');
     };
     const handleMinus = () => {
         if (quantity > 1) {

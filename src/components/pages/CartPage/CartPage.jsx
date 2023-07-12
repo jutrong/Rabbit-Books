@@ -5,22 +5,28 @@ import NoCart from './NoCartPage';
 
 const Cart = () => {
     const navigate = useNavigate();
-    const [isData, setIsData] = useState(true);
+    const [isData, setIsData] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [selectAll, setSelectAll] = useState(true);
-
+    
     useEffect(() => {
         // 로컬 스토리지에서 저장된 카트 아이템을 가져와서 초기화
         const storedCartItems = localStorage.getItem('cart');
         if (storedCartItems) {
             setCartItems(JSON.parse(storedCartItems));
             setIsData(true);
-        } else setIsData(false);
-    }, []);
+        } else if (setIsData(false)) {
+            Storage.removeItem('cart');
+        }
+    }, [isData]);
 
     const goOrder = () => {
         navigate('/order');
     };
+    const navigateToOrder = () => {
+        navigate('/order');
+    };
+
     const removeProduct = (itemId) => {
         // // 로컬 스토리지에서 항목 삭제
         const deleteItem = cartItems.filter(
@@ -35,9 +41,16 @@ const Cart = () => {
             }),
         );
         // 카트가 비어있으면 로컬 스토리지도 초기화
-        if (cartItems.length === 0) {
-            setIsData(false);
-            localStorage.clear();
+        // if (cartItems.length === 0) {
+        //     setIsData(false);
+        //     localStorage.clear();
+        // }
+
+        if (
+            localStorage.getItem('cart') === null ||
+            localStorage.getItem('cart') === ''
+        ) {
+            localStorage.removeItem('cart');
         }
     };
 
@@ -113,6 +126,7 @@ const Cart = () => {
             } else return product;
         });
         setCartItems(addQty);
+        localStorage.setItem('cart', JSON.stringify(addQty));
     };
     const handleMinus = (productId) => {
         const minusQty = cartItems.map((product) => {
@@ -121,6 +135,7 @@ const Cart = () => {
             } else return product;
         });
         setCartItems(minusQty);
+        localStorage.setItem('cart', JSON.stringify(minusQty));
     };
 
     // 전체 가격, 숫자
@@ -189,6 +204,7 @@ const Cart = () => {
                                             toggleCheckbox={toggleCheckbox}
                                             handleAdd={handleAdd}
                                             handleMinus={handleMinus}
+                                            navigateToOrder={navigateToOrder}
                                         />
                                     ))}
                                 </tbody>
@@ -287,6 +303,7 @@ const Tablerow = ({
     toggleCheckbox,
     handleAdd,
     handleMinus,
+    navigateToOrder,
 }) => {
     const handleCheckbox = (event) => {
         const checkbox = event.target;
@@ -375,7 +392,7 @@ const Tablerow = ({
                 <strong className="amount">
                     {(item.price * item.quantity).toLocaleString()}
                 </strong>
-                <button className="blue_btn w_156 martop_10">바로구매</button>
+ 
             </td>
             <td>
                 <span className="speaker">7월 10일(월)</span>

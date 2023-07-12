@@ -9,21 +9,22 @@ const Order = () => {
     const [cartData, setCartData] = useState([]);
 
     useEffect(() => {
-        fetch('http://kdt-sw-5-team05.elicecoding.com/orders', {
-            method: 'post',
-            header: {}
-            body: JSON.stringify({
+    //   fetch('http://kdt-sw-5-team05.elicecoding.com/orders', {
+    //         method: 'post',
+    //         headers: {
+    //        'Content-Type': 'application/json; charset=UTF-8',
+    //        authorization: token ${getSaveToken()},
+    //    },
+    //         body: JSON.stringify({
                 
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                if (res.success) {
-                    alert('저장완료');
-                }
-            });
-    }, []);
-    useEffect(() => {
+    //         }),
+    //     })
+    //         .then((res) => res.json())
+    //         .then((res) => {
+    //             if (res.success) {
+    //                 alert('저장완료');
+    //             }
+    //         });
         // 로컬스토리지에서 cart 가져오기
         const storedCartData = localStorage.getItem('cart');
         if (storedCartData) {
@@ -79,7 +80,7 @@ const Order = () => {
                                 </p>
                             </div>
                             {cartData.map((item) => (
-                                <OrderProduct item={item} key={item.id} />
+                                <OrderProduct item={item} key={item._id} />
                             ))}
                         </div>
 
@@ -150,8 +151,8 @@ const OrderProduct = ({ item }) => {
     return (
         <div className="product_box">
             <div className="product_content">
-                <img src={item.imgLink} alt="주문책" />
-                <p>{item.productName}</p>
+                <img src={item.imgPath} alt="주문책" />
+                <p>{item.name}</p>
                 <p>토끼책방배송</p>
                 <p>{item.quantity}개</p>
                 <p>{item.price.toLocaleString()}원</p>

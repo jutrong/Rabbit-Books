@@ -5,7 +5,13 @@ import loginBg from '../../../assets/images/login_bg.png';
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { SERVER_URL, postFetch, setSaveJoinName } from '../../../utils';
+import {
+    SERVER_URL,
+    emailChk,
+    korChk,
+    postFetch,
+    setSaveJoinName,
+} from '../../../utils';
 
 const Join = () => {
     const navigate = useNavigate();
@@ -43,18 +49,15 @@ const Join = () => {
             `${SERVER_URL}/api/auth/duplicateChkId`,
             data,
         );
-        if (json) {
-            if (json.result === 'success') {
-                setDuplicateEmail(true);
-                alert('사용 가능한 이메일입니다');
-            } else {
-                alert('이미 가입된 이메일입니다');
-            }
+
+        if (json?.result === 'success') {
+            setDuplicateEmail(true);
+            alert('사용 가능한 이메일입니다');
+        } else if (json) {
+            alert('이미 가입된 이메일입니다');
         } else {
             alert('알 수 없는 오류가 발생했습니다\n다시 시도해주세요');
         }
-
-        //
     };
 
     // 회원가입
@@ -113,8 +116,8 @@ const Join = () => {
 
         // 유효성 통과 후 로직(Post)
         const json = await postFetch(`${SERVER_URL}/api/auth/join`, data);
-        if (json && json.username) {
-            setSaveJoinName(json.username);
+        if (json) {
+            setSaveJoinName(name);
             // 회원가입 완료 시 완료 화면 전환
             navigate('/joinComplete');
         } else {
@@ -122,17 +125,6 @@ const Join = () => {
                 '회원 가입에 실패했습니다\n동일한 오류가 발생시 관리자에게 문의바랍니다',
             );
         }
-    };
-
-    // 한글 정규식
-    const korChk = (str) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(str);
-
-    // 이메일 정규식
-    const emailChk = (email) => {
-        // eslint가 정규식을 제대로 확인을 못하는 것 같음... 더 쉽고 간편한 정규식 찾으면 변경 예정...
-        const emailRegex =
-            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        return emailRegex.test(email);
     };
 
     return (

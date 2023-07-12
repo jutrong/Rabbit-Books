@@ -1,20 +1,47 @@
-import { useRef, useState } from 'react';
-import { SERVER_URL, postFetch } from '../../../utils';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import {
+    SERVER_URL,
+    deleteFetch,
+    getFetch,
+    korChk,
+    putFetch,
+} from '../../../utils';
+import { useNavigate } from 'react-router-dom';
 
 const MypageUser = () => {
+    const navigate = useNavigate();
     const newPasswordRef = useRef();
 
     const nameRef = useRef();
     const phoneRef = useRef();
     const addressRef = useRef();
 
-    const [email] = useState('yunana@gmail.com');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newChkPassword, setNewChkPassword] = useState('');
-    const [name, setName] = useState('규나');
-    const [phone, setPhone] = useState('01012341234');
-    const [address, setAddress] = useState('서울시 금천구 벚꽃로 100길');
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+
+    // 페이지 접근시 로그인된 내 정보 가져오기
+    const getMyInfo = useCallback(async () => {
+        const json = await getFetch(`${SERVER_URL}/api/users/my-profile`);
+        if (json?.error) {
+            alert('로그아웃 되었습니다');
+            navigate('/');
+        } else {
+            const { email, username: name, phone, address } = json;
+            setEmail(email);
+            setName(name);
+            setPhone(phone);
+            setAddress(address);
+        }
+    }, [navigate]);
+
+    useEffect(() => {
+        getMyInfo();
+    }, [getMyInfo]);
 
     // 필드별 입력 처리 (공통 메소드)
     const onInput = (e) => {
@@ -35,8 +62,8 @@ const MypageUser = () => {
         setReadMode((prev) => !prev);
     };
 
+    // 회원 정보 수정(Submit)
     const onSubmit = async (e) => {
-        console.log('onSubmit', newPassword);
         e.preventDefault();
 
         if (newPassword.length < 10 || newPassword.length > 20) {
@@ -70,14 +97,52 @@ const MypageUser = () => {
             return;
         }
 
-        const data = {};
+        const data = {
+            email,
+            username: name,
+            password,
+            newPassword,
+            newChkPassword,
+            address,
+            phone,
+        };
         // 유효성 통과 후
-        postFetch(`${SERVER_URL}/api/auth/join`, data);
-        onModify();
+        const json = await putFetch(`${SERVER_URL}/api/users`, data);
+        console.log(json);
+        if (json?.error) {
+            alert(
+                '회원 정보 수정에 실패했습니다\n동일한 오류가 발생시 관리자에게 문의바랍니다',
+            );
+            console.warn(json.error);
+        } else if (json) {
+            alert('회원 정보가 수정되었습니다');
+            onModify();
+        } else {
+            alert(
+                '회원 정보 수정에 실패했습니다\n동일한 오류가 발생시 관리자에게 문의바랍니다',
+            );
+        }
     };
 
-    // 한글 정규식
-    const korChk = (str) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(str);
+    // 회원 탈퇴 --- 테스트 필요
+    const onRemove = async () => {
+        const json = await deleteFetch(`${SERVER_URL}/api/auth/withdraw`);
+        console.log(json);
+        if (json?.error) {
+            alert('회원 탈퇴가 정상적으로 진행되지 않았습니다');
+            console.warn(json.error);
+        } else if (json) {
+            alert(
+                '회원 탈퇴가 정상적으로 진행되었습니다\n그동안 이용해 주셔서 감사합니다',
+            );
+            navigate('/');
+        } else {
+            alert(
+                '회원 탈퇴에 실패했습니다\n동일한 오류가 발생시 관리자에게 문의바랍니다',
+            );
+        }
+    };
+
     return (
         <div className="main_container_wrap">
             <strong>기본정보</strong>
@@ -120,7 +185,9 @@ const MypageUser = () => {
                         >
                             회원 정보 수정
                         </button>
-                        <button className="white_btn w_100">회원 탈퇴</button>
+                        <button className="white_btn w_100" onClick={onRemove}>
+                            회원 탈퇴
+                        </button>
                     </div>
                 </>
             ) : (
@@ -134,7 +201,7 @@ const MypageUser = () => {
                             <tbody>
                                 <tr>
                                     <th>아이디</th>
-                                    <td>yuna@gmail.com</td>
+                                    <td>{email}</td>
                                 </tr>
                                 <tr>
                                     <th>비밀번호</th>

@@ -9,6 +9,7 @@ import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     SERVER_URL,
+    emailChk,
     getSaveId,
     postFetch,
     removeSaveId,
@@ -60,39 +61,27 @@ const Login = () => {
 
         // 유효성 통과 후
         const json = await postFetch(`${SERVER_URL}/api/auth/login`, data);
-        console.log(json);
 
-        if (json) {
-            if (json.error) {
-                alert(json.error);
-            } else if (json.token) {
-                // 이메일(아이디) 저장 체크용
-                if (idSave) setSaveId(email);
-                else {
-                    if (getSaveId()) {
-                        removeSaveId();
-                    }
+        if (json?.error) {
+            alert('로그인 도중 오류가 발생했습니다');
+            console.warn(json.error);
+        } else if (json) {
+            // 이메일(아이디) 저장 체크용
+            if (idSave) setSaveId(email);
+            else {
+                if (getSaveId()) {
+                    removeSaveId();
                 }
-
-                // 서버에서 전달받은 토큰을 로컬에 저장
-                setSaveToken(json.token);
-
-                // 로그인 완료 시
-                navigate('/');
-            } else {
-                alert('알 수 없는 오류가 발생했습니다');
             }
+            console.log(json);
+            // 서버에서 전달받은 토큰을 로컬에 저장
+            setSaveToken(json);
+
+            // 로그인 완료 시
+            navigate('/');
         } else {
             alert('알 수 없는 오류가 발생했습니다');
         }
-    };
-
-    // 이메일 정규식
-    const emailChk = (email) => {
-        // eslint가 정규식을 제대로 확인을 못하는 것 같음... 더 쉽고 간편한 정규식 찾으면 변경 예정...
-        const emailRegex =
-            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        return emailRegex.test(email);
     };
 
     return (

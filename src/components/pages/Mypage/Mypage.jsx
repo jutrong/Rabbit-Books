@@ -1,35 +1,25 @@
 import './Mypage.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MypageUser from './MypageUser';
 import MypageEmpty from './MypageEmpty';
 import MypageOrder from './MypageOrder';
+import { useParams } from 'react-router-dom';
 
 const Mypage = () => {
+    const { tab } = useParams();
     const [selectTab, setSelectTab] = useState(0);
     const onTabSelect = (num) => {
         setSelectTab(num);
     };
+    useEffect(() => {
+        setSelectTab(Number(tab));
+    }, [tab]);
     const [tabMenu] = useState([
-        {
-            id: 0,
-            text: '회원 정보',
-        },
-        {
-            id: 1,
-            text: '주문·배송 조회',
-        },
-        {
-            id: 2,
-            text: '내 문의 조회',
-        },
-        {
-            id: 3,
-            text: '포인트 조회',
-        },
-        {
-            id: 4,
-            text: '배송지 관리',
-        },
+        { id: 0, text: '회원 정보' },
+        { id: 1, text: '주문·배송 조회' },
+        { id: 2, text: '내 문의 조회' },
+        { id: 3, text: '포인트 조회' },
+        { id: 4, text: '배송지 관리' },
     ]);
     return (
         <div className="mypage_container con_wrap">

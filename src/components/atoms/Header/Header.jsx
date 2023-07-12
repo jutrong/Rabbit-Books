@@ -17,13 +17,6 @@ const Header = () => {
             <div className="con_wrap">
                 <div className="service_menu">
                     <ul>
-                        {/* {serviceMenus.map((menu, i) => (
-                            <li key={i}>
-                                <Link to={menu.target} className={menu.class}>
-                                    {menu.name}
-                                </Link>
-                            </li>
-                        ))} */}
                         <li>
                             <Link to="/join" className="col_blue">
                                 회원가입
@@ -73,10 +66,10 @@ const Header = () => {
                             <Link to="/cart"></Link>
                         </li>
                         <li className="my">
-                            <Link to="/mypage"></Link>
+                            <Link to="/mypage/0"></Link>
                         </li>
                         <li className="delivery">
-                            <Link to="/ordercheck"></Link>
+                            <Link to="/mypage/1"></Link>
                         </li>
                     </ul>
                 </div>

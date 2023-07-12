@@ -446,6 +446,7 @@ header.active{box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);}
 .move_list li.basket a{background-image: url('../images/icons/icon_gnb_basket.png');}
 .move_list li.my a{background-image: url('../images/icons/icon_gnb_my.png');}
 .move_list li.delivery a{background-image: url('../images/icons/icon_gnb_delivery.png');}
+.move_list li.new a::after{content: ""; position: absolute; right: 0; top: 0; width: 6px;height: 6px; border-radius: 50%; background-color: #F45F5F;}
 
 
 /* GNB */

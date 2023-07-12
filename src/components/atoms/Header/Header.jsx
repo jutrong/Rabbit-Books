@@ -62,7 +62,7 @@ const Header = () => {
                     </div>
 
                     <ul className="move_list">
-                        <li className="basket">
+                        <li className="basket new">
                             <Link to="/cart"></Link>
                         </li>
                         <li className="my">

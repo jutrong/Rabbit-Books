@@ -14,6 +14,7 @@ const Order = () => {
     );
     const [phone] = useState('01012341234');
     const [totalPrice, setTotalPrice] = useState(0);
+    const [userName, setUserName] = useState('토깽이');
 
     useEffect(() => {
         // 로컬스토리지에서 cart 가져오기
@@ -37,6 +38,7 @@ const Order = () => {
             categoryName: item.categoryName,
             author: item.author,
             quantity: item.quantity,
+            imgPath: item.imgPath,
         }));
 
         fetch('http://kdt-sw-5-team05.elicecoding.com/api/orders', {
@@ -55,7 +57,7 @@ const Order = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                navigate('/mypage/1')
+                navigate('/orderComplete');
             })
             .catch((error) => {
                 console.error('Error submitting order:', error);
@@ -63,10 +65,6 @@ const Order = () => {
             });
     };
 
-    // const totalPrice = cartData.reduce(
-    //     (accumulator, item) => accumulator + item.price * item.quantity,
-    //     0,
-    // );
     const totalNumber = cartData.reduce(
         (total, item) => total + item.quantity,
         0,
@@ -85,7 +83,9 @@ const Order = () => {
                                 </div>
                                 <div className="info_right">
                                     <p>엘리스랩</p>
-                                    <span>토깽이 / {phone}</span>
+                                    <span>
+                                        {name} / {phone}
+                                    </span>
                                     <span className="address">
                                         [04799] 서울특별시 성동구 아차산로17길
                                         48 (성수동2가, 성수 SK V1 CENTER I)

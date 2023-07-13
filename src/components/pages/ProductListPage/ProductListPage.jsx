@@ -22,6 +22,7 @@ const ProductList = () => {
                     checked: false,
                 }));
                 setBooks(initialBooks);
+                console.log(initialBooks);
             });
     }, []);
 

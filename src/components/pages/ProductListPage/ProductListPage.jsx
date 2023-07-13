@@ -1,10 +1,10 @@
 import './ProductListPage.scss';
+import { SERVER_URL } from '../../../utils';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cart from '../../../assets/images/icons/icon_gnb_basket.png';
 import wish from '../../../assets/images/icons/icon_wish.png';
 // import wishActive from '../../../assets/images/icons/icon_wish_active.png';
-// import bookData from '../../dummydata/BookData.json';
 
 const ProductList = () => {
     const [books, setBooks] = useState([]);
@@ -12,18 +12,16 @@ const ProductList = () => {
     const [selectAll, setSelectAll] = useState(false);
 
     useEffect(() => {
-        fetch('http://kdt-sw-5-team05.elicecoding.com/orders')
+        fetch('http://kdt-sw-5-team05.elicecoding.com/api/products?keyword=kor')
             .then((res) => res.json())
             .then((data) => {
-                setBooks([data.results]);
-                console.log(...books)
+                setBooks(data);
+                // const initialBooks = data.map((book) => ({
+                //     ...book,
+                //     checked: false,
+                // }));
+                // setBooks(initialBooks);
             });
-        // 새로운 속성인 checked를 추가하고 기본값으로 false를 설정합니다.
-        const initialBooks = bookData.map((book) => ({
-            ...book,
-            checked: false,
-        }));
-        setBooks(initialBooks);
     }, []);
 
     const showModal = () => {
@@ -32,7 +30,7 @@ const ProductList = () => {
     // 선택된 상품을 로컬 스토리지에 저장
     const inputStorage = (check) => {
         const updatedCheck = books.map((book) => {
-            if (book.id === check) {
+            if (book._id === check) {
                 return { ...book, checked: !book.checked };
             }
             return book;
@@ -45,7 +43,7 @@ const ProductList = () => {
         // 이미 로컬 스토리지에 있는 항목은 필터링
         // 현재 book의 id와 동일한 id를 가진 요소가 없을 경우 true를 반환
         const newItems = checkedItems.filter(
-            (book) => !cartItems.some((item) => item.id === book.id),
+            (book) => !cartItems.some((item) => item._id === book._id),
         );
 
         // 기존 항목과 새로운 항목을 결합
@@ -64,8 +62,10 @@ const ProductList = () => {
     };
     // 개별 체크박스 선택 상태를 토글
     const handleCheckboxChange = (check) => {
+        console.log('da');
+
         const updatedCheck = books.map((book) => {
-            if (book.id === check) {
+            if (book._id === check) {
                 return { ...book, checked: !book.checked };
             }
             return book;
@@ -80,6 +80,7 @@ const ProductList = () => {
     const navigate = useNavigate();
     const navigateToItem = (id) => {
         navigate(`/productlist/${id}`);
+        console.log(id);
     };
 
     return (
@@ -163,10 +164,9 @@ const ProductList = () => {
                     <div className="book_list">
                         {books.map((book) => (
                             <BookItem
-                                key={book.id}
+                                key={book._id}
                                 book={book}
-                                onCheckboxChange={handleCheckboxChange}
-                                // onDeselect={handleIndividualDeselect}
+                                handleCheckboxChange={handleCheckboxChange}
                                 navigateToItem={navigateToItem}
                             />
                         ))}
@@ -250,9 +250,9 @@ const ProductList = () => {
     );
 };
 
-const BookItem = ({ book, onCheckboxChange, navigateToItem }) => {
-    const handleCheckboxChange = () => {
-        onCheckboxChange(book.id);
+const BookItem = ({ book, handleCheckboxChange, navigateToItem }) => {
+    const CheckboxChange = () => {
+        handleCheckboxChange(book._id);
     };
 
     return (
@@ -260,19 +260,23 @@ const BookItem = ({ book, onCheckboxChange, navigateToItem }) => {
             <input
                 type="checkbox"
                 name="inpChk"
-                key={book.id}
+                key={book._id}
                 className="ch_check hide allcheck"
                 value={''}
-                id={book.id}
+                id={book._id}
                 checked={book.checked}
-                onChange={() => handleCheckboxChange(book.id)}
+                onChange={CheckboxChange}
             />
-            <label htmlFor={book.id} className="label single"></label>
-            <a href="#" onClick={() => navigateToItem(book.id)}>
-                <img src={book.imgLink} alt="책이미지1" id="book1" />
+            <label htmlFor={book._id} className="label single"></label>
+            <a href="#" onClick={() => navigateToItem(book._id)}>
+                <img
+                    src={`${SERVER_URL}${book.imgPath}`}
+                    alt="책이미지1"
+                    id="book1"
+                />
             </a>
             <div className="book_content">
-                <p className="book_title">{book.productName}</p>
+                <p className="book_title">{book.name}</p>
                 <p className="author">{book.author}</p>
                 <div>
                     <p className="price">{book.price}</p>

@@ -2,21 +2,31 @@ import './CartPage.scss';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoCart from './NoCartPage';
+// import { SERVER_URL } from '../../../utils';
 
 const Cart = () => {
     const navigate = useNavigate();
     const [isData, setIsData] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [selectAll, setSelectAll] = useState(true);
-    
+    const [quantity] = useState(1);
+
     useEffect(() => {
         // 로컬 스토리지에서 저장된 카트 아이템을 가져와서 초기화
         const storedCartItems = localStorage.getItem('cart');
         if (storedCartItems) {
-            setCartItems(JSON.parse(storedCartItems));
+            const parsedCartItems = JSON.parse(storedCartItems);
+            // quantity 속성이 없는 경우 추가하여 저장
+            const updatedCartItems = parsedCartItems.map((item) => {
+                if (!item.hasOwnProperty('quantity')) {
+                    return { ...item, quantity: 1 };
+                }
+                return item;
+            });
+            setCartItems(updatedCartItems);
             setIsData(true);
         } else if (setIsData(false)) {
-            Storage.removeItem('cart');
+            localStorage.removeItem('cart');
         }
     }, [isData]);
 
@@ -30,14 +40,14 @@ const Cart = () => {
     const removeProduct = (itemId) => {
         // // 로컬 스토리지에서 항목 삭제
         const deleteItem = cartItems.filter(
-            (cartItem) => cartItem.id !== itemId,
+            (cartItem) => cartItem._id !== itemId,
         );
         localStorage.setItem('cart', JSON.stringify(deleteItem));
 
         // 화면에서 항목 삭제
         setCartItems(
             cartItems.filter((item) => {
-                return item.id !== itemId;
+                return item._id !== itemId;
             }),
         );
         // 카트가 비어있으면 로컬 스토리지도 초기화
@@ -68,7 +78,7 @@ const Cart = () => {
         // 이전 상태를 기반으로 새로운 배열생성
         setCartItems((prevItems) => {
             const updatedItems = prevItems.map((item) => {
-                if (item.id === itemId) {
+                if (item._id === itemId) {
                     //  현재 항목의 id가 매개변수로 전달된 itemId와 일치하는 경우
                     //  새로운 객체를 생성하여 checked 속성을 전달된 checked 값으로 업데이트
                     return {
@@ -101,11 +111,11 @@ const Cart = () => {
         // 선택된 상품의 id 배열 가져오기
         const selectedIds = cartItems
             .filter((item) => item.checked)
-            .map((item) => item.id);
+            .map((item) => item._id);
 
         // 로컬 스토리지에서 선택된 상품 삭제
         const updatedItems = cartItems.filter(
-            (item) => !selectedIds.includes(item.id),
+            (item) => !selectedIds.includes(item._id),
         );
         if (updatedItems.length === 0) {
             // 로컬 스토리지를 비움
@@ -119,25 +129,31 @@ const Cart = () => {
     };
 
     // 장바구니 물건 수량 변경 기능
-    const handleAdd = (productId) => {
-        const addQty = cartItems.map((product) => {
-            if (productId === product.id && product.quantity > 0) {
-                return { ...product, quantity: product.quantity + 1 };
-            } else return product;
+    const handleAdd = (itemId) => {
+        setCartItems((prevItems) => {
+            const updatedItems = prevItems.map((item) => {
+                if (item._id === itemId) {
+                    return { ...item, quantity: item.quantity + 1 };
+                }
+                return item;
+            });
+            localStorage.setItem('cart', JSON.stringify(updatedItems));
+            return [...updatedItems]; // 새로운 배열을 반환
         });
-        setCartItems(addQty);
-        localStorage.setItem('cart', JSON.stringify(addQty));
-    };
-    const handleMinus = (productId) => {
-        const minusQty = cartItems.map((product) => {
-            if (productId === product.id && product.quantity > 1) {
-                return { ...product, quantity: product.quantity - 1 };
-            } else return product;
-        });
-        setCartItems(minusQty);
-        localStorage.setItem('cart', JSON.stringify(minusQty));
     };
 
+    const handleMinus = (itemId) => {
+        setCartItems((prevItems) => {
+            const updatedItems = prevItems.map((item) => {
+                if (item._id === itemId && item.quantity > 1) {
+                    return { ...item, quantity: item.quantity - 1 };
+                }
+                return item;
+            });
+            localStorage.setItem('cart', JSON.stringify(updatedItems));
+            return [...updatedItems]; // 새로운 배열을 반환
+        });
+    };
     // 전체 가격, 숫자
     const calculateTotalPrice = () => {
         let totalPrice = 0;
@@ -197,14 +213,14 @@ const Cart = () => {
                                 <tbody>
                                     {cartItems.map((item) => (
                                         <Tablerow
-                                            key={item.id}
+                                            key={item._id}
                                             item={item}
-                                            cartItems={cartItems}
                                             removeProduct={removeProduct}
                                             toggleCheckbox={toggleCheckbox}
                                             handleAdd={handleAdd}
                                             handleMinus={handleMinus}
                                             navigateToOrder={navigateToOrder}
+                                            quantity={quantity}
                                         />
                                     ))}
                                 </tbody>
@@ -304,15 +320,16 @@ const Tablerow = ({
     handleAdd,
     handleMinus,
     navigateToOrder,
+    quantity,
 }) => {
     const handleCheckbox = (event) => {
         const checkbox = event.target;
         const checked = checkbox.checked;
-        toggleCheckbox(item.id, checked);
+        toggleCheckbox(item._id, checked);
     };
     const navigate = useNavigate();
     const navigateToDetailPage = () => {
-        navigate(`/productlist/${item.id}`);
+        navigate(`/productlist/${item._id}`);
     };
 
     return (
@@ -322,24 +339,22 @@ const Tablerow = ({
                     type="checkbox"
                     name="inpChk"
                     className="ch_check hide individual"
-                    value={item.id}
-                    id={item.id}
+                    value={item._id}
+                    id={item._id}
                     checked={item.checked}
                     onChange={handleCheckbox}
                 />
-                <label htmlFor={item.id} className="label single"></label>
+                <label htmlFor={item._id} className="label single"></label>
             </td>
             <td>
                 <div className="book_info_box">
                     <img
-                        src={item.imgLink}
+                        src={item.imgPath}
                         alt="책 이미지"
                         onClick={navigateToDetailPage}
                     />
                     <div className="book_info" onClick={navigateToDetailPage}>
-                        <strong className="book_info_title">
-                            {item.productName}
-                        </strong>
+                        <strong className="book_info_title">{item.name}</strong>
                         <p className="author">{item.author}</p>
                         <p>창비&#183; 2022년 03월 28일</p>
                         <div className="pay">
@@ -353,7 +368,7 @@ const Tablerow = ({
                     <button
                         className="remove_btn"
                         onClick={() => {
-                            removeProduct(item.id);
+                            removeProduct(item._id);
                         }}
                     ></button>
                 </div>
@@ -365,7 +380,7 @@ const Tablerow = ({
                         id="minusBtn"
                         className="minus_btn"
                         onClick={() => {
-                            handleMinus(item.id);
+                            handleMinus(item._id);
                         }}
                     >
                         <i></i>
@@ -381,7 +396,7 @@ const Tablerow = ({
                         id="plusBtn"
                         className="plus_btn"
                         onClick={() => {
-                            handleAdd(item.id);
+                            handleAdd(item._id);
                         }}
                     >
                         <i></i>
@@ -392,7 +407,6 @@ const Tablerow = ({
                 <strong className="amount">
                     {(item.price * item.quantity).toLocaleString()}
                 </strong>
- 
             </td>
             <td>
                 <span className="speaker">7월 10일(월)</span>

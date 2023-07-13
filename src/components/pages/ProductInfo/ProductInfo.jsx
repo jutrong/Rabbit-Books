@@ -1,29 +1,38 @@
 import './ProductInfo.scss';
 import { useNavigate, useParams } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import zoom from '../../../assets/images/icons/icon_guide01.png';
 import cart from '../../../assets/images/icons/icon_cart.png';
-import bookData from '../../dummydata/BookData.json';
+import { SERVER_URL } from '../../../utils';
 
 const ProductInfo = () => {
-    const [books] = useState(bookData);
+    const [book, setBook] = useState({});
     const { id } = useParams();
     const [quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        fetch(`http://kdt-sw-5-team05.elicecoding.com/api/products/${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setBook(data);
+            });
+    }, [id]);
+
     const navigateToOrder = () => {
-        const selectedBook = books.find((book) => book.id === parseInt(id));
         const orderData = {
-            author: selectedBook.author,
-            categoryName: selectedBook.categoryName,
-            checked: true,
-            description: '설명부분',
-            id: selectedBook.id,
-            imgLink: selectedBook.imgLink,
-            price: selectedBook.price,
-            productName: selectedBook.productName,
+            author: book.author,
+            categoryName: book.categoryName,
+            checked: book.checked,
+            description: book.description,
+            imgPath: book.imgPath,
+            name: book.name,
+            price: book.price,
+            publishData: book.publishData,
             quantity: quantity,
-            stock: selectedBook.stock,
+            stock: book.stock,
+            _id: book._id,
         };
 
         // 로컬스토리지에서 기존의 카트 아이템을 가져옴
@@ -37,19 +46,20 @@ const ProductInfo = () => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
         navigate('/order');
     };
+
     const saveToLocalStorage = () => {
-        const selectedBook = books.find((book) => book.id === parseInt(id));
         const cartItem = {
-            author: selectedBook.author,
-            categoryName: selectedBook.categoryName,
-            checked: true,
-            description: '설명부분',
-            id: selectedBook.id,
-            imgLink: selectedBook.imgLink,
-            price: selectedBook.price,
-            productName: selectedBook.productName,
-            quantity: quantity,
-            stock: selectedBook.stock,
+            author: book.author,
+            categoryName: book.categoryName,
+            checked: book.checked,
+            description: book.description,
+            imgPath: book.imgPath,
+            name: book.name,
+            price: book.price,
+            publishData: book.publishData,
+            quantity: book.quantity,
+            stock: book.stock,
+            _id: book._id,
         };
         // 로컬스토리지에서 기존의 카트 아이템을 가져오기
         const existingCartItems = localStorage.getItem('cart');
@@ -57,7 +67,7 @@ const ProductInfo = () => {
 
         // 이미 카트에 있는 상품인 경우 수량 업데이트 또는 카트에 추가
         const existingCartItem = cartItems.find(
-            (item) => item.id === cartItem.id,
+            (item) => item._id === cartItem._id,
         );
         if (existingCartItem) {
             existingCartItem.quantity += quantity;
@@ -71,6 +81,7 @@ const ProductInfo = () => {
         // 카트 페이지로 이동
         navigate('/cart');
     };
+
     const handleMinus = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
@@ -85,19 +96,19 @@ const ProductInfo = () => {
         <div className="productinfo">
             <section className="left">
                 <div className="book_img">
-                    <img src={books[id].imgLink} alt="책2" />
+                    <img src={`${SERVER_URL}${book.imgPath}`} alt="책2" />
                     <img src={zoom} alt="돋보기" />
                     <p>미리보기</p>
                 </div>
             </section>
             <section className="right">
-                <p className="main_title">{books[id].productName}</p>
+                <p className="main_title">{book.name}</p>
                 <p className="sub_title">
                     자바스크립트 기초부터 애플리케이션 배포까지
                 </p>
                 <p className="price">
                     <span>💰</span>
-                    {books[id].price.toLocaleString()}
+                    {book.price}
                 </p>
                 <div className="delivery_info">
                     <p>배송정보</p>
@@ -109,7 +120,7 @@ const ProductInfo = () => {
                 </div>
                 <p className="plus_fee">제주 4,000원, 도서산간 5,000원 추가</p>
                 <div className="book_counter">
-                    <p>한 입 크기로 잘라 먹는 리액트</p>
+                    <p>{book.name}</p>
                     <div>
                         <div className="increase_box">
                             <button
@@ -135,16 +146,12 @@ const ProductInfo = () => {
                                 <i></i>
                             </button>
                         </div>
-                        <div className="count_price">
-                            {books[id].price.toLocaleString()}원
-                        </div>
+                        <div className="count_price">{book.price}원</div>
                     </div>
                 </div>
                 <p className="all_price">
                     합계
-                    <span>
-                        {(books[id].price * quantity).toLocaleString()}원
-                    </span>
+                    <span>{(book.price * quantity).toLocaleString()}원</span>
                 </p>
                 <div className="order_box">
                     <button className="goCart" onClick={saveToLocalStorage}>

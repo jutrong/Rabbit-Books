@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getSaveToken, removeToken } from '../../../utils';
 
 const Header = () => {
     const navigate = useNavigate();
     const [token, setToken] = useState(getSaveToken() ? getSaveToken() : '');
+    const [cartOn, setCartOn] = useState(false);
     const onLogout = () => {
         removeToken();
         setToken('');
         alert('로그아웃 되었습니다');
         navigate('/'); // 로그아웃 시 메인 이동
     };
-
+    useEffect(() => {
+        const storedCartItems = localStorage.getItem('cart');
+        setCartOn(Boolean(storedCartItems))
+    }, [cartOn]);
     return (
         <header>
             <div className="con_wrap">
@@ -62,7 +66,7 @@ const Header = () => {
                     </div>
 
                     <ul className="move_list">
-                        <li className="basket new">
+                        <li className={`basket ${cartOn ? 'new' : ''}`}>
                             <Link to="/cart"></Link>
                         </li>
                         <li className="my">

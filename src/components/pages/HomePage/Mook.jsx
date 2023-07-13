@@ -1,20 +1,31 @@
 import { useState } from 'react';
+import mookImg1 from '../../../assets/images/mook1.jpg';
+import mookImg2 from '../../../assets/images/mook2.jpg';
+import mookImg3 from '../../../assets/images/mook3.jpg';
+import mookImg4 from '../../../assets/images/mook4.jpg';
+import mookImg5 from '../../../assets/images/mook5.jpg';
+import mookImg6 from '../../../assets/images/mook6.jpg';
+import mookImg7 from '../../../assets/images/mook7.jpg';
+import mookImg8 from '../../../assets/images/mook8.jpg';
+import mookImg9 from '../../../assets/images/mook9.jpg';
+import mookImg10 from '../../../assets/images/mook10.jpg';
+import mookImg11 from '../../../assets/images/mook11.jpg';
+import mookImg12 from '../../../assets/images/mook12.jpg';
 
 const Mook = () => {
-    const PREFIX_SRC = 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/';
     const [slideBookDatas] = useState([
-        { imgSrc: '3904000356228.jpg', target: '#' },
-        { imgSrc: '9791190109178.jpg', target: '#' },
-        { imgSrc: '3904000351094.jpg', target: '#' },
-        { imgSrc: '9788970414201.jpg', target: '#' },
-        { imgSrc: '9791197488665.jpg', target: '#' },
-        { imgSrc: '3904000345864.jpg', target: '#' },
-        { imgSrc: '3904000342375.jpg', target: '#' },
-        { imgSrc: '3904000357744.jpg', target: '#' },
-        { imgSrc: '9791198108517.jpg', target: '#' },
-        { imgSrc: '9791160360516.jpg', target: '#' },
-        { imgSrc: '9791191645231.jpg', target: '#' },
-        { imgSrc: '3904000346502.jpg', target: '#' },
+        { imgSrc: mookImg1, target: '#' },
+        { imgSrc: mookImg2, target: '#' },
+        { imgSrc: mookImg3, target: '#' },
+        { imgSrc: mookImg4, target: '#' },
+        { imgSrc: mookImg5, target: '#' },
+        { imgSrc: mookImg6, target: '#' },
+        { imgSrc: mookImg7, target: '#' },
+        { imgSrc: mookImg8, target: '#' },
+        { imgSrc: mookImg9, target: '#' },
+        { imgSrc: mookImg10, target: '#' },
+        { imgSrc: mookImg11, target: '#' },
+        { imgSrc: mookImg12, target: '#' },
     ]);
 
     const [animation, setAnimation] = useState(true);
@@ -46,7 +57,7 @@ const Mook = () => {
                                     >
                                         <div className="today_img">
                                             <img
-                                                src={PREFIX_SRC + slide.imgSrc}
+                                                src={slide.imgSrc}
                                                 alt="책 이미지"
                                             />
                                         </div>
@@ -71,7 +82,7 @@ const Mook = () => {
                                     >
                                         <div className="today_img">
                                             <img
-                                                src={PREFIX_SRC + slide.imgSrc}
+                                                src={slide.imgSrc}
                                                 alt="책 이미지"
                                             />
                                         </div>

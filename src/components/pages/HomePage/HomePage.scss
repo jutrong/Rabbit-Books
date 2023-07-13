@@ -249,6 +249,7 @@
                     center / 44px;
                 border-radius: 50%;
                 color: transparent;
+                cursor: pointer;
             }
             .swiper_nav_next {
                 right: -54px;
@@ -432,6 +433,10 @@
                             font-size: 20px;
                             padding-bottom: 10px;
                             font-weight: 700;
+                            letter-spacing: -0.625px;
+                        }
+                        span {
+                            opacity: 0.8;
                         }
                     }
 
@@ -531,6 +536,7 @@
                     center / 44px;
                 border-radius: 50%;
                 color: transparent;
+                cursor: pointer;
             }
             .swiper_nav_next {
                 right: -54px;

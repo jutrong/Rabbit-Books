@@ -133,7 +133,6 @@ const Join = () => {
                 <h1 className="main_logo">
                     <Link to="/">
                         <img src={loginLogo} alt="로고" />
-                        <p>토끼 책방</p>
                     </Link>
                 </h1>
             </div>

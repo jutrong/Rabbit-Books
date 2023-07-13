@@ -15,6 +15,19 @@ import mainBanner3 from '../../../assets/images/main_banner3.webp';
 import mainBanner4 from '../../../assets/images/main_banner4.webp';
 import mainBanner5 from '../../../assets/images/main_banner5.webp';
 
+import mainBook1 from '../../../assets/images/main_book1.jpg';
+import mainBook2 from '../../../assets/images/main_book2.webp';
+import mainBook3 from '../../../assets/images/main_book3.jpg';
+import mainBook4 from '../../../assets/images/main_book4.webp';
+import mainBook5 from '../../../assets/images/main_book5.jpg';
+import mainBook6 from '../../../assets/images/main_book6.jpg';
+import mainBook7 from '../../../assets/images/main_book7.jpg';
+import mainBook8 from '../../../assets/images/main_book8.webp';
+
+import eventBanner1 from '../../../assets/images/banner1.jpg';
+import eventBanner2 from '../../../assets/images/banner2.jpg';
+import eventBanner3 from '../../../assets/images/banner3.jpg';
+
 import eventImg1 from '../../../assets/images/event1.png';
 import eventImg2 from '../../../assets/images/event2.png';
 import eventImg3 from '../../../assets/images/event3.png';
@@ -31,11 +44,15 @@ import authorImg6 from '../../../assets/images/author6.jpg';
 import authorImg7 from '../../../assets/images/author7.jpg';
 import authorImg8 from '../../../assets/images/author8.webp';
 import authorImg9 from '../../../assets/images/author9.jpg';
+import authorImg10 from '../../../assets/images/author10.webp';
 
 import { useEffect, useRef } from 'react';
 import Mook from './Mook';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
+
     const slideSectionPrevBtn = useRef();
     const slideSectionNextBtn = useRef();
 
@@ -48,6 +65,10 @@ const Home = () => {
     useEffect(() => {
         AOS.init();
     }, []);
+
+    const goDetail = (id) => {
+        navigate(`/productlist/${id}`);
+    };
 
     return (
         <div className="home">
@@ -75,7 +96,10 @@ const Home = () => {
                         swiper.navigation.update();
                     }}
                 >
-                    <SwiperSlide className="slide_black">
+                    <SwiperSlide
+                        className="slide_black"
+                        onClick={() => goDetail('64afbf4504ddf382bfc543d7')}
+                    >
                         <div className="slide_container">
                             <div className="blur_bg"></div>
                             <img
@@ -85,15 +109,15 @@ const Home = () => {
                             />
                             <div className="slide_txt">
                                 <ul>
-                                    <li>ORIGINAL</li>
-                                    <li>대여</li>
+                                    <li>NEW</li>
+                                    <li>BEST</li>
                                 </ul>
                                 <strong>
-                                    내일 일어날 일
+                                    베르베르 신간 소설
                                     <br />
-                                    내세에 일어날 일
+                                    🐝『꿀벌의 예언』출간!
                                 </strong>
-                                <p>우주라이크소설 SF 장르전</p>
+                                <p>주간 베스트 - feat. 꿀벌 가든백 증정!</p>
                             </div>
                             {/* <img
                                 src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791170521730.jpg"
@@ -102,7 +126,10 @@ const Home = () => {
                             /> */}
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide className="slide_blue">
+                    <SwiperSlide
+                        className="slide_blue"
+                        onClick={() => goDetail('64afbf4504ddf382bfc543dc')}
+                    >
                         <div className="slide_container">
                             <div className="blur_bg"></div>
                             <img
@@ -112,21 +139,24 @@ const Home = () => {
                             />
                             <div className="slide_txt">
                                 <ul>
-                                    <li>10%할인</li>
-                                    <li>대여</li>
+                                    <li>NEW</li>
+                                    <li>10% 할인</li>
                                 </ul>
                                 <strong>
                                     불가능 범죄 전문
-                                    <br />샘 호손 박사 컴백!
+                                    <br />
+                                    🐰 샘 호손 박사 컴백!
                                 </strong>
                                 <p>
-                                    &#60;샘 호손 박사의 세번째 불가능
-                                    사건집&#62; 출간
+                                    『샘 호손 박사의 세번째 불가능 사건집』 출간
                                 </p>
                             </div>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide className="slide_pink">
+                    <SwiperSlide
+                        className="slide_pink"
+                        onClick={() => goDetail('64afbf4504ddf382bfc543bc')}
+                    >
                         <div className="slide_container">
                             <div className="blur_bg"></div>
                             <img
@@ -141,13 +171,18 @@ const Home = () => {
                                 </ul>
                                 <strong>
                                     MZ세대 그 이후,
-                                    <br />뉴 트렌드에 대비하라!
+                                    <br />
+                                    💗 뉴 트렌드에 대비하라!
                                 </strong>
-                                <p>&#60;새로운 인류 알파세대&#62; 대여 50%</p>
+                                <p>『새로운 인류 알파세대』 대여 50%</p>
                             </div>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide className="slide_green">
+
+                    <SwiperSlide
+                        className="slide_green"
+                        onClick={() => goDetail('64afbf4504ddf382bfc543d3')}
+                    >
                         <div className="slide_container">
                             <div className="blur_bg"></div>
                             <img
@@ -162,7 +197,7 @@ const Home = () => {
                                 <strong>
                                     공부왕 찐천재
                                     <br />
-                                    홍진경 인생책
+                                    🤓 홍진경 인생책
                                 </strong>
                                 <p>
                                     사는 모습은 다 달라도 우리는 누구나 스토너다
@@ -170,7 +205,10 @@ const Home = () => {
                             </div>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide className="slide_purple">
+                    <SwiperSlide
+                        className="slide_purple"
+                        onClick={() => goDetail('64afbf4504ddf382bfc543dd')}
+                    >
                         <div className="slide_container">
                             <div className="blur_bg"></div>
                             <img
@@ -186,7 +224,7 @@ const Home = () => {
                                 <strong>
                                     원작으로 먼저
                                     <br />
-                                    만나는 류츠신 &#60;삼체&#62;
+                                    🔮 만나는 류츠신『삼체』
                                 </strong>
                                 <p>넷플릭스 공개 임박 기념 특가 세트전</p>
                             </div>
@@ -226,12 +264,11 @@ const Home = () => {
                         swiper.navigation.update();
                     }}
                 >
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543c3')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/734002510/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook1} alt="책 이미지" />
                         </div>
                         <em>에세이</em>
                         <strong>
@@ -239,78 +276,71 @@ const Home = () => {
                         </strong>
                         <p>류이치 사카모토 · 위즈덤하우스</p>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543c4')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/2066005932/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook2} alt="책 이미지" />
                         </div>
                         <em>추리/스릴러</em>
                         <strong>페퍼스 고스트</strong>
                         <p>이사카 고타로 · 소미북스</p>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543c5')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/1546001077/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook3} alt="책 이미지" />
                         </div>
                         <em>자연과학</em>
                         <strong>기후 책</strong>
                         <p>그레타 툰베리 · 김영사</p>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543de')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/2155023408/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook4} alt="책 이미지" />
                         </div>
                         <em>성곤/삶의자세</em>
                         <strong>세이노의 가르침</strong>
                         <p>세이노 · 데이원</p>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543be')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/1546001070/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook5} alt="책 이미지" />
                         </div>
                         <em>정치/사회</em>
                         <strong>총, 균, 쇠</strong>
                         <p>재레드 다이아몬드 · 김영사</p>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543bd')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/852000790/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook6} alt="책 이미지" />
                         </div>
                         <em>에세이</em>
                         <strong>아무튼, 여름</strong>
                         <p>김신회 · 제철소</p>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543a4')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/754038212/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook7} alt="책 이미지" />
                         </div>
                         <em>한국소설</em>
                         <strong>구의 증명</strong>
                         <p>최진영 · 은행나무</p>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide
+                        onClick={() => goDetail('64afbf4504ddf382bfc543df')}
+                    >
                         <div className="today_img">
-                            <img
-                                src="https://img.ridicdn.net/cover/745000210/xxlarge#1"
-                                alt="책 이미지"
-                            />
+                            <img src={mainBook8} alt="책 이미지" />
                         </div>
                         <em>인문</em>
                         <strong>도파민네이션</strong>
@@ -334,136 +364,9 @@ const Home = () => {
                 data-aos="fade-up"
                 data-aos-duration="600"
             >
-                <img
-                    src="https://contents.kyobobook.co.kr/display/i_1200_150_471e118f2e9d48f3ac71c37b91b5f631.jpg"
-                    alt="배너 이미지"
-                />
+                <img src={eventBanner1} alt="배너 이미지" />
             </section>
 
-            {/* <section className="marquee_section">
-                <h2 className="con_wrap">이 계절의 무크지</h2>
-                <div
-                    className="list_container"
-                    onMouseEnter={onStop}
-                    onMouseLeave={onRun}
-                >
-                    <Swiper
-                        className="marqueeSwiper"
-                        ref={swiperRef}
-                        modules={[Autoplay]}
-                        loop={true}
-                        loopedSlides={4}
-                        allowTouchMove={false}
-                        observer={true}
-                        observeParents={true}
-                        slidesPerView={'auto'}
-                        spaceBetween={80}
-                        speed={6000}
-                        autoplay={{
-                            delay: 1,
-                            disableOnInteraction: false,
-                            pauseOnMouseEnter: true,
-                        }}
-                    >
-                        <SwiperSlide className="big">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000356228.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="small">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190109178.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="big">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000351094.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="small">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788970414201.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="big">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791197488665.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="small">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000345864.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="big">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000342375.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="small">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000357744.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="big">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791198108517.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="small">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791160360516.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="big">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191645231.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className="small">
-                            <div className="today_img">
-                                <img
-                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/3904000346502.jpg"
-                                    alt="책 이미지"
-                                />
-                            </div>
-                        </SwiperSlide>
-                    </Swiper>
-                </div>
-            </section> */}
             <Mook />
 
             <section
@@ -504,10 +407,7 @@ const Home = () => {
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="img_box">
-                            <img
-                                src="https://i.namu.wiki/i/RR6juoH6yWKtFhFSpRSh0CxHeN5Bm7e3XvG5Ja76R8iVuU0WX1D1l06RGmF7i0Cu5eBFr6TsKYk0jp-RhT556w.webp"
-                                alt="작가 이미지"
-                            />
+                            <img src={authorImg10} alt="작가 이미지" />
                             <div className="img_hover">
                                 <p>
                                     당신을 잃은 뒤, 우리들의 시간은 <br />
@@ -673,13 +573,13 @@ const Home = () => {
                         <div className="event_box salmon">
                             <div className="event_txt">
                                 <p>
-                                    영화 플래시 개봉 기념
+                                    푸른 밤,
                                     <br />
-                                    원작 도서 구매 이벤트
+                                    에세이와 떠나요
                                 </p>
                                 <span>
-                                    이벤트 도서 구매 시<br />
-                                    플래시 자수 에코백 증정!
+                                    푸른 밤 하늘 아래에서 곁을 지킬 <br />
+                                    시&middot; 에세이 추천 도서 기획전
                                 </span>
                             </div>
                             <img src={eventImg2} alt="이벤트 이미지" />
@@ -689,13 +589,14 @@ const Home = () => {
                         <div className="event_box lavender">
                             <div className="event_txt">
                                 <p>
-                                    영화 플래시 개봉 기념
+                                    빠른 시작
                                     <br />
-                                    원작 도서 구매 이벤트
+                                    여름방학 챌린지
                                 </p>
                                 <span>
-                                    이벤트 도서 구매 시<br />
-                                    플래시 자수 에코백 증정!
+                                    초등부터 고등까지, 국어는 빠작
+                                    <br />
+                                    feat. 여름방학 특별 굿즈 증정
                                 </span>
                             </div>
                             <img src={eventImg3} alt="이벤트 이미지" />
@@ -705,13 +606,14 @@ const Home = () => {
                         <div className="event_box yellow">
                             <div className="event_txt">
                                 <p>
-                                    영화 플래시 개봉 기념
+                                    출석체크 하셨나요?
                                     <br />
-                                    원작 도서 구매 이벤트
+                                    최대 5,000 P 적립!
                                 </p>
                                 <span>
-                                    이벤트 도서 구매 시<br />
-                                    플래시 자수 에코백 증정!
+                                    한 달동안 개근하고
+                                    <br />
+                                    매일 매일이 혜택 받기!
                                 </span>
                             </div>
                             <img src={eventImg4} alt="이벤트 이미지" />
@@ -721,13 +623,14 @@ const Home = () => {
                         <div className="event_box pink">
                             <div className="event_txt">
                                 <p>
-                                    영화 플래시 개봉 기념
+                                    미야자키 하야오
                                     <br />
-                                    원작 도서 구매 이벤트
+                                    그대들, 어떻게 살 것인가
                                 </p>
                                 <span>
-                                    이벤트 도서 구매 시<br />
-                                    플래시 자수 에코백 증정!
+                                    스튜디오 지브리 특별전 작품
+                                    <br />
+                                    구매 시 데스크매트 세트 증정!
                                 </span>
                             </div>
                             <img src={eventImg5} alt="이벤트 이미지" />
@@ -737,13 +640,14 @@ const Home = () => {
                         <div className="event_box green">
                             <div className="event_txt">
                                 <p>
-                                    영화 플래시 개봉 기념
+                                    독서 지원금 받고
                                     <br />
-                                    원작 도서 구매 이벤트
+                                    북메이트로 참여하기!
                                 </p>
                                 <span>
-                                    이벤트 도서 구매 시<br />
-                                    플래시 자수 에코백 증정!
+                                    북메이트와 리뷰 나누고
+                                    <br />
+                                    3단 우산 증정 받기!
                                 </span>
                             </div>
                             <img src={eventImg6} alt="이벤트 이미지" />
@@ -757,14 +661,8 @@ const Home = () => {
                 data-aos="fade-up"
                 data-aos-duration="600"
             >
-                <img
-                    src="http://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/06/28/46833/WELCOMEMAIND.jpg"
-                    alt="광고 배너"
-                />
-                <img
-                    src="http://image.kyobobook.co.kr/newimages/adcenter/IMAC/creatives/2023/06/30/2/welcome_PC_595x180.jpg"
-                    alt="광고 배너"
-                />
+                <img src={eventBanner2} alt="광고 배너" />
+                <img src={eventBanner3} alt="광고 배너" />
             </section>
         </div>
     );

@@ -5,6 +5,7 @@ import {
     getFetch,
     korChk,
     putFetch,
+    removeToken,
 } from '../../../utils';
 import { useNavigate } from 'react-router-dom';
 
@@ -66,16 +67,21 @@ const MypageUser = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        if (newPassword.length < 10 || newPassword.length > 20) {
-            alert('비밀번호를 10 ~ 20 자리로 입력해주세요');
-            newPasswordRef.current.focus();
-            return;
+        // 비밀번호 변경하는 경우 새로운 비밀번호 유효성 검증
+        if (password) {
+            if (newPassword.length < 10 || newPassword.length > 20) {
+                alert('비밀번호를 10 ~ 20 자리로 입력해주세요');
+                newPasswordRef.current.focus();
+                return;
+            }
+            if (newPassword !== newChkPassword) {
+                alert('새로운 비밀번호가 서로 일치하지 않습니다');
+                newPassword.current.focus();
+                return;
+            }
         }
-        if (newPassword !== newChkPassword) {
-            alert('새로운 비밀번호가 서로 일치하지 않습니다');
-            newPassword.current.focus();
-            return;
-        }
+
+        // 공통 유효성 검증
         if (name.length < 2 || name.length > 10) {
             alert('이름을 2 ~ 10 자리로 입력해주세요');
             nameRef.current.focus();
@@ -97,18 +103,21 @@ const MypageUser = () => {
             return;
         }
 
+        // 공통으로 전송 요청 옵션
         const data = {
             email,
             username: name,
-            password,
-            newPassword,
-            newChkPassword,
             address,
             phone,
         };
+
+        // 비밀번호 변경하는 경우 옵션 추가
+        if (password) {
+            data.password = password;
+            data.newPassword = newPassword;
+        }
         // 유효성 통과 후
         const json = await putFetch(`${SERVER_URL}/api/users`, data);
-        console.log(json);
         if (json?.error) {
             alert(
                 '회원 정보 수정에 실패했습니다\n동일한 오류가 발생시 관리자에게 문의바랍니다',
@@ -127,11 +136,11 @@ const MypageUser = () => {
     // 회원 탈퇴 --- 테스트 필요
     const onRemove = async () => {
         const json = await deleteFetch(`${SERVER_URL}/api/auth/withdraw`);
-        console.log(json);
         if (json?.error) {
             alert('회원 탈퇴가 정상적으로 진행되지 않았습니다');
             console.warn(json.error);
         } else if (json) {
+            removeToken(); // 기존 로그인 토큰 삭제
             alert(
                 '회원 탈퇴가 정상적으로 진행되었습니다\n그동안 이용해 주셔서 감사합니다',
             );

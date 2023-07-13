@@ -1,36 +1,91 @@
 import './SearchPage.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NoSearch from './NoSearchPage';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import {
+    SERVER_URL,
+    disCount,
+    getFetch,
+    priceFormat,
+    setCartItems,
+} from '../../../utils';
 
 const Search = () => {
-    const [isData] = useState(true);
+    const navigate = useNavigate();
+    const { keyword } = useParams();
+    const [allData, setAllData] = useState([]);
+    const [searchData, setSearchData] = useState([]);
+
+    const getServerData = async () => {
+        const category = ['kor', 'west'];
+        for (let i = 0; i < category.length; i++) {
+            const json = await getFetch(
+                `${SERVER_URL}/api/products?keyword=${category[i]}`,
+            );
+            setAllData((prev) => [...prev, ...json]);
+        }
+    };
+
+    const getShipDate = () => {
+        const dayStr = ['일', '월', '화', '수', '목', '금', '토'];
+        const date = new Date();
+        date.setDate(date.getDate() + 1); // 내일 날짜 구하기(배송 날짜 다음날로 지정)
+        return `${date.getMonth() + 1}/${date.getDate()}, ${
+            dayStr[date.getDay()]
+        }`;
+    };
+
+    // 장바구니 추가
+    const addCartItems = (bookInfo) => {
+        setCartItems(bookInfo);
+        alert(`장바구니에 [${bookInfo.name}]을/를 담았습니다`);
+    };
+
+    // 장바구니 추가 후 구매 페이지로 넘어가는 형태
+    const buyBooks = (bookInfo) => {
+        setCartItems(bookInfo);
+        navigate('/order');
+    };
+
+    useEffect(() => {
+        getServerData();
+    }, []);
+
+    useEffect(() => {
+        const equalData = allData.filter(
+            (data) =>
+                data.name.includes(keyword) || data.author.includes(keyword),
+        );
+        setSearchData(equalData);
+    }, [keyword, allData]);
+
     return (
         <div className="search con_wrap">
-            {isData ? (
+            {searchData.length > 0 ? (
                 <div className="search_container">
                     <strong className="search_title">
-                        &#39;<em>TEXT</em>&#39;에 대한 검색 결과
-                        <span>(44)</span>
+                        &#39;<em>{keyword}</em>&#39;에 대한 검색 결과
+                        <span>({searchData.length})</span>
                     </strong>
 
                     <div className="related_txt">
                         <ul>
                             <li>
                                 <span className="related_label">
-                                    연관검색어
+                                    추천검색어
                                 </span>
                             </li>
                             <li>
-                                <a href="#">연관검색어1</a>
+                                <a href="#">소설</a>
                             </li>
                             <li>
-                                <a href="#">연관검색어2연관검색어2</a>
+                                <a href="#">베스트셀러</a>
                             </li>
                             <li>
-                                <a href="#">연관검색어3</a>
+                                <a href="#">세계문학상</a>
                             </li>
                             <li>
-                                <a href="#">연관검색어4</a>
+                                <a href="#">자기계발</a>
                             </li>
                         </ul>
                     </div>
@@ -62,220 +117,154 @@ const Search = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div className="book_info_box">
-                                                <img
-                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791167901996.jpg"
-                                                    alt="책 이미지"
-                                                />
-                                                <div className="book_info">
-                                                    <ul className="book_tag_list">
-                                                        <li>
-                                                            <span className="sky">
-                                                                오늘의 선택
+                                    {searchData.map((book, i) => (
+                                        <tr key={book._id + i}>
+                                            <td>{i + 1}</td>
+                                            <td>
+                                                <div className="book_info_box">
+                                                    <Link
+                                                        to={`/productlist/${book._id}`}
+                                                    >
+                                                        <img
+                                                            src={
+                                                                SERVER_URL +
+                                                                book.imgPath
+                                                            }
+                                                            alt="책 이미지"
+                                                        />
+                                                    </Link>
+                                                    <div className="book_info">
+                                                        <PickTag num={i} />
+                                                        <Link
+                                                            to={`/productlist/${book._id}`}
+                                                        >
+                                                            <strong className="book_info_title">
+                                                                {book.name}
+                                                            </strong>
+                                                        </Link>
+                                                        <p className="author">
+                                                            {book.author}&nbsp;
+                                                            저자(글)
+                                                        </p>
+                                                        <p>
+                                                            {book.publishDate}
+                                                        </p>
+                                                        <div className="pay">
+                                                            <em>10%</em>
+                                                            <strong>
+                                                                {priceFormat(
+                                                                    disCount(
+                                                                        book.price,
+                                                                    ),
+                                                                )}
+                                                            </strong>
+                                                            원
+                                                            <span>
+                                                                {priceFormat(
+                                                                    book.price,
+                                                                )}
+                                                                원
                                                             </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="green">
-                                                                MD의 선택
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="orange">
-                                                                이벤트
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                    <strong className="book_info_title">
-                                                        매스커레이드 게임
-                                                    </strong>
-                                                    <p className="author">
-                                                        히가시노 게이고 저자(글)
-                                                        &#183; 양윤옥 번역
-                                                    </p>
-                                                    <p>
-                                                        현대문학&#183; 2023년
-                                                        06월 23일
-                                                    </p>
-                                                    <div className="pay">
-                                                        <em>10%</em>
-                                                        <strong>15,120</strong>
-                                                        원<span>16,800원</span>
+                                                        </div>
+                                                        <span className="star_grade">
+                                                            9.89
+                                                        </span>
                                                     </div>
-                                                    <span className="star_grade">
-                                                        9.89
-                                                    </span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span className="speaker">
-                                                내일 (7/8, 토)
-                                            </span>
-                                            도착 예정
-                                        </td>
-                                        <td>
-                                            <button className="white_btn w_156">
-                                                장바구니
-                                            </button>
-                                            <button className="blue_btn w_156 martop_10">
-                                                바로구매
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div className="book_info_box">
-                                                <img
-                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788990982704.jpg"
-                                                    alt="책 이미지"
-                                                />
-                                                <div className="book_info">
-                                                    <ul className="book_tag_list">
-                                                        <li>
-                                                            <span className="sky">
-                                                                오늘의 선택
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="green">
-                                                                무료배송
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="yellow">
-                                                                사은품
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="orange">
-                                                                이벤트
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="pink">
-                                                                소득공제
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                    <strong className="book_info_title">
-                                                        용의자 X의 헌신
-                                                    </strong>
-                                                    <p className="author">
-                                                        히가시노 게이고 저자(글)
-                                                        &#183; 양억관 번역
-                                                    </p>
-                                                    <p>
-                                                        재인&#183; 2017년 08월
-                                                        30일
-                                                    </p>
-                                                    <div className="pay">
-                                                        <em>10%</em>
-                                                        <strong>15,120</strong>
-                                                        원<span>16,800원</span>
-                                                    </div>
-                                                    <span className="star_grade">
-                                                        9.4
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span className="speaker">
-                                                내일 (7/8, 토)
-                                            </span>
-                                            도착 예정
-                                        </td>
-                                        <td>
-                                            <button className="white_btn w_156">
-                                                장바구니
-                                            </button>
-                                            <button className="blue_btn w_156 martop_10">
-                                                바로구매
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div className="book_info_box">
-                                                <img
-                                                    src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788990982575.jpg"
-                                                    alt="책 이미지"
-                                                />
-                                                <div className="book_info">
-                                                    <ul className="book_tag_list">
-                                                        <li>
-                                                            <span className="sky">
-                                                                오늘의 선택
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="green">
-                                                                무료배송
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="orange">
-                                                                이벤트
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span className="pink">
-                                                                소득공제
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                    <strong className="book_info_title">
-                                                        가면산장 살인사건
-                                                    </strong>
-                                                    <p className="author">
-                                                        히가시노 게이고 저자(글)
-                                                        &#183; 김난주 번역
-                                                    </p>
-                                                    <p>
-                                                        재인&#183; 2014년 09월
-                                                        26일
-                                                    </p>
-                                                    <div className="pay">
-                                                        <em>10%</em>
-                                                        <strong>15,120</strong>
-                                                        원<span>16,800원</span>
-                                                    </div>
-                                                    <span className="star_grade">
-                                                        9.4
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span className="speaker">
-                                                내일 (7/8, 토)
-                                            </span>
-                                            도착 예정
-                                        </td>
-                                        <td>
-                                            <button className="white_btn w_156">
-                                                장바구니
-                                            </button>
-                                            <button className="blue_btn w_156 martop_10">
-                                                바로구매
-                                            </button>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <span className="speaker">
+                                                    내일 ({getShipDate()})
+                                                </span>
+                                                도착 예정
+                                            </td>
+                                            <td>
+                                                <button
+                                                    onClick={() =>
+                                                        addCartItems(book)
+                                                    }
+                                                    className="white_btn w_156"
+                                                >
+                                                    장바구니
+                                                </button>
+                                                <button
+                                                    onClick={() =>
+                                                        buyBooks(book)
+                                                    }
+                                                    className="blue_btn w_156 martop_10"
+                                                >
+                                                    바로구매
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             ) : (
-                <NoSearch />
+                <NoSearch keyword={keyword} />
             )}
         </div>
     );
 };
 
 export default Search;
+
+const PickTag = ({ num }) => {
+    const idx = num % 3;
+    switch (idx) {
+        case 0:
+            return (
+                <ul className="book_tag_list">
+                    <li>
+                        <span className="sky">오늘의 선택</span>
+                    </li>
+                    <li>
+                        <span className="green">MD의 선택</span>
+                    </li>
+                    <li>
+                        <span className="orange">이벤트</span>
+                    </li>
+                </ul>
+            );
+        case 1:
+            return (
+                <ul className="book_tag_list">
+                    <li>
+                        <span className="sky">오늘의 선택</span>
+                    </li>
+                    <li>
+                        <span className="green">무료배송</span>
+                    </li>
+                    <li>
+                        <span className="yellow">사은품</span>
+                    </li>
+                    <li>
+                        <span className="orange">이벤트</span>
+                    </li>
+                    <li>
+                        <span className="pink">소득공제</span>
+                    </li>
+                </ul>
+            );
+        default:
+            return (
+                <ul className="book_tag_list">
+                    <li>
+                        <span className="sky">오늘의 선택</span>
+                    </li>
+                    <li>
+                        <span className="green">무료배송</span>
+                    </li>
+                    <li>
+                        <span className="orange">이벤트</span>
+                    </li>
+                    <li>
+                        <span className="pink">소득공제</span>
+                    </li>
+                </ul>
+            );
+    }
+};

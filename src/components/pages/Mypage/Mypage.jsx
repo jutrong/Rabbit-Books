@@ -3,14 +3,20 @@ import { useEffect, useState } from 'react';
 import MypageUser from './MypageUser';
 import MypageEmpty from './MypageEmpty';
 import MypageOrder from './MypageOrder';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getSaveToken } from '../../../utils';
 
 const Mypage = () => {
+    const navigate = useNavigate();
+    const getToken = getSaveToken();
     const { tab } = useParams();
     const [selectTab, setSelectTab] = useState(0);
     const onTabSelect = (num) => {
         setSelectTab(num);
     };
+    useEffect(() => {
+        if (!getToken) navigate('/');
+    }, [navigate, getToken]);
     useEffect(() => {
         setSelectTab(Number(tab));
     }, [tab]);
@@ -21,6 +27,11 @@ const Mypage = () => {
         { id: 3, text: '포인트 조회' },
         { id: 4, text: '배송지 관리' },
     ]);
+
+    if (!getToken) {
+        return null;
+    }
+
     return (
         <div className="mypage_container con_wrap">
             <div className="mypage_status">

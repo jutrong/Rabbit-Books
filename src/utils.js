@@ -1,7 +1,39 @@
-export const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+export const SERVER_URL =
+    import.meta.env.VITE_SERVER_URL || 'http://kdt-sw-5-team05.elicecoding.com';
 const LOGIN_ID = 'loginId';
 const JOIN_NAME = 'joinName';
 const LOGIN_TOKEN = 'token';
+const BASKET_KEY = 'cart';
+
+// 장바구니 아이템 넣기
+export const setCartItems = (items, quantity = 1) => {
+    items.quantity = quantity; // 기본적으로 1개씩 담긴다.
+    const { name } = items;
+    const cartArr = getCartItems(); // 기존에 담긴 장바구니 호출
+    const isData = cartArr.find((book) => book.name === name);
+    if (isData) {
+        // 기존에 담아둔 책이 있으면 수량만 추가
+        const newCart = cartArr.map((book) =>
+            book.name === name
+                ? { ...book, quantity: book.quantity + quantity }
+                : book,
+        );
+        localStorage.setItem(BASKET_KEY, JSON.stringify(newCart)); // 저장
+    } else {
+        // 기존에 담아둔 책이 없으면 새로 추가
+        cartArr.push(items); // 기존에 담긴 장바구니에 아이템 추가
+        localStorage.setItem(BASKET_KEY, JSON.stringify(cartArr)); // 저장
+    }
+};
+
+// 장바구니 아이템 가져오기
+export const getCartItems = () => {
+    const json = localStorage.getItem(BASKET_KEY); // 장바구니 아이템 localstorage 호출
+    return json ? JSON.parse(json) : []; // 장바구니가 비었으면 빈 배열 return
+};
+
+// 장바구니 아이템 지우기
+export const removeCartItems = () => localStorage.removeItem(BASKET_KEY);
 
 // 로그인 시 아이디 저장을 체크했을 경우 이메일(아이디) 저장
 export const setSaveId = (value) => localStorage.setItem(LOGIN_ID, value);
@@ -13,10 +45,29 @@ export const getSaveId = () => localStorage.getItem(LOGIN_ID);
 export const removeSaveId = () => localStorage.removeItem(LOGIN_ID);
 
 // 로그인 시 jwt 토큰을 로컬스토리지에 저장
-export const setSaveToken = (jwt) => localStorage.setItem(LOGIN_TOKEN, jwt);
+export const setSaveToken = (jwt) => {
+    const EXPIRE_TIME = 1000 * 60 * 60; // 만료시간 1시간
+    const obj = {
+        token: jwt,
+        expire: Date.now() + EXPIRE_TIME,
+    };
+    localStorage.setItem(LOGIN_TOKEN, JSON.stringify(obj));
+};
 
 // 토큰 가져오기(ex.로그인/로그아웃 체크 용)
-export const getSaveToken = () => localStorage.getItem(LOGIN_TOKEN);
+export const getSaveToken = () => {
+    const json = localStorage.getItem(LOGIN_TOKEN);
+    if (json) {
+        const obj = JSON.parse(json);
+        if (Date.now() > obj.expire) {
+            return '';
+        } else {
+            return obj.token;
+        }
+    } else {
+        return '';
+    }
+};
 
 // 로그아웃 시 jwt 토큰을 로컬스토리지에 삭제
 export const removeToken = () => localStorage.removeItem(LOGIN_TOKEN);
@@ -89,4 +140,28 @@ export const emailChk = (email) => {
     const emailRegex =
         /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     return emailRegex.test(email);
+};
+
+/**
+ * 가격과 할인률을 입력하면 계산되어 return
+ * @param {number} price
+ * @param {number} per
+ * @returns
+ */
+export const disCount = (price, per = 10) => {
+    return Number.isInteger(Number(price))
+        ? Math.floor(price - price / per)
+        : price;
+};
+
+/**
+ * 한국 화폐 표기법(세자리마다 콤마)으로 return
+ * 1000000 -> 1,000,000
+ * @param {number} price
+ * @returns
+ */
+export const priceFormat = (price) => {
+    return Number.isInteger(Number(price))
+        ? price.toLocaleString('ko-KR')
+        : price;
 };

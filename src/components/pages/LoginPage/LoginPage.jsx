@@ -63,8 +63,7 @@ const Login = () => {
         const json = await postFetch(`${SERVER_URL}/api/auth/login`, data);
 
         if (json?.error) {
-            alert('로그인 도중 오류가 발생했습니다');
-            console.warn(json.error);
+            alert(json.error);
         } else if (json) {
             // 이메일(아이디) 저장 체크용
             if (idSave) setSaveId(email);
@@ -73,7 +72,6 @@ const Login = () => {
                     removeSaveId();
                 }
             }
-            console.log(json);
             // 서버에서 전달받은 토큰을 로컬에 저장
             setSaveToken(json);
 
@@ -90,7 +88,6 @@ const Login = () => {
                 <h1 className="main_logo">
                     <Link to="/">
                         <img src={loginLogo} alt="로고" />
-                        <p>토끼 책방</p>
                     </Link>
                 </h1>
             </div>

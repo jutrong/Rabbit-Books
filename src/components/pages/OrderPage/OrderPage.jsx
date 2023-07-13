@@ -3,34 +3,36 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import radioOn from '../../../assets/images/icons/radio_on.png';
 import radioOff from '../../../assets/images/icons/radio_off.png';
+import { getCartItems, priceFormat } from '../../../utils';
 
 const Order = () => {
     const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
 
     useEffect(() => {
-    //   fetch('http://kdt-sw-5-team05.elicecoding.com/orders', {
-    //         method: 'post',
-    //         headers: {
-    //        'Content-Type': 'application/json; charset=UTF-8',
-    //        authorization: token ${getSaveToken()},
-    //    },
-    //         body: JSON.stringify({
-                
-    //         }),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             if (res.success) {
-    //                 alert('저장완료');
-    //             }
-    //         });
+        //   fetch('http://kdt-sw-5-team05.elicecoding.com/orders', {
+        //         method: 'post',
+        //         headers: {
+        //        'Content-Type': 'application/json; charset=UTF-8',
+        //        authorization: token ${getSaveToken()},
+        //    },
+        //         body: JSON.stringify({
+
+        //         }),
+        //     })
+        //         .then((res) => res.json())
+        //         .then((res) => {
+        //             if (res.success) {
+        //                 alert('저장완료');
+        //             }
+        //         });
         // 로컬스토리지에서 cart 가져오기
-        const storedCartData = localStorage.getItem('cart');
-        if (storedCartData) {
-            const parsedCartData = JSON.parse(storedCartData);
-            setCartData(parsedCartData);
-        }
+        setCartData(getCartItems());
+        // const storedCartData = localStorage.getItem('cart');
+        // if (storedCartData) {
+        //     const parsedCartData = JSON.parse(storedCartData);
+        //     setCartData(parsedCartData);
+        // }
     }, []);
     const totalAmount = cartData.reduce(
         (accumulator, item) => accumulator + item.price * item.quantity,
@@ -119,7 +121,7 @@ const Order = () => {
                         <div className="sidebar_container">
                             <div className="price">
                                 <span>상품금액</span>
-                                <span>{totalAmount.toLocaleString()}원</span>
+                                <span>{priceFormat(totalAmount)}원</span>
                             </div>
                             <div className="delivery_fee">
                                 <span>배송비</span>
@@ -135,9 +137,7 @@ const Order = () => {
                             </div>
                             <div className="final_fee">
                                 <span>최종결제금액</span>
-                                <span>
-                                    {(totalAmount + 3000).toLocaleString()}원
-                                </span>
+                                <span>{priceFormat(totalAmount + 3000)}원</span>
                             </div>
                             <button className="blue_btn w_276">결제하기</button>
                         </div>
@@ -155,7 +155,7 @@ const OrderProduct = ({ item }) => {
                 <p>{item.name}</p>
                 <p>토끼책방배송</p>
                 <p>{item.quantity}개</p>
-                <p>{item.price.toLocaleString()}원</p>
+                <p>{priceFormat(item.price)}원</p>
             </div>
         </div>
     );

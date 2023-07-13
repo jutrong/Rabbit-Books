@@ -1,16 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getSaveToken, removeToken } from '../../../utils';
+import { getCartItems, getSaveToken, removeToken } from '../../../utils';
 
 const Header = () => {
     const navigate = useNavigate();
+    const [cartNew, setCartNew] = useState(getCartItems());
     const [token, setToken] = useState(getSaveToken() ? getSaveToken() : '');
+    const [keyword, setKeyword] = useState('');
     const onLogout = () => {
         removeToken();
         setToken('');
         alert('로그아웃 되었습니다');
         navigate('/'); // 로그아웃 시 메인 이동
     };
+
+    const goMypage = (tab) => {
+        if (token) {
+            navigate(`/mypage/${tab}`);
+        } else {
+            alert('로그인이 필요한 서비스입니다');
+            navigate(`/login`);
+        }
+    };
+
+    const goSearch = (e) => {
+        e.preventDefault();
+
+        if (keyword.length > 1) {
+            navigate(`/search/${keyword}`);
+        } else {
+            alert('검색어는 최소 2자리 이상 입력하세요');
+        }
+    };
+
+    useEffect(() => {
+        let timer = setInterval(() => {
+            const getToken = getSaveToken();
+            if (token && !getToken) {
+                setToken('');
+            }
+            setCartNew(getCartItems());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [token]);
 
     return (
         <header>
@@ -43,33 +75,36 @@ const Header = () => {
                                 src="/src/assets/images/rabbit.png"
                                 alt="로고"
                             />
-                            <p>
-                                토끼
-                                <br />
-                                책방
-                            </p>
                         </Link>
                     </h1>
 
                     <div className="inp_search_wrap">
-                        <input
-                            type="text"
-                            placeholder="검색어를 입력 해주세요"
-                        />
-                        <button type="button" className="search_btn">
-                            <span className="hide">검색</span>
-                        </button>
+                        <form onSubmit={goSearch}>
+                            <input
+                                type="text"
+                                placeholder="검색어를 입력 해주세요"
+                                value={keyword}
+                                onChange={(e) => setKeyword(e.target.value)}
+                            />
+                            <button type="submit" className="search_btn">
+                                <span className="hide">검색</span>
+                            </button>
+                        </form>
                     </div>
 
                     <ul className="move_list">
-                        <li className="basket new">
+                        <li
+                            className={
+                                cartNew.length > 0 ? 'basket new' : 'basket'
+                            }
+                        >
                             <Link to="/cart"></Link>
                         </li>
                         <li className="my">
-                            <Link to="/mypage/0"></Link>
+                            <a onClick={() => goMypage(0)}></a>
                         </li>
                         <li className="delivery">
-                            <Link to="/mypage/1"></Link>
+                            <a onClick={() => goMypage(1)}></a>
                         </li>
                     </ul>
                 </div>
@@ -78,7 +113,11 @@ const Header = () => {
             <div className="gnb_menu">
                 <ul className="gnb_bar con_wrap">
                     <li>
-                        <button type="button" className="gnb category">
+                        <button
+                            type="button"
+                            className="gnb category"
+                            onClick={() => navigate('/productlist')}
+                        >
                             카테고리
                         </button>
                         <div className="sub_nav">
@@ -126,7 +165,7 @@ const CreateGnbMenus = () => {
         {
             id: 'korBooks',
             gnbCategory: '국내도서',
-            target: '#',
+            target: '/productlist?category=kor',
             menus: [
                 { name: '소설', target: '#' },
                 { name: '시/에세이', target: '#' },
@@ -162,7 +201,7 @@ const CreateGnbMenus = () => {
         {
             id: 'westernBooks',
             gnbCategory: '서양도서',
-            target: '#',
+            target: 'productlist?category=west',
             menus: [
                 { name: '문학', target: '#' },
                 { name: '취미/실용/여행', target: '#' },

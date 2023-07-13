@@ -22,14 +22,15 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="style" element={<Style />} />
                 <Route path="list" element={<List />} />
+                <Route path="search/:keyword" element={<Search />} />
                 <Route path="search" element={<Search />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="mypagePw" element={<MypagePw />} />
                 {/* <Route path="mypage" element={<Mypage />} /> */}
                 <Route path="mypage/:tab" element={<Mypage />} />
                 <Route path="order" element={<Order />} />
-                <Route path="productlist" element={<ProductList />} />
                 <Route path="productlist/:id" element={<ProductInfo />} />
+                <Route path="productlist" element={<ProductList />} />
                 <Route path="ordercheck" element={<OrderCheck />} />
             </Route>
             <Route path="/login" element={<Login />} />

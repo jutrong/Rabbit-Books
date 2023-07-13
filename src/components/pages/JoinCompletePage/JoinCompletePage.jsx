@@ -21,7 +21,6 @@ const JoinComplete = () => {
                 <h1 className="main_logo">
                     <a href="#none">
                         <img src={loginLogo} alt="로고" />
-                        <p>토끼 책방</p>
                     </a>
                 </h1>
             </div>

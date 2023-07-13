@@ -1,9 +1,9 @@
 import './ProductInfo.scss';
 import { useNavigate, useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import zoom from '../../../assets/images/icons/icon_guide01.png';
 import cart from '../../../assets/images/icons/icon_cart.png';
-import { SERVER_URL } from '../../../utils';
+import { SERVER_URL, priceFormat, setCartItems } from '../../../utils';
 
 const ProductInfo = () => {
     const [book, setBook] = useState({});
@@ -15,7 +15,6 @@ const ProductInfo = () => {
         fetch(`http://kdt-sw-5-team05.elicecoding.com/api/products/${id}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 setBook(data);
             });
     }, [id]);
@@ -61,22 +60,23 @@ const ProductInfo = () => {
             stock: book.stock,
             _id: book._id,
         };
-        // 로컬스토리지에서 기존의 카트 아이템을 가져오기
-        const existingCartItems = localStorage.getItem('cart');
-        let cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
+        setCartItems(cartItem, quantity);
+        // // 로컬스토리지에서 기존의 카트 아이템을 가져오기
+        // const existingCartItems = localStorage.getItem('cart');
+        // let cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
 
-        // 이미 카트에 있는 상품인 경우 수량 업데이트 또는 카트에 추가
-        const existingCartItem = cartItems.find(
-            (item) => item._id === cartItem._id,
-        );
-        if (existingCartItem) {
-            existingCartItem.quantity += quantity;
-        } else {
-            cartItems.push(cartItem);
-        }
+        // // 이미 카트에 있는 상품인 경우 수량 업데이트 또는 카트에 추가
+        // const existingCartItem = cartItems.find(
+        //     (item) => item._id === cartItem._id,
+        // );
+        // if (existingCartItem) {
+        //     existingCartItem.quantity += quantity;
+        // } else {
+        //     cartItems.push(cartItem);
+        // }
 
-        // 업데이트된 카트 아이템을 로컬스토리지에 저장
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+        // // 업데이트된 카트 아이템을 로컬스토리지에 저장
+        // localStorage.setItem('cart', JSON.stringify(cartItems));
 
         // 카트 페이지로 이동
         navigate('/cart');
@@ -108,7 +108,7 @@ const ProductInfo = () => {
                 </p>
                 <p className="price">
                     <span>💰</span>
-                    {book.price}
+                    {priceFormat(book.price)}원
                 </p>
                 <div className="delivery_info">
                     <p>배송정보</p>
@@ -146,12 +146,14 @@ const ProductInfo = () => {
                                 <i></i>
                             </button>
                         </div>
-                        <div className="count_price">{book.price}원</div>
+                        <div className="count_price">
+                            {priceFormat(book.price)}원
+                        </div>
                     </div>
                 </div>
                 <p className="all_price">
                     합계
-                    <span>{(book.price * quantity).toLocaleString()}원</span>
+                    <span>{priceFormat(book.price * quantity)}원</span>
                 </p>
                 <div className="order_box">
                     <button className="goCart" onClick={saveToLocalStorage}>

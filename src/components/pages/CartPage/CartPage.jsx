@@ -2,38 +2,30 @@ import './CartPage.scss';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoCart from './NoCartPage';
+import {
+    SERVER_URL,
+    disCount,
+    getCartItems,
+    priceFormat,
+} from '../../../utils';
 // import { SERVER_URL } from '../../../utils';
 
 const Cart = () => {
     const navigate = useNavigate();
-    const [isData, setIsData] = useState(false);
     const [cartItems, setCartItems] = useState([]);
-    const [selectAll, setSelectAll] = useState(true);
-    const [quantity] = useState(1);
+    const [selectAll, setSelectAll] = useState(false);
 
     useEffect(() => {
-        // 로컬 스토리지에서 저장된 카트 아이템을 가져와서 초기화
-        const storedCartItems = localStorage.getItem('cart');
-        if (storedCartItems) {
-            const parsedCartItems = JSON.parse(storedCartItems);
-            // quantity 속성이 없는 경우 추가하여 저장
-            const updatedCartItems = parsedCartItems.map((item) => {
-                if (!item.hasOwnProperty('quantity')) {
-                    return { ...item, quantity: 1 };
-                }
-                return item;
+        let cartItems = getCartItems();
+        if (cartItems.length > 0) {
+            cartItems.map((item) => {
+                return { ...item, checked: false };
             });
-            setCartItems(updatedCartItems);
-            setIsData(true);
-        } else if (setIsData(false)) {
-            localStorage.removeItem('cart');
         }
-    }, [isData]);
+        setCartItems(cartItems);
+    }, []);
 
     const goOrder = () => {
-        navigate('/order');
-    };
-    const navigateToOrder = () => {
         navigate('/order');
     };
 
@@ -50,11 +42,6 @@ const Cart = () => {
                 return item._id !== itemId;
             }),
         );
-        // 카트가 비어있으면 로컬 스토리지도 초기화
-        // if (cartItems.length === 0) {
-        //     setIsData(false);
-        //     localStorage.clear();
-        // }
 
         if (
             localStorage.getItem('cart') === null ||
@@ -105,7 +92,6 @@ const Cart = () => {
         setCartItems([]);
 
         localStorage.clear();
-        setIsData(false);
     };
     const deleteChecked = () => {
         // 선택된 상품의 id 배열 가져오기
@@ -118,8 +104,6 @@ const Cart = () => {
             (item) => !selectedIds.includes(item._id),
         );
         if (updatedItems.length === 0) {
-            // 로컬 스토리지를 비움
-            setIsData(false);
             localStorage.clear();
         } else {
             localStorage.setItem('cart', JSON.stringify(updatedItems));
@@ -162,12 +146,13 @@ const Cart = () => {
             totalPrice += book.price * book.quantity;
             totalCount += book.quantity;
         }
+        totalPrice = disCount(totalPrice);
         return { totalPrice, totalCount };
     };
     const { totalPrice, totalCount } = calculateTotalPrice();
     return (
         <div className="cart con_wrap">
-            {isData ? (
+            {cartItems.length > 0 ? (
                 <div className="cart_container">
                     <div className="title_box">
                         <strong className="sub_title">장바구니</strong>
@@ -219,8 +204,6 @@ const Cart = () => {
                                             toggleCheckbox={toggleCheckbox}
                                             handleAdd={handleAdd}
                                             handleMinus={handleMinus}
-                                            navigateToOrder={navigateToOrder}
-                                            quantity={quantity}
                                         />
                                     ))}
                                 </tbody>
@@ -260,7 +243,9 @@ const Cart = () => {
                                                 <div className="order_box">
                                                     <strong>
                                                         <em>
-                                                            {totalPrice.toLocaleString()}
+                                                            {priceFormat(
+                                                                totalPrice,
+                                                            )}
                                                         </em>
                                                         원
                                                     </strong>
@@ -283,10 +268,10 @@ const Cart = () => {
                                                 <div className="order_box">
                                                     <strong>
                                                         <em>
-                                                            {(
+                                                            {priceFormat(
                                                                 totalPrice +
-                                                                3000
-                                                            ).toLocaleString()}
+                                                                    3000,
+                                                            )}
                                                         </em>
                                                         원
                                                     </strong>
@@ -319,8 +304,6 @@ const Tablerow = ({
     toggleCheckbox,
     handleAdd,
     handleMinus,
-    navigateToOrder,
-    quantity,
 }) => {
     const handleCheckbox = (event) => {
         const checkbox = event.target;
@@ -349,7 +332,7 @@ const Tablerow = ({
             <td>
                 <div className="book_info_box">
                     <img
-                        src={item.imgPath}
+                        src={SERVER_URL + item.imgPath}
                         alt="책 이미지"
                         onClick={navigateToDetailPage}
                     />
@@ -360,9 +343,9 @@ const Tablerow = ({
                         <div className="pay">
                             <em>10%</em>
                             <strong>
-                                {((item.price * 9) / 10).toLocaleString()}
+                                {priceFormat((item.price * 9) / 10)}
                             </strong>
-                            원<span>{item.price.toLocaleString()}</span>
+                            원<span>{priceFormat(item.price)}</span>
                         </div>
                     </div>
                     <button
@@ -405,13 +388,13 @@ const Tablerow = ({
             </td>
             <td>
                 <strong className="amount">
-                    {(item.price * item.quantity).toLocaleString()}
+                    {priceFormat(disCount(item.price * item.quantity))}
                 </strong>
             </td>
             <td>
                 <span className="speaker">7월 10일(월)</span>
                 도착 예정
-                <p className="delivery_fee">3,000원</p>
+                <p className="delivery_fee">{priceFormat(3000)}원</p>
             </td>
         </tr>
     );

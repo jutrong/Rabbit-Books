@@ -6,6 +6,12 @@
 
         em {
             color: #4d47c3;
+            display: inline-block;
+            max-width: calc(100% - 353px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            vertical-align: bottom;
         }
         span {
             display: inline-block;

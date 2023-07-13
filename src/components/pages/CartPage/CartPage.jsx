@@ -10,6 +10,7 @@ const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [selectAll, setSelectAll] = useState(true);
     const [quantity] = useState(1);
+    const [value] = useState();
 
     useEffect(() => {
         // 로컬 스토리지에서 저장된 카트 아이템을 가져와서 초기화
@@ -30,7 +31,8 @@ const Cart = () => {
             localStorage.clear();
             setIsData(false);
         }
-    }, [isData]);
+   
+    }, []);
 
     const goOrder = () => {
         navigate('/order');
@@ -200,6 +202,7 @@ const Cart = () => {
                                                 id="checkAll"
                                                 onChange={checkAll}
                                                 checked={selectAll}
+                                                value={value || ''}
                                             />
                                             <label
                                                 htmlFor="checkAll"
@@ -223,6 +226,7 @@ const Cart = () => {
                                             handleMinus={handleMinus}
                                             navigateToOrder={navigateToOrder}
                                             quantity={quantity}
+                                            value={value}
                                         />
                                     ))}
                                 </tbody>
@@ -321,7 +325,9 @@ const Tablerow = ({
     toggleCheckbox,
     handleAdd,
     handleMinus,
+    value
 }) => {
+
     const handleCheckbox = (event) => {
         const checkbox = event.target;
         const checked = checkbox.checked;
@@ -339,6 +345,7 @@ const Tablerow = ({
                     type="checkbox"
                     name="inpChk"
                     className="ch_check hide individual"
+                    value={value || ''}
                     id={item._id}
                     checked={item.checked}
                     onChange={handleCheckbox}

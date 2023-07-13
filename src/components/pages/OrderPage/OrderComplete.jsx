@@ -3,7 +3,6 @@ import joinBg from '../../../assets/images/event4.png';
 import { Link, useNavigate } from 'react-router-dom';
 import './OrderComplete.scss';
 
-
 const OrderComplete = () => {
     const navigate = useNavigate();
     const routeToProductlist = () => {
@@ -15,7 +14,6 @@ const OrderComplete = () => {
                 <h1 className="main_logo">
                     <a href="#none">
                         <img src={loginLogo} alt="로고" />
-                        <p>토끼 책방</p>
                     </a>
                 </h1>
             </div>
@@ -23,11 +21,11 @@ const OrderComplete = () => {
                 <h2>
                     <span>주문이 완료되었습니다 🤝</span>
                 </h2>
-                <p>홈페이지로 이동</p>
+                <p> 감사합니다</p>
                 <Link to="/" className="blue_btn" onClick={routeToProductlist}>
-                    이동
+                    홈페이지로 이동
                 </Link>
-                <img src={joinBg}  alt="주문완료 이미지" />
+                <img src={joinBg} alt="주문완료 이미지" />
             </div>
         </div>
     );

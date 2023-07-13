@@ -12,7 +12,7 @@ const ProductInfo = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://kdt-sw-5-team05.elicecoding.com/api/products/${id}`)
+        fetch(`${SERVER_URL}/api/products/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setBook(data);

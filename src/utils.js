@@ -113,6 +113,7 @@ export const postFetch = async (url, body) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
+            authorization: `token ${getSaveToken()}`,
         },
         body: JSON.stringify(body), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
     });

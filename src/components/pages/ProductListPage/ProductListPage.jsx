@@ -28,14 +28,14 @@ const ProductList = () => {
         if (category === 'kor' || category === 'west') {
             // 카테고리가 있으면 접근한 카테고리 책들만 보여준다.
             const data = await getFetch(
-                `http://kdt-sw-5-team05.elicecoding.com/api/products?keyword=${category}`,
+                `${SERVER_URL}/api/products?keyword=${category}`,
             );
             setBooks(data);
         } else {
             // 카테고리가 없으면 전부 보여준다
             for (let i = 0; i < defaultCategory.length; i++) {
                 const data = await getFetch(
-                    `http://kdt-sw-5-team05.elicecoding.com/api/products?keyword=${defaultCategory[i]}`,
+                    `${SERVER_URL}/api/products?keyword=${defaultCategory[i]}`,
                 );
                 setBooks((prev) => [...prev, ...data]);
             }

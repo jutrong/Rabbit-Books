@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { getSaveToken } from '../../../utils';
+import { useState, useEffect, useCallback } from 'react';
+import { SERVER_URL, getFetch, getSaveToken } from '../../../utils';
 
 const MypageOrder = () => {
     const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        fetch(`http://kdt-sw-5-team05.elicecoding.com/api/orders`, {
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                authorization: `token ${getSaveToken()}`,
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setItems(data);
-                console.log(data);
-
-            });
+    const getMyOrders = useCallback(async () => {
+        const json = await getFetch(`${SERVER_URL}/api/orders`);
+        setItems(json);
+        console.log(json);
     }, []);
-
+    useEffect(() => {
+        getMyOrders();
+        // fetch(, {
+        //     method: 'get',
+        //     headers: {
+        //         'Content-Type': 'application/json; charset=UTF-8',
+        //         authorization: `token ${getSaveToken()}`,
+        //     },
+        // })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         setItems(data);
+        //         console.log(data);
+        //     });
+    }, [getMyOrders]);
 
     const cancelData = (itemId) => {
-        fetch(`http://kdt-sw-5-team05.elicecoding.com/api/orders/${itemId}`, {
+        fetch(`${SERVER_URL}/api/orders/${itemId}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
@@ -88,8 +92,11 @@ const OrderBook = ({ item, cancelData }) => {
             {item.products.map((product) => (
                 <tr className="orderBooks" key={product._id}>
                     <td>
-                        <div className="book_info_box" >
-                            <img src={product.img} alt="책 이미지" />
+                        <div className="book_info_box">
+                            <img
+                                src={SERVER_URL + product.img}
+                                alt="책 이미지"
+                            />
                             <div className="book_info">
                                 <ul className="book_tag_list">
                                     {/* <li>

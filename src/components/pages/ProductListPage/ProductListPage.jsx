@@ -16,11 +16,12 @@ const ProductList = () => {
             .then((res) => res.json())
             .then((data) => {
                 setBooks(data);
-                // const initialBooks = data.map((book) => ({
-                //     ...book,
-                //     checked: false,
-                // }));
-                // setBooks(initialBooks);
+                const initialBooks = data.map((book) => ({
+                    ...book,
+                    quantity: 1,
+                    checked: false,
+                }));
+                setBooks(initialBooks);
             });
     }, []);
 

@@ -3,39 +3,70 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import radioOn from '../../../assets/images/icons/radio_on.png';
 import radioOff from '../../../assets/images/icons/radio_off.png';
+import { getSaveToken } from '../../../utils';
+import { SERVER_URL } from '../../../utils';
 
 const Order = () => {
     const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
+    const [address] = useState(
+        '[04799] 서울특별시 성동구 아차산로17길 48 (성수동2가, 성수 SK V1 CENTER I) 엘리스랩',
+    );
+    const [phone] = useState('01012341234');
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
-    //   fetch('http://kdt-sw-5-team05.elicecoding.com/orders', {
-    //         method: 'post',
-    //         headers: {
-    //        'Content-Type': 'application/json; charset=UTF-8',
-    //        authorization: token ${getSaveToken()},
-    //    },
-    //         body: JSON.stringify({
-                
-    //         }),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             if (res.success) {
-    //                 alert('저장완료');
-    //             }
-    //         });
         // 로컬스토리지에서 cart 가져오기
         const storedCartData = localStorage.getItem('cart');
         if (storedCartData) {
             const parsedCartData = JSON.parse(storedCartData);
             setCartData(parsedCartData);
+
+            const calculatedTotalPrice = parsedCartData.reduce(
+                (accumulator, item) => accumulator + item.price * item.quantity,
+                0,
+            );
+            setTotalPrice(calculatedTotalPrice);
         }
     }, []);
-    const totalAmount = cartData.reduce(
-        (accumulator, item) => accumulator + item.price * item.quantity,
-        0,
-    );
+    const handleSubmitOrder = () => {
+        const orderData = cartData.map((item) => ({
+            _id: item._id,
+            name: item.name,
+            price: item.price,
+            categoryName: item.categoryName,
+            author: item.author,
+            quantity: item.quantity,
+        }));
+
+        fetch('http://kdt-sw-5-team05.elicecoding.com/api/orders', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                authorization: `token ${getSaveToken()}`,
+            },
+            body: JSON.stringify({
+                products: orderData,
+                address: address,
+                phone: phone,
+                totalPrice: totalPrice.toString(),
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                navigate('/mypage/1')
+            })
+            .catch((error) => {
+                console.error('Error submitting order:', error);
+                // 주문 실패 시 처리할 로직 작성
+            });
+    };
+
+    // const totalPrice = cartData.reduce(
+    //     (accumulator, item) => accumulator + item.price * item.quantity,
+    //     0,
+    // );
     const totalNumber = cartData.reduce(
         (total, item) => total + item.quantity,
         0,
@@ -54,7 +85,7 @@ const Order = () => {
                                 </div>
                                 <div className="info_right">
                                     <p>엘리스랩</p>
-                                    <span>토깽이 / 010-1234-1234</span>
+                                    <span>토깽이 / {phone}</span>
                                     <span className="address">
                                         [04799] 서울특별시 성동구 아차산로17길
                                         48 (성수동2가, 성수 SK V1 CENTER I)
@@ -119,7 +150,7 @@ const Order = () => {
                         <div className="sidebar_container">
                             <div className="price">
                                 <span>상품금액</span>
-                                <span>{totalAmount.toLocaleString()}원</span>
+                                <span>{totalPrice.toLocaleString()}원</span>
                             </div>
                             <div className="delivery_fee">
                                 <span>배송비</span>
@@ -136,10 +167,15 @@ const Order = () => {
                             <div className="final_fee">
                                 <span>최종결제금액</span>
                                 <span>
-                                    {(totalAmount + 3000).toLocaleString()}원
+                                    {(totalPrice + 3000).toLocaleString()}원
                                 </span>
                             </div>
-                            <button className="blue_btn w_276">결제하기</button>
+                            <button
+                                className="blue_btn w_276"
+                                onClick={handleSubmitOrder}
+                            >
+                                결제하기
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -151,7 +187,7 @@ const OrderProduct = ({ item }) => {
     return (
         <div className="product_box">
             <div className="product_content">
-                <img src={item.imgPath} alt="주문책" />
+                <img src={`${SERVER_URL}${item.imgPath}`} alt="주문책" />
                 <p>{item.name}</p>
                 <p>토끼책방배송</p>
                 <p>{item.quantity}개</p>

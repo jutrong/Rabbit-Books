@@ -39,8 +39,21 @@ const ProductInfo = () => {
         const existingCartItems = localStorage.getItem('cart');
         let cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
 
-        // 새로운 주문 데이터를 카트 아이템에 추가
-        cartItems.push(orderData);
+        let itemExists = false;
+
+        // 동일한 _id 값을 가진 상품을 찾아 quantity를 증가시킴
+        cartItems = cartItems.map((item) => {
+            if (item._id === orderData._id) {
+                item.quantity += orderData.quantity;
+                itemExists = true;
+            }
+            return item;
+        });
+
+        // 동일한 _id 값을 가진 상품이 없으면 새로운 상품으로 추가
+        if (!itemExists) {
+            cartItems.push(orderData);
+        }
 
         // 업데이트된 카트 아이템을 로컬스토리지에 저장
         localStorage.setItem('cart', JSON.stringify(cartItems));
@@ -57,7 +70,7 @@ const ProductInfo = () => {
             name: book.name,
             price: book.price,
             publishData: book.publishData,
-            quantity: book.quantity,
+            quantity: quantity,
             stock: book.stock,
             _id: book._id,
         };

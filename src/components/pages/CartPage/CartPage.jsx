@@ -2,7 +2,7 @@ import './CartPage.scss';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoCart from './NoCartPage';
-// import { SERVER_URL } from '../../../utils';
+import { SERVER_URL } from '../../../utils';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -17,6 +17,7 @@ const Cart = () => {
         if (storedCartItems) {
             const parsedCartItems = JSON.parse(storedCartItems);
             // quantity 속성이 없는 경우 추가하여 저장
+
             const updatedCartItems = parsedCartItems.map((item) => {
                 if (!item.hasOwnProperty('quantity')) {
                     return { ...item, quantity: 1 };
@@ -25,8 +26,9 @@ const Cart = () => {
             });
             setCartItems(updatedCartItems);
             setIsData(true);
-        } else if (setIsData(false)) {
-            localStorage.removeItem('cart');
+        } else if (storedCartItems === null || '') {
+            localStorage.clear();
+            setIsData(false);
         }
     }, [isData]);
 
@@ -38,6 +40,7 @@ const Cart = () => {
     };
 
     const removeProduct = (itemId) => {
+
         // // 로컬 스토리지에서 항목 삭제
         const deleteItem = cartItems.filter(
             (cartItem) => cartItem._id !== itemId,
@@ -50,21 +53,18 @@ const Cart = () => {
                 return item._id !== itemId;
             }),
         );
-        // 카트가 비어있으면 로컬 스토리지도 초기화
-        // if (cartItems.length === 0) {
-        //     setIsData(false);
-        //     localStorage.clear();
-        // }
 
         if (
             localStorage.getItem('cart') === null ||
             localStorage.getItem('cart') === ''
         ) {
             localStorage.removeItem('cart');
+            setIsData(false);
         }
     };
 
     const checkAll = () => {
+
         // 모든 아이템의 체크 상태 변경
         const updatedItems = cartItems.map((item) => ({
             ...item,
@@ -75,10 +75,12 @@ const Cart = () => {
     };
 
     const toggleCheckbox = (itemId, checked) => {
+
         // 이전 상태를 기반으로 새로운 배열생성
         setCartItems((prevItems) => {
             const updatedItems = prevItems.map((item) => {
                 if (item._id === itemId) {
+
                     //  현재 항목의 id가 매개변수로 전달된 itemId와 일치하는 경우
                     //  새로운 객체를 생성하여 checked 속성을 전달된 checked 값으로 업데이트
                     return {
@@ -319,8 +321,6 @@ const Tablerow = ({
     toggleCheckbox,
     handleAdd,
     handleMinus,
-    navigateToOrder,
-    quantity,
 }) => {
     const handleCheckbox = (event) => {
         const checkbox = event.target;
@@ -339,7 +339,6 @@ const Tablerow = ({
                     type="checkbox"
                     name="inpChk"
                     className="ch_check hide individual"
-                    value={item._id}
                     id={item._id}
                     checked={item.checked}
                     onChange={handleCheckbox}
@@ -349,7 +348,7 @@ const Tablerow = ({
             <td>
                 <div className="book_info_box">
                     <img
-                        src={item.imgPath}
+                        src={`${SERVER_URL}${item.imgPath}`}
                         alt="책 이미지"
                         onClick={navigateToDetailPage}
                     />
@@ -388,7 +387,7 @@ const Tablerow = ({
                     <input
                         type="number"
                         id="quantity"
-                        value={item.quantity}
+                        value={item.quantity  || ''}
                         readOnly
                     />
                     <button

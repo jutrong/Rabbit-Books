@@ -14,6 +14,7 @@ import MypagePw from './components/pages/MypagePwPage/MypagePwPage';
 import ProductList from './components/pages/ProductListPage/ProductListPage';
 import ProductInfo from './components/pages/ProductInfo/ProductInfo';
 import OrderCheck from './components/pages/OrderCheck/OrderCheck';
+import OrderComplete from './components/pages/OrderPage/OrderComplete';
 
 const App = () => {
     return (
@@ -36,6 +37,8 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />
             <Route path="/joinComplete" element={<JoinComplete />} />
+            <Route path="/orderComplete" element={<OrderComplete />} />
+
         </Routes>
     );
 };

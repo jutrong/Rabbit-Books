@@ -8,7 +8,6 @@ import {
     getCartItems,
     priceFormat,
 } from '../../../utils';
-// import { SERVER_URL } from '../../../utils';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -204,6 +203,9 @@ const Cart = () => {
                                             toggleCheckbox={toggleCheckbox}
                                             handleAdd={handleAdd}
                                             handleMinus={handleMinus}
+                                            goOrder={goOrder}
+                                            // quantity={quantity}
+                                            // value={value}
                                         />
                                     ))}
                                 </tbody>
@@ -304,6 +306,7 @@ const Tablerow = ({
     toggleCheckbox,
     handleAdd,
     handleMinus,
+    value,
 }) => {
     const handleCheckbox = (event) => {
         const checkbox = event.target;
@@ -322,7 +325,7 @@ const Tablerow = ({
                     type="checkbox"
                     name="inpChk"
                     className="ch_check hide individual"
-                    value={item._id}
+                    value={value || ''}
                     id={item._id}
                     checked={item.checked}
                     onChange={handleCheckbox}
@@ -332,7 +335,7 @@ const Tablerow = ({
             <td>
                 <div className="book_info_box">
                     <img
-                        src={SERVER_URL + item.imgPath}
+                        src={`${SERVER_URL}${item.imgPath}`}
                         alt="책 이미지"
                         onClick={navigateToDetailPage}
                     />
@@ -371,7 +374,7 @@ const Tablerow = ({
                     <input
                         type="number"
                         id="quantity"
-                        value={item.quantity}
+                        value={item.quantity || ''}
                         readOnly
                     />
                     <button

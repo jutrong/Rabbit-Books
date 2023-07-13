@@ -6,6 +6,7 @@ import {
     SERVER_URL,
     disCount,
     getCartItems,
+    getSaveToken,
     priceFormat,
 } from '../../../utils';
 
@@ -25,7 +26,7 @@ const Cart = () => {
     }, []);
 
     const goOrder = () => {
-        navigate('/order');
+        if (getSaveToken()) navigate('/order');
     };
 
     const removeProduct = (itemId) => {

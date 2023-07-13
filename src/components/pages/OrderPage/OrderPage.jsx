@@ -1,5 +1,5 @@
 import './OrderPage.scss';
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import radioOn from '../../../assets/images/icons/radio_on.png';
 import radioOff from '../../../assets/images/icons/radio_off.png';
@@ -7,9 +7,9 @@ import {
     SERVER_URL,
     getCartItems,
     getFetch,
-    getSaveToken,
     postFetch,
     priceFormat,
+    removeCartItems,
 } from '../../../utils';
 
 const Order = () => {
@@ -23,8 +23,8 @@ const Order = () => {
     const getMyInfo = useCallback(async () => {
         const json = await getFetch(`${SERVER_URL}/api/users/my-profile`);
         if (json?.error) {
-            alert('로그아웃 되었습니다');
-            navigate('/');
+            alert('로그인이 필요한 서비스입니다');
+            navigate('/login');
         } else {
             const { username: name, phone, address } = json;
             setUserName(name);
@@ -38,7 +38,13 @@ const Order = () => {
     }, [getMyInfo]);
 
     useEffect(() => {
-        setCartData(getCartItems());
+        const storedCartData = getCartItems();
+        setCartData(storedCartData);
+        const calculatedTotalPrice = storedCartData.reduce(
+            (accumulator, item) => accumulator + item.price * item.quantity,
+            0,
+        );
+        setTotalPrice(calculatedTotalPrice);
     }, []);
 
     const handleSubmitOrder = async () => {
@@ -51,7 +57,6 @@ const Order = () => {
             quantity: item.quantity,
             imgPath: item.imgPath,
         }));
-
         const data = {
             products: orderData,
             address: address,
@@ -60,13 +65,13 @@ const Order = () => {
         };
 
         const json = await postFetch(`${SERVER_URL}/api/orders`, data);
-        console.log(json);
         if (json?.reason) {
-            alert('로그아웃 되었습니다');
-            navigate('/');
+            alert('로그인이 필요한 서비스입니다');
+            navigate('/login');
         } else if (json) {
             alert('주문되었습니다');
             navigate('/orderComplete');
+            removeCartItems();
         } else {
             alert('주문에 실패하였습니다');
         }

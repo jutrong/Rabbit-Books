@@ -1,50 +1,28 @@
 import { useState, useEffect, useCallback } from 'react';
-import { SERVER_URL, getFetch, getSaveToken } from '../../../utils';
+import { SERVER_URL, deleteFetch, getFetch } from '../../../utils';
 
 const MypageOrder = () => {
     const [items, setItems] = useState([]);
-
     const getMyOrders = useCallback(async () => {
         const json = await getFetch(`${SERVER_URL}/api/orders`);
-        setItems(json);
         console.log(json);
+        setItems(json?.userOrder);
     }, []);
+    const cancelData = async (itemId) => {
+        const json = await deleteFetch(`${SERVER_URL}/api/orders/${itemId}`);
+        if (json?.orderId) {
+            setItems((prev) =>
+                prev.filter((item) => item._id !== json.orderId),
+            );
+        } else {
+            alert('주문 취소가 실패했습니다');
+        }
+    };
+
     useEffect(() => {
         getMyOrders();
-        // fetch(, {
-        //     method: 'get',
-        //     headers: {
-        //         'Content-Type': 'application/json; charset=UTF-8',
-        //         authorization: `token ${getSaveToken()}`,
-        //     },
-        // })
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         setItems(data);
-        //         console.log(data);
-        //     });
     }, [getMyOrders]);
 
-    const cancelData = (itemId) => {
-        fetch(`${SERVER_URL}/api/orders/${itemId}`, {
-            method: 'delete',
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                authorization: `token ${getSaveToken()}`,
-            },
-        })
-            .then((res) => res.json())
-            .then(() => {
-                const updatedItems = items.filter(
-                    (item) => item._id !== itemId,
-                );
-                setItems(updatedItems);
-                console.log(updatedItems);
-            })
-            .catch((error) => {
-                console.error('Error deleting order:', error);
-            });
-    };
     return (
         <div className="main_container_wrap">
             <strong>주문배송조회</strong>
@@ -66,13 +44,15 @@ const MypageOrder = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {items.map((item) => (
-                                        <OrderBook
-                                            item={item}
-                                            key={item._id}
-                                            cancelData={cancelData}
-                                        />
-                                    ))}
+                                    {items &&
+                                        items.length > 0 &&
+                                        items.map((item) => (
+                                            <OrderBook
+                                                item={item}
+                                                key={item._id}
+                                                cancelData={cancelData}
+                                            />
+                                        ))}
                                 </tbody>
                             </table>
                         </div>
@@ -94,7 +74,7 @@ const OrderBook = ({ item, cancelData }) => {
                     <td>
                         <div className="book_info_box">
                             <img
-                                src={SERVER_URL + product.img}
+                                src={SERVER_URL + product.imgPath}
                                 alt="책 이미지"
                             />
                             <div className="book_info">

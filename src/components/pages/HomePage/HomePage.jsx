@@ -1,10 +1,10 @@
-import './HomePage.scss';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+
+import './HomePage.scss';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -230,18 +230,17 @@ const Home = () => {
                             </div>
                         </div>
                     </SwiperSlide>
+                    <div className="swiper_nav">
+                        <div
+                            ref={slideSectionPrevBtn}
+                            className="swiper_nav_prev"
+                        ></div>
+                        <div
+                            ref={slideSectionNextBtn}
+                            className="swiper_nav_next"
+                        ></div>
+                    </div>
                 </Swiper>
-
-                <div className="swiper_nav">
-                    <div
-                        ref={slideSectionPrevBtn}
-                        className="swiper_nav_prev"
-                    ></div>
-                    <div
-                        ref={slideSectionNextBtn}
-                        className="swiper_nav_next"
-                    ></div>
-                </div>
             </section>
 
             <section
@@ -250,6 +249,16 @@ const Home = () => {
                 data-aos-duration="600"
             >
                 <h2>오늘, 토끼의 발견!</h2>
+                <div className="swiper_nav">
+                    <div
+                        ref={todaySectionPrevBtn}
+                        className="swiper_nav_prev"
+                    ></div>
+                    <div
+                        ref={todaySectionNextBtn}
+                        className="swiper_nav_next"
+                    ></div>
+                </div>
                 <Swiper
                     className="todaySwiper"
                     modules={[Navigation]}
@@ -347,16 +356,6 @@ const Home = () => {
                         <p>애나 렘키 · 흐름출판</p>
                     </SwiperSlide>
                 </Swiper>
-                <div className="swiper_nav">
-                    <div
-                        ref={todaySectionPrevBtn}
-                        className="swiper_nav_prev"
-                    ></div>
-                    <div
-                        ref={todaySectionNextBtn}
-                        className="swiper_nav_next"
-                    ></div>
-                </div>
             </section>
 
             <section
@@ -375,6 +374,16 @@ const Home = () => {
                 data-aos-duration="600"
             >
                 <h2>이 달의 작가</h2>
+                <div className="swiper_nav">
+                    <div
+                        ref={authorSectionPrevBtn}
+                        className="swiper_nav_prev"
+                    ></div>
+                    <div
+                        ref={authorSectionNextBtn}
+                        className="swiper_nav_next"
+                    ></div>
+                </div>
                 <Swiper
                     className="todaySwiper"
                     modules={[Navigation]}
@@ -533,16 +542,6 @@ const Home = () => {
                         <p>다자이 오사무</p>
                     </SwiperSlide>
                 </Swiper>
-                <div className="swiper_nav">
-                    <div
-                        ref={authorSectionPrevBtn}
-                        className="swiper_nav_prev"
-                    ></div>
-                    <div
-                        ref={authorSectionNextBtn}
-                        className="swiper_nav_next"
-                    ></div>
-                </div>
             </section>
 
             <section

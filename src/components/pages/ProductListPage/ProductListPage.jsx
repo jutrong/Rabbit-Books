@@ -1,6 +1,7 @@
 import './ProductListPage.scss';
 import {
     SERVER_URL,
+    disCount,
     getFetch,
     priceFormat,
     setCartItems,
@@ -20,27 +21,52 @@ const ProductList = () => {
     const [books, setBooks] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectAll, setSelectAll] = useState(false);
+    const [sort, setSort] = useState('recent');
+
+    const changeSort = (e) => setSort(e.target.value);
+    const bookSorting = useCallback(
+        (books) => {
+            if (sort === 'recent') {
+                return books.sort((a, b) => {
+                    const num1 = Number(a.publishDate.replace(/[^0-9]/g, ''));
+                    const num2 = Number(b.publishDate.replace(/[^0-9]/g, ''));
+                    return num2 - num1;
+                });
+            } else if (sort === 'highPrice') {
+                return books.sort((a, b) => b.price - a.price);
+            } else if (sort === 'lowPrice') {
+                return books.sort((a, b) => a.price - b.price);
+            } else {
+                return books.sort((a, b) =>
+                    a.name < b.name ? -1 : a.name > b.name ? 1 : 0,
+                );
+            }
+        },
+        [sort],
+    );
 
     // 서버에서 책리스트를 받아오는 함수
     const getBooks = useCallback(async () => {
+        let bookList = []; // 책을 담는다.
         const defaultCategory = ['west', 'kor'];
-        setBooks([]); // 초기화
         if (category === 'kor' || category === 'west') {
             // 카테고리가 있으면 접근한 카테고리 책들만 보여준다.
             const data = await getFetch(
                 `${SERVER_URL}/api/products?keyword=${category}`,
             );
-            setBooks(data);
+            bookList = [...data];
         } else {
             // 카테고리가 없으면 전부 보여준다
             for (let i = 0; i < defaultCategory.length; i++) {
                 const data = await getFetch(
                     `${SERVER_URL}/api/products?keyword=${defaultCategory[i]}`,
                 );
-                setBooks((prev) => [...prev, ...data]);
+                bookList = [...bookList, ...data];
             }
         }
-    }, [category]);
+        bookList = bookSorting(bookList);
+        setBooks(bookList);
+    }, [category, bookSorting]);
 
     // 장바구니 추가
     const goCart = () => {
@@ -59,28 +85,6 @@ const ProductList = () => {
     const showModal = () => {
         setModalOpen(true);
     };
-
-    // 선택된 상품을 로컬 스토리지에 저장
-    // const inputStorage = () => {
-    // const updatedCheck = books.map((book) => {
-    //     if (book._id === check) {
-    //         return { ...book, checked: !book.checked };
-    //     }
-    //     return book;
-    // });
-    // setBooks(updatedCheck);
-    // // 로컬 스토리지에서 기존 항목을 가져오거나 빈 배열을 초기화
-    // const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    // const checkedItems = updatedCheck.filter((book) => book.checked);
-    // // 이미 로컬 스토리지에 있는 항목은 필터링
-    // // 현재 book의 id와 동일한 id를 가진 요소가 없을 경우 true를 반환
-    // const newItems = checkedItems.filter(
-    //     (book) => !cartItems.some((item) => item._id === book._id),
-    // );
-    // // 기존 항목과 새로운 항목을 결합
-    // const updatedItems = [...cartItems, ...newItems];
-    // localStorage.setItem('cart', JSON.stringify(updatedItems));
-    // };
 
     // 함수는 전체 선택, 해제 기능
     const handleSelectAll = () => {
@@ -120,57 +124,23 @@ const ProductList = () => {
     return (
         <div className="productlist">
             <div className="list_content">
-                <div className="list_left">
-                    <h3>
-                        <a href="#">국내도서</a>
-                    </h3>
-                    <div>
-                        <h4>
-                            <a href="#">컴퓨터공학</a>
-                        </h4>
-                        <ul>
-                            <li>
-                                <a href="#">컴퓨터공학/과학개론</a>
-                            </li>
-                            <li>
-                                <a href="#">소프트웨어공학</a>
-                            </li>
-                            <li>
-                                <a href="#">정보통신공학</a>
-                            </li>
-                            <li>
-                                <a href="#">컴퓨터구조</a>
-                            </li>
-                            <li>
-                                <a href="#">마이크로프로세서</a>
-                            </li>
-                            <li>
-                                <a href="#">운영체제론</a>
-                            </li>
-                            <li>
-                                <a href="#">자료구조/알고리즘</a>
-                            </li>
-                            <li>
-                                <a href="#">인공지능</a>
-                            </li>
-                            <li>
-                                <a href="#">블록체인</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
                 <div className="list_right">
-                    <header>
-                        <p>컴퓨터 공학</p>
-                        <select name="select w_156" id="bookFilter">
-                            <option>최신순</option>
-                            <option>판매량순</option>
-                            <option>높은가격순</option>
-                            <option>낮은가격순</option>
-                        </select>
-                    </header>
-                    <div className="boundary">
-                        <div>
+                    <h2 className="product_title">
+                        {category === 'west' ? '서양' : '국내'}도서
+                    </h2>
+                    <div className="inp_box_wrap clear">
+                        <p>총 {books.length}건</p>
+                        <div className="right">
+                            <select
+                                className="select w_156"
+                                id="bookFilter"
+                                onChange={changeSort}
+                            >
+                                <option value="recent">최신순</option>
+                                <option value="name">이름순</option>
+                                <option value="highPrice">높은가격순</option>
+                                <option value="lowPrice">낮은가격순</option>
+                            </select>
                             <input
                                 type="checkbox"
                                 className="ch_check hide"
@@ -179,15 +149,12 @@ const ProductList = () => {
                                 checked={selectAll}
                                 onChange={handleSelectAll}
                             />
-                            <label htmlFor="ipChkAll2" className="label">
+                            <label htmlFor="ipChkAll2" className="label w_156">
                                 전체 선택
                             </label>
-                        </div>
-                        <div onClick={goCart}>
-                            <a href="#">
-                                <img src={cart} alt="장바구니" />
-                                <p>장바구니</p>
-                            </a>
+                            <button onClick={goCart} className="blue_btn w_156">
+                                장바구니 담기
+                            </button>
                         </div>
                     </div>
                     <div className="book_list">
@@ -201,7 +168,7 @@ const ProductList = () => {
                         ))}
                     </div>
 
-                    <div className="paging txt_center clear martop_20 pagenation">
+                    <div className="paging txt_center clear martop_40 pagenation">
                         <ul>
                             <li>
                                 <a href="" className="paging_first"></a>
@@ -286,19 +253,9 @@ const BookItem = ({ book, handleCheckboxChange, navigateToItem }) => {
 
     return (
         <div className="items">
-            <input
-                type="checkbox"
-                name="inpChk"
-                key={book._id}
-                className="ch_check hide allcheck"
-                value={''}
-                id={book._id}
-                checked={book.checked}
-                onChange={CheckboxChange}
-            />
-            <label htmlFor={book._id} className="label single"></label>
             <a href="#" onClick={() => navigateToItem(book._id)}>
                 <img
+                    loading="lazy"
                     src={`${SERVER_URL}${book.imgPath}`}
                     alt="책이미지1"
                     id="book1"
@@ -306,12 +263,30 @@ const BookItem = ({ book, handleCheckboxChange, navigateToItem }) => {
             </a>
             <div className="book_content">
                 <p className="book_title">{book.name}</p>
-                <p className="author">{book.author}</p>
-                <div>
-                    <p className="price">{priceFormat(book.price)}원</p>
+                <p className="author">{book.author} 저자(글)</p>
+                <p className="publish_date">{book.publishDate}</p>
+                <div className="price_container">
+                    <div>
+                        <em>10%</em>
+                        <p className="price">
+                            <strong>{priceFormat(disCount(book.price))}</strong>
+                            원<span>{priceFormat(book.price)}원</span>
+                        </p>
+                    </div>
                     <button className="active">
-                        <img src={wish} alt="찜하기" />
+                        <img loading="lazy" src={wish} alt="찜하기" />
                     </button>
+                    <input
+                        type="checkbox"
+                        name="inpChk"
+                        key={book._id}
+                        className="ch_check hide allcheck"
+                        value={''}
+                        id={book._id}
+                        checked={book.checked}
+                        onChange={CheckboxChange}
+                    />
+                    <label htmlFor={book._id} className="label single"></label>
                 </div>
             </div>
         </div>

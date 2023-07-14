@@ -3,7 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import zoom from '../../../assets/images/icons/icon_guide01.png';
 import cart from '../../../assets/images/icons/icon_cart.png';
-import { SERVER_URL, priceFormat, setCartItems } from '../../../utils';
+import {
+    SERVER_URL,
+    disCount,
+    priceFormat,
+    setCartItems,
+} from '../../../utils';
 
 const ProductInfo = () => {
     const [book, setBook] = useState({});
@@ -109,71 +114,89 @@ const ProductInfo = () => {
         <div className="productinfo">
             <section className="left">
                 <div className="book_img">
-                    <img src={`${SERVER_URL}${book.imgPath}`} alt="책2" />
-                    <img src={zoom} alt="돋보기" />
-                    <p>미리보기</p>
+                    <div className="book_img_container">
+                        <img
+                            loading="lazy"
+                            src={`${SERVER_URL}${book.imgPath}`}
+                            alt="책2"
+                        />
+                    </div>
+                    {/* <div className="preview_img_container">
+                        <img loading="lazy" src={zoom} alt="돋보기" />
+                        <p>미리보기</p>
+                    </div> */}
                 </div>
             </section>
             <section className="right">
                 <p className="main_title">{book.name}</p>
-                <p className="sub_title">
-                    자바스크립트 기초부터 애플리케이션 배포까지
-                </p>
+                <p className="sub_title">{book.description}</p>
+                <div className="book_info_container">
+                    <p className="main_author">{book.author} 저자(글)</p>
+                    <p>{book.publishDate}</p>
+                    <span className="star_grade">9.89</span>
+                </div>
                 <p className="price">
-                    <span>💰</span>
-                    {priceFormat(book.price)}원
+                    <em>10%</em>
+                    <strong>{priceFormat(disCount(book.price))}</strong>원
+                    <span>{priceFormat(book.price)}원</span>
                 </p>
                 <div className="delivery_info">
                     <p>배송정보</p>
                     <p>택배배송</p>
                 </div>
                 <div className="delivery_fee">
-                    <p>배송비</p>
-                    <p>무료 (30만원 이상 무료)</p>
+                    <p>배&nbsp;&nbsp;송&nbsp;&nbsp;비</p>
+                    <p>3,000원 (30만원 이상 무료)</p>
                 </div>
                 <p className="plus_fee">제주 4,000원, 도서산간 5,000원 추가</p>
                 <div className="book_counter">
-                    <p>{book.name}</p>
                     <div>
-                        <div className="increase_box">
-                            <button
-                                type="button"
-                                id="minusBtn"
-                                className="minus_btn"
-                                onClick={handleMinus}
-                            >
-                                <i></i>
-                            </button>
-                            <input
-                                type="number"
-                                id="quantity"
-                                value={quantity}
-                                readOnly
-                            />
-                            <button
-                                type="button"
-                                id="plusBtn"
-                                className="plus_btn"
-                                onClick={handlePlus}
-                            >
-                                <i></i>
-                            </button>
+                        <div>
+                            <span className="increase_txt">구매 수량</span>
+                            <div className="increase_box">
+                                <button
+                                    type="button"
+                                    id="minusBtn"
+                                    className="minus_btn"
+                                    onClick={handleMinus}
+                                >
+                                    <i></i>
+                                </button>
+                                <input
+                                    type="number"
+                                    id="quantity"
+                                    value={quantity}
+                                    readOnly
+                                />
+                                <button
+                                    type="button"
+                                    id="plusBtn"
+                                    className="plus_btn"
+                                    onClick={handlePlus}
+                                >
+                                    <i></i>
+                                </button>
+                            </div>
                         </div>
-                        <div className="count_price">
-                            {priceFormat(book.price)}원
-                        </div>
+                        <p className="all_price">
+                            주문 금액
+                            <span>
+                                {priceFormat(disCount(book.price * quantity))}
+                            </span>
+                            <em>원</em>
+                        </p>
                     </div>
-                </div>
-                <p className="all_price">
-                    합계
-                    <span>{priceFormat(book.price * quantity)}원</span>
-                </p>
-                <div className="order_box">
-                    <button className="goCart" onClick={saveToLocalStorage}>
-                        <img src={cart} alt="카트" />
-                        장바구니
-                    </button>
-                    <button onClick={navigateToOrder}>구매하기</button>
+                    <div className="btn_center">
+                        <button
+                            className="black_btn"
+                            onClick={saveToLocalStorage}
+                        >
+                            장바구니
+                        </button>
+                        <button className="blue_btn" onClick={navigateToOrder}>
+                            주문하기
+                        </button>
+                    </div>
                 </div>
             </section>
         </div>

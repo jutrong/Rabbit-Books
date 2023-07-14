@@ -2,48 +2,100 @@
     width: 1200px;
     margin: 0 auto;
     display: flex;
+    padding-top: 80px;
     .left {
-        border-right: 1px dotted #4d47c310;
-        flex: 1;
+        width: 50%;
         .book_img {
-            padding: 140px;
             position: relative;
-            img:first-child {
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.327);
+            .book_img_container {
+                margin: 0 auto;
+                width: 400px;
+                height: 575px;
+                img {
+                    width: 100%;
+                    display: block;
+                    object-fit: cover;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.327);
+                }
             }
-            img:nth-child(2) {
-                width: 30px;
-                height: 27px;
-                margin-top: 10px;
-                position: absolute;
-                bottom: 104px;
-                left: 47%;
-                transform: translateX(-50%);
-                cursor: pointer;
-            }
-            p {
-                position: absolute;
-                left: 51%;
-                bottom: 107px;
-                font-size: 5px;
-                border: 1px solid #4d47c3;
-                border-radius: 10px;
-                padding: 2px 5px;
-                color: #4d47c3;
-                font-weight: bold;
-                box-shadow: 0 0 10px #4d47c339;
-                cursor: pointer;
+
+            .preview_img_container {
+                img {
+                    width: 30px;
+                    height: 27px;
+                    margin-top: 10px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 47%;
+                    transform: translateX(-50%);
+                    cursor: pointer;
+                }
+                p {
+                    position: absolute;
+                    left: 51%;
+                    bottom: 0;
+                    font-size: 5px;
+                    border: 1px solid #4d47c3;
+                    border-radius: 10px;
+                    padding: 2px 5px;
+                    color: #4d47c3;
+                    font-weight: bold;
+                    box-shadow: 0 0 10px #4d47c339;
+                    cursor: pointer;
+                }
             }
         }
     }
     .right {
-        flex: 1;
-        margin-left: 50px;
+        // padding-left: 60px;
+        width: 50%;
         .main_title {
-            font-size: 28px;
+            padding-bottom: 10px;
+            font-size: 32px;
             font-weight: 600;
-            margin-top: 130px;
         }
+        .sub_title {
+            font-size: 16px;
+            color: #4d4d4d;
+        }
+        .book_info_container {
+            padding-top: 8px;
+            * {
+                display: inline-block;
+                font-size: 13px;
+            }
+            * ~ * {
+                position: relative;
+                padding-left: 10px;
+                margin-left: 10px;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 1px;
+                    height: 10px;
+                    background-color: #c4c4c4;
+                }
+            }
+            .star_grade {
+                position: relative;
+                padding-left: 28px;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 10px;
+                    top: 49%;
+                    transform: translateY(-50%);
+                    width: 14px;
+                    height: 14px;
+                    background: url(/src/assets/images/icons/icon_star.png)
+                        no-repeat center/contain;
+                }
+            }
+        }
+
         .delivery_info {
             margin-top: 60px;
             display: flex;
@@ -60,7 +112,7 @@
             display: flex;
             font-size: 13px;
             p:first-child {
-                margin-right: 61px;
+                margin-right: 50px;
             }
         }
         .sub_title {
@@ -68,11 +120,21 @@
         }
         .price {
             margin-top: 30px;
-            font-size: 23px;
-            font-weight: bold;
+            em {
+                color: #4d47c3;
+                font-weight: 700;
+                font-size: 24px;
+            }
+            strong {
+                margin-left: 10px;
+                font-size: 24px;
+            }
             span {
-                margin-right: 10px;
-                font-size: 18px;
+                display: inline-block;
+                margin-left: 8px;
+                font-size: 13px;
+                text-decoration: line-through;
+                color: #999;
             }
         }
         .plus_fee {
@@ -85,29 +147,33 @@
             background-color: #4d47c30e;
             margin-top: 40px;
             border-radius: 10px;
-            p {
+            padding: 20px;
+            p,
+            .increase_txt {
                 font-size: 15px;
-                margin-bottom: 33px;
-                margin-left: 20px;
-                padding-top: 10px;
+                font-weight: 700;
+                margin-right: 15px;
             }
             div {
                 display: flex;
+                align-items: center;
                 justify-content: space-between;
                 .increase_box {
-                    margin-left: 20px;
-                    margin-bottom: 10px;
                     border: none;
+                    input[readonly] {
+                        color: #333;
+                    }
                 }
                 .count_price {
                     font-size: 18px;
                     margin-right: 20px;
+                    font-weight: 700;
                 }
             }
         }
         .all_price {
             text-align: right;
-            margin-top: 30px;
+            font-weight: 700;
             span {
                 color: #4d47c3;
                 margin-left: 15px;
@@ -115,43 +181,17 @@
                 opacity: 1;
                 font-weight: bold;
             }
+            em {
+                font-weight: 400;
+                font-size: 14px;
+                margin-left: 4px;
+            }
         }
-        .order_box {
+        .btn_center {
             display: flex;
             margin-top: 40px;
             button {
-                border: 1px solid #4d47c3;
-                border-radius: 10px;
-                padding: 5px 10px;
-                margin: 0 20px;
-                flex: 1;
-            }
-            button:first-child {
-                opacity: 0.9;
-                transition: 0.3s;
-                position: relative;
-                overflow: hidden;
-                img {
-                    position: absolute;
-                    left: 30px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 20px;
-                    height: 20px;
-                    transition: 0.7s;
-                }
-                &:hover img {
-                    left: 250px;
-                }
-            }
-            button:last-child {
-                background-color: #4d47c3;
-                color: white;
-                opacity: 0.8;
-                transition: 0.3s;
-                &:hover {
-                    opacity: 1;
-                }
+                width: 50%;
             }
         }
     }

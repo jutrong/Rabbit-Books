@@ -455,19 +455,17 @@ header.active{box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);}
 .gnb_bar > li .gnb{position: relative; display: block; padding: 16px 0; margin: 0 auto; width: 100%; font-size: 16px; color: #333333; font-weight: 700; line-height: 22px;}
 .gnb_bar > li .gnb.category{padding-left: 32px; background: url('../images/icons/menu.png') no-repeat left 25% center / 32px;}
 
-.gnb_bar .sub_nav {opacity: 0;overflow: hidden;padding: 0;position: absolute;top: 54px;left: 0;width: 100%;height: 0;border: 1px solid #ededed;background-color: #fff;box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);transition: all .4s;z-index: 99;}
-.gnb_bar > li:hover .sub_nav,
-.gnb_bar > li .sub_nav.active { opacity: 1; height: 446px; padding: 24px 52px 24px 0;}
+.gnb_bar .sub_nav { opacity: 0; overflow: hidden; padding: 0; position: absolute; top: 54px; left: 0; width: 100%; height: 0; border: none; background-color: #fff; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1); transition: all .4s; z-index: 99;}
+.gnb_bar>li:hover .sub_nav,
+.gnb_bar>li .sub_nav.active { opacity: 1; height: 446px; padding: 24px 52px 24px 0; border: 1px solid #ededed;}
 
-.gnb_bar > li .gnb:before{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background-color:transparent; transition: width .2s;}
-.gnb_bar > li .gnb:hover,
-.gnb_bar > li .gnb.active{color: #4D47C3;}
-.gnb_bar > li .gnb:hover:before,
-.gnb_bar > li .gnb.active:before{width:100%; background-color:#4D47C3; outline: 1px solid #000;}
-.gnb_bar > li .gnb.category:hover{background-image: url('../images/icons/menu_hover.png');}
-.gnb_bar > li .gnb.category.active {
-    background-image: url('../images/icons/menu_hover.png');
-}
+.gnb_bar>li .gnb:before {content: '';position: absolute;bottom: 0;left: 0;width: 0;height: 2px;background-color: transparent;transition: width .2s;}
+.gnb_bar>li:hover .gnb,
+.gnb_bar>li .gnb.active {color: #4D47C3;}
+.gnb_bar>li:hover .gnb:before,
+.gnb_bar>li .gnb.active:before {width: 100%;background-color: #4D47C3;outline: 1px solid #000;}
+.gnb_bar>li:hover .gnb.category {background-image: url('../images/icons/menu_hover.png');}
+.gnb_bar>li .gnb.category.active { background-image: url('../images/icons/menu_hover.png');}
 
 .sub_nav .depth01 .sub_menu{display: none; position: absolute; top: 0; padding: 24px 0; margin-left: 220px; width: calc(100% - 220px);}
 .sub_nav .depth01 > li{display: flex; align-items: baseline;}

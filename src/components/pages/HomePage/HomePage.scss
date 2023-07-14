@@ -156,7 +156,9 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 1200px;
-            z-index: 1;
+            z-index: 999;
+            // height: 64px;
+            // outline: 1px solid red;
             .swiper_nav_prev {
                 position: absolute;
                 left: 0;

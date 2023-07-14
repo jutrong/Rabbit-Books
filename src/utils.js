@@ -1,5 +1,6 @@
 export const SERVER_URL =
-    import.meta.env.VITE_SERVER_URL || 'http://kdt-sw-5-team05.elicecoding.com';
+    import.meta.env.VITE_SERVER_URL ||
+    'https://rabbit-bookstore-api.vercel.app';
 const LOGIN_ID = 'loginId';
 const JOIN_NAME = 'joinName';
 const LOGIN_TOKEN = 'token';

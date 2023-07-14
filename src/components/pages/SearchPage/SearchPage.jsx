@@ -1,5 +1,5 @@
 import './SearchPage.scss';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import NoSearch from './NoSearchPage';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
@@ -15,6 +15,31 @@ const Search = () => {
     const { keyword } = useParams();
     const [allData, setAllData] = useState([]);
     const [searchData, setSearchData] = useState([]);
+    const [sort, setSort] = useState('recent');
+
+    const changeSort = (e) => setSort(e.target.value);
+    const bookSorting = useCallback(
+        (books) => {
+            if (sort === 'recent') {
+                return books.sort((a, b) => {
+                    const num1 = Number(a.publishDate.replace(/[^0-9]/g, ''));
+                    const num2 = Number(b.publishDate.replace(/[^0-9]/g, ''));
+                    return num2 - num1;
+                });
+            } else if (sort === 'highPrice') {
+                return books.sort((a, b) => b.price - a.price);
+            } else if (sort === 'lowPrice') {
+                return books.sort((a, b) => a.price - b.price);
+            } else if (sort === 'name') {
+                return books.sort((a, b) =>
+                    a.name < b.name ? -1 : a.name > b.name ? 1 : 0,
+                );
+            } else {
+                return books;
+            }
+        },
+        [sort],
+    );
 
     const getServerData = async () => {
         const category = ['kor', 'west'];
@@ -52,12 +77,13 @@ const Search = () => {
     }, []);
 
     useEffect(() => {
-        const equalData = allData.filter(
+        let equalData = allData.filter(
             (data) =>
                 data.name.includes(keyword) || data.author.includes(keyword),
         );
+        equalData = bookSorting(equalData);
         setSearchData(equalData);
-    }, [keyword, allData]);
+    }, [keyword, allData, bookSorting]);
 
     return (
         <div className="search con_wrap">
@@ -92,11 +118,15 @@ const Search = () => {
 
                     <div className="search_box">
                         <div className="clear">
-                            <select className="select w_156 right">
-                                <option>정렬 선택</option>
-                                <option>추천순</option>
-                                <option>판매순</option>
-                                <option>최신순</option>
+                            <select
+                                className="select w_156 right"
+                                onChange={changeSort}
+                            >
+                                <option value="">정렬 선택</option>
+                                <option value="recent">최신순</option>
+                                <option value="name">이름순</option>
+                                <option value="highPrice">높은가격순</option>
+                                <option value="lowPrice">낮은가격순</option>
                             </select>
                         </div>
 
@@ -203,6 +233,8 @@ const Search = () => {
                         </div>
                     </div>
                 </div>
+            ) : allData.length === 0 ? (
+                <div>검색 중입니다...</div>
             ) : (
                 <NoSearch keyword={keyword} />
             )}

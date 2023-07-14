@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getCartItems, getSaveToken, removeToken } from '../../../utils';
 
+import loginLogo from '../../../assets/images/rabbit.png';
+
 const Header = () => {
     const navigate = useNavigate();
     const [cartNew, setCartNew] = useState(getCartItems());
@@ -71,10 +73,7 @@ const Header = () => {
                 <div className="header_menu">
                     <h1 className="main_logo">
                         <Link to="/">
-                            <img
-                                src="/src/assets/images/rabbit.png"
-                                alt="로고"
-                            />
+                            <img src={loginLogo} alt="로고" />
                         </Link>
                     </h1>
 

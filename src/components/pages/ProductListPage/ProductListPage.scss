@@ -1,69 +1,62 @@
 .productlist {
     position: relative;
-    max-width: 1200px;
-    margin: 100px auto;
+    width: 1200px;
+    margin: 60px auto;
     .list_content {
         display: flex;
-        .list_left {
-            width: 190px;
-            h3 {
+        .list_right {
+            min-width: 100%;
+            .product_title {
+                padding-bottom: 40px;
                 font-size: 30px;
+                text-align: center;
+            }
+            .inp_box_wrap {
+                min-width: 100%;
                 margin-bottom: 30px;
-            }
-        }
-        div {
-            h4 {
-                font-size: 20px;
-                padding-left: 20px;
-                position: relative;
-            }
-            h4::before {
-                content: '';
-                position: absolute;
-                background-image: url(../../../assets/images/icons/icon_prev.png);
-                background-repeat: no-repeat;
-                background-size: 25px;
-                width: 100%;
-                height: 100%;
-                top: 3px;
-                left: -3px;
-                cursor: pointer;
-            }
-            ul {
-                margin-top: 30px;
-                font-size: 15px;
-                margin-left: 20px;
-                li {
-                    margin-bottom: 10px;
-                    opacity: 0.7;
-                    transform: 0.1s;
-                    &:hover {
-                        opacity: 1;
-                        text-decoration: underline;
+                background-color: #f7f7f7;
+                padding: 16px 20px;
+                border-radius: 12px;
+                .right {
+                    & * ~ * {
+                        margin-left: 8px;
+                    }
+                    .blue_btn {
+                        font-size: 14px;
+                        width: 120px;
+                    }
+                    .select {
+                        border-radius: 18px;
+                    }
+                    .label {
+                        display: inline-block;
+                        padding: 0 36px 0 16px;
+                        height: 40px;
+                        line-height: 39px;
+                        border-radius: 18px;
+                        background-color: #fff;
+                        border: 1px solid #e0e0e0;
+                        background-position: right 14px center;
                     }
                 }
-            }
-        }
-        .list_right {
-            width: 950px;
-            margin-left: 60px;
-            header {
-                display: flex;
-                justify-content: space-between;
-                background-color: #4d47c30e;
-                padding: 20px 50px;
-                border-radius: 12px;
-                box-shadow: 0 0 10px #4d47c30e;
                 p {
-                    font-size: 20px;
-                    font-weight: bold;
-                }
-                select {
-                    border: 1px solid rgba(0, 0, 0, 0.158);
-                    padding: 5px 20px;
-                    border-radius: 5px;
-                    text-align: center;
+                    margin-top: 10px;
+                    display: inline-block;
                     position: relative;
+                    padding-left: 22px;
+                    font-weight: bold;
+                    font-size: 16px;
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 53%;
+                        transform: translateY(-50%);
+                        width: 14px;
+                        height: 18px;
+                        background: url('../../../assets/images/icons/icon_check_shape.png')
+                            no-repeat left center / contain;
+                    }
                 }
             }
             .boundary {
@@ -76,17 +69,14 @@
                     display: flex;
                     align-items: end;
                     label {
-                        font-size: 1rpx;
-                        margin-left: 6px;
-                        font-weight: bold;
-                        opacity: 0.8;
+                        font-size: 16px;
+                        font-weight: 700;
                     }
                 }
                 div:last-child {
                     border: 1px solid rgba(0, 0, 0, 0.218);
                     padding: 8px 20px;
                     border-radius: 10px;
-                    margin-right: 11px;
                     cursor: pointer;
                     transition: 0.3s;
                     &:hover {
@@ -103,45 +93,37 @@
                 }
             }
             .book_list {
-                width: 950px;
                 display: flex;
                 flex-wrap: wrap;
+                gap: 30px;
+
                 .items {
-                    flex: 1;
-                    flex-basis: 200px;
-                    width: 200px;
-                    margin-bottom: 80px;
+                    width: calc(100% / 4 - 23px);
                     position: relative;
-                    .label {
-                        position: absolute;
-                        top: -15px;
-                        width: 10px;
-                        height: 30px;
-                        left: 15px;
-                        opacity: 0.3;
-                    }
+
                     > a {
                         display: flex;
                         justify-content: left;
+                        // height: 400px;
+                        height: calc((240px - 2px) * 1.618 - 10px);
+                        overflow: hidden;
                     }
                     #book1 {
-                        width: 200px;
-                        height: 230px;
-                        margin: 0 auto;
-                        margin-top: 30px;
+                        width: 100%;
+
+                        // object-fit: contain;
                         transition: 0.3s;
-                        overflow: hidden;
+
                         &:hover {
-                            transform: scale(1.05);
+                            transform: scale(1.02);
                         }
                     }
                     .book_content {
-                        margin-top: 20px;
-                        margin-left: 20px;
+                        margin-top: 10px;
                         .book_title {
                             font-weight: bold;
                             margin-bottom: 10px;
-                            font-size: 17px;
+                            font-size: 20px;
                             cursor: pointer;
                             &:hover {
                                 text-decoration: underline;
@@ -149,24 +131,49 @@
                         }
                         .author {
                             font-size: 13px;
-                            opacity: 0.7;
-                            cursor: pointer;
                         }
-                        div {
+                        .publish_date {
+                            font-size: 12px;
+                            padding-top: 4px;
+                        }
+                        .price_container {
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
-                            margin-top: 20px;
-                            .price {
-                                font-weight: bold;
-                                color: #4d47c3;
-                                cursor: pointer;
-                                bottom: 10px;
+                            margin-top: 10px;
+                            > div {
+                                display: flex;
+                                em {
+                                    color: #4d47c3;
+                                    font-size: 20px;
+                                    font-weight: 700;
+                                }
+                                .price {
+                                    padding-left: 10px;
+                                    cursor: pointer;
+                                    strong {
+                                        font-size: 20px;
+                                    }
+                                    span {
+                                        display: inline-block;
+                                        margin-left: 8px;
+                                        font-size: 13px;
+                                        text-decoration: line-through;
+                                        color: #999;
+                                    }
+                                }
                             }
                             img {
-                                width: 22px;
-                                height: 22px;
+                                width: 40px;
+                                height: 40px;
                                 margin-right: 15px;
+                            }
+                            .ch_check + .label {
+                                position: absolute;
+                                left: 10px;
+                                top: 10px;
+                                width: 18px;
+                                height: 18px;
                             }
                         }
                     }

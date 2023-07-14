@@ -1,4 +1,4 @@
-import './Mypage.scss';
+import './MyPage.scss';
 import { useEffect, useState } from 'react';
 import MypageUser from './MypageUser';
 import MypageEmpty from './MypageEmpty';

@@ -1,0 +1,71 @@
+.dimLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.08);
+    z-index: 999;
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    .loading_text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        text-align: center;
+        color: #d3d3d3;
+        font-weight: 700;
+        font-size: 12px;
+    }
+    .loading_bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 40px;
+        width: 300px;
+        border: 2px solid #000;
+        font-size: 24px;
+        text-transform: uppercase;
+        mix-blend-mode: difference;
+        z-index: 99;
+    }
+    .loading_bar::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: #b2b83c;
+
+        animation: loadingAni 3s linear infinite;
+    }
+}
+
+@keyframes loadingAni {
+    0% {
+        width: 0%;
+        border-radius: 0 20px 20px 0;
+    }
+    50% {
+        border-radius: 0 20px 20px 0;
+    }
+    100% {
+        width: 100%;
+        border-radius: 0;
+    }
+}

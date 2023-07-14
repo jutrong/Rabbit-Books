@@ -286,7 +286,7 @@ const Cart = () => {
                             </div>
                             <div className="order_btn">
                                 <button
-                                    className="blue_btn w_156 martop_10"
+                                    className="blue_btn big w_276 martop_10"
                                     onClick={goOrder}
                                 >
                                     주문하기

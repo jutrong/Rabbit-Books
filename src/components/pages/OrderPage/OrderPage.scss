@@ -3,79 +3,20 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    // header area
-    header {
-        display: flex;
-        align-items: center;
+    .order_header {
         width: 100%;
-        height: 50px;
-        margin-top: 50px;
-        .header_left {
-            height: 100%;
-            flex: 4;
-            display: flex;
-            align-items: center;
-            p {
-                font : {
-                    size: 30px;
-                    weight: 600;
-                }
-                margin-left: 20px;
-            }
-        }
-        .header_right {
-            height: 100%;
-            flex: 2;
-            display: flex;
-            align-items: center;
-            justify-content: right;
-            ul {
-                display: flex;
-                align-items: center;
-                li {
-                    margin-left: 50px;
-                    font-size: 15px;
-                    opacity: 0.6;
-                    position: relative;
-                    &::before {
-                        content: attr(num);
-                        text-align: center;
-                        line-height: 16px;
-                        font-size: 12px;
-                        position: absolute;
-                        width: 17px;
-                        height: 17px;
-                        background: rgba(211, 211, 211, 0.329);
-                        border-radius: 50%;
-                        top: 3px;
-                        left: -23px;
-                    }
-                }
-                .active {
-                    opacity: 1;
-                    font-weight: 600;
-                    &::before {
-                        background-color: #4d47c3;
-                        color: white;
-                        box-shadow: 0 0 10px #6e6e7228;
-                    }
-                }
-            }
-        }
+        margin-top: 60px;
     }
-    // content area
+
     .content {
         display: flex;
         width: 100%;
         .content_left {
-            flex: 4;
-        }
-        .content_left {
+            width: calc(100% - 360px);
             .content_container {
                 .delivery_area {
                     margin-top: 61px;
                     border: 1px solid #4d47c3;
-                    width: 90%;
                     border-radius: 10px;
                     background-color: #4d47c307;
                     display: flex;
@@ -86,20 +27,20 @@
                         margin-bottom: 20px;
                         margin-top: 14px;
                         .info_left {
-                            flex: 1;
                             padding: 30px;
                             font-size: 16px;
                             font-weight: bold;
                         }
                         .info_right {
-                            flex: 4;
-                            padding: 20px;
+                            margin-top: 28px;
+                            margin-left: 30px;
                             font-size: 16px;
                             p {
                                 color: #4d47c3;
                                 font-weight: bold;
                                 margin-left: 32px;
                                 position: relative;
+                                padding-bottom: 10px;
                             }
                             p::before {
                                 content: '';
@@ -116,20 +57,23 @@
                                 font-size: 14px;
                                 margin-top: 5px;
                             }
-                            span:last-of-type {
-                                font-size: 12px;
-                                opacity: 0.7;
+                            .address_box {
+                                padding-top: 10px;
                             }
-                            button {
+                            span.address {
+                                display: inline-block;
+                                font-size: 14px;
+                            }
+                            .white_btn {
                                 width: 60px;
-                                height: 20px;
-                                line-height: 5px;
+                                height: 28px;
+                                line-height: 26px;
                                 margin-left: 20px;
-                                font-size: 12px;
-                                transition: 0.4s;
-                            }
-                            button:hover {
-                                border: 1px solid black;
+                                font-size: 13px;
+                                transition: 0.3s;
+                                :hover {
+                                    border: 1px solid black;
+                                }
                             }
                         }
                     }
@@ -142,41 +86,34 @@
                             font-size: 16px;
                             font-weight: bold;
                         }
-                        button {
-                            width: 600px;
-                            height: 40px;
-                            transition: 0.5s;
-                        }
-                        button:hover {
-                            border: 1px solid black;
+                        .select {
+                            width: calc(100% - 200px);
                         }
                     }
                 }
                 .order_product {
                     border: 1px solid #4d47c3;
                     margin-top: 60px;
-                    width: 90%;
                     border-radius: 10px;
                     background-color: #4d47c307;
                     .product_header {
-                            margin: 30px 50px;
-                            display: flex;
-                            align-items: center;
-                            > span {
-                                font-size: 25px;
-                                margin-right: 160px;
+                        margin: 30px 50px;
+                        display: flex;
+                        align-items: center;
+                        > span {
+                            font-size: 25px;
+                            margin-right: 160px;
+                            font-weight: bold;
+                        }
+                        p {
+                            font-size: 18px;
+                            span {
+                                color: #4d47c3;
+                                font-size: 22px;
                                 font-weight: bold;
                             }
-                            p {
-                                font-size: 14px;
-                                span {
-                                    color: #4d47c3;
-                                    font-size: 16px;
-                                    font-weight: bold;
-                                }
-                            }
                         }
-
+                    }
 
                     .product_content {
                         display: flex;
@@ -198,21 +135,21 @@
                             width: 210px;
                         }
                         p:nth-of-type(2) {
-                            font-size: 9px;
+                            font-size: 12px;
                             background-color: #4d47c3;
                             color: white;
-                            padding: 2px 8px;
-                            border-radius: 10px;
+                            padding: 4px 12px;
+                            border-radius: 12px;
                         }
                         p:nth-of-type(4) {
                             font-weight: bold;
+                            font-size: 20px;
                         }
                     }
                 }
                 .coupon_area {
                     margin-top: 61px;
                     border: 1px solid #4d47c3;
-                    width: 90%;
                     border-radius: 10px;
                     background-color: #4d47c307;
                     display: flex;
@@ -232,7 +169,6 @@
                 .order_select {
                     margin-top: 61px;
                     border: 1px solid #4d47c3;
-                    width: 90%;
                     border-radius: 10px;
                     background-color: #4d47c307;
                     > span {
@@ -245,7 +181,7 @@
                     .select_box {
                         border-top: 1px solid rgba(0, 0, 0, 0.237);
                         .toss {
-                            padding: 20px 0;
+                            padding: 20px 30px;
                             background-color: #4d47c331;
                             position: relative;
                             cursor: pointer;
@@ -261,7 +197,7 @@
                             }
                         }
                         .other {
-                            padding: 20px 0;
+                            padding: 20px 30px;
                             border-top: 1px solid rgba(0, 0, 0, 0.237);
                             border-bottom: 1px solid rgba(0, 0, 0, 0.237);
                             position: relative;
@@ -299,9 +235,9 @@
         }
 
         .content_right {
-            flex: 1;
+            margin-left: 60px;
             .sidebar {
-                width: 230px;
+                width: 300px;
                 border: 1px solid #4d47c3;
                 border-radius: 10px;
                 margin: 0 auto;

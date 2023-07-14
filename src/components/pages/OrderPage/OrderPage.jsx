@@ -29,7 +29,7 @@ const Order = () => {
         } else {
             const { username: name, phone, address } = json;
             setUserName(name);
-            setPhone(콜);
+            setPhone(phone);
             setAddress(address);
         }
     }, [navigate]);
@@ -107,28 +107,42 @@ const Order = () => {
                                         <div className="info_right">
                                             <p>내 정보</p>
                                             <span>
-                                                {userName} / {phone}
+                                                <strong>이름 : </strong>
+                                                {userName}
+                                                &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <strong>핸드폰 : </strong>
+                                                {phone}
                                             </span>
-                                            <span className="address">
-                                                {address}
-                                            </span>
-                                            <button className="white_btn w_276">
-                                                변경
-                                            </button>
+                                            <div className="address_box">
+                                                <span className="address">
+                                                    <strong>주소 : </strong>
+                                                    {address}
+                                                </span>
+                                                <button className="white_btn w_276">
+                                                    변경
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="delivery_message">
                                         <p>배송지요청사항</p>
-                                        <button className="white_btn w_276">
-                                            배송요청사항 메시지
-                                        </button>
+                                        <select className="select">
+                                            <option>배송요청사항 메시지</option>
+                                            <option>
+                                                문 앞에 놓고 가주세요
+                                            </option>
+                                            <option>
+                                                부재시 경비실에 맡겨 주세요
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="order_product">
                                     <div className="product_header">
                                         <span>주문상품</span>
                                         <p>
-                                            총 <span>{totalNumber}</span>개
+                                            총&nbsp;&nbsp;&nbsp;
+                                            <span>{totalNumber}</span>개
                                         </p>
                                     </div>
                                     {cartData.map((item) => (
@@ -147,15 +161,32 @@ const Order = () => {
                                     <span>결제수단</span>
                                     <div className="select_box">
                                         <div className="toss">
-                                            <p>토스페이</p>
-                                            <img src={radioOn} alt="라디오온" />
+                                            <input
+                                                type="radio"
+                                                name="inpRadio"
+                                                className="ch_radio hide"
+                                                id="inpRadio1"
+                                            />
+                                            <label
+                                                htmlFor="inpRadio1"
+                                                className="label"
+                                            >
+                                                토스 페이
+                                            </label>
                                         </div>
                                         <div className="other">
-                                            <p>다른 결제 수단</p>
-                                            <img
-                                                src={radioOff}
-                                                alt="라디오오프"
+                                            <input
+                                                type="radio"
+                                                name="inpRadio"
+                                                className="ch_radio hide"
+                                                id="inpRadio2"
                                             />
+                                            <label
+                                                htmlFor="inpRadio2"
+                                                className="label"
+                                            >
+                                                다른 결제수단
+                                            </label>
                                         </div>
                                     </div>
                                     <div className="three_box">
@@ -229,20 +260,16 @@ const OrderProduct = ({ item }) => {
 };
 const OrderProcedure = () => {
     return (
-        <header>
-            <div className="header_left">
-                <p>주문/결제</p>
-            </div>
-            <div className="header_right">
+        <div className="order_header">
+            <div className="title_box">
+                <strong className="sub_title">장바구니</strong>
                 <ul>
-                    <li num="1">장바구니</li>
-                    <li className="active" num="2">
-                        주문/결제
-                    </li>
-                    <li num="3">주문완료</li>
+                    <li className="list1">장바구니</li>
+                    <li className="list2 active">주문/결제</li>
+                    <li className="list3">주문완료</li>
                 </ul>
             </div>
-        </header>
+        </div>
     );
 };
 export default Order;

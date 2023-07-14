@@ -21,7 +21,6 @@ const OrderComplete = () => {
                 <h2>
                     <span>주문이 완료되었습니다 🤝</span>
                 </h2>
-                <p> 감사합니다</p>
                 <Link to="/" className="blue_btn" onClick={routeToProductlist}>
                     홈페이지로 이동
                 </Link>

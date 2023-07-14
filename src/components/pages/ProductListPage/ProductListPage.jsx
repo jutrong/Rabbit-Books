@@ -298,9 +298,11 @@ const CartModal = ({ closeModal, navigateToCart }) => {
             <div className="modal">
                 <h4>장바구니에 추가되었습니다.</h4>
                 <div>
-                    <button onClick={closeModal}>계속 장보기</button>
-                    <button onClick={navigateToCart}>
-                        장바구니로 이동하기
+                    <button className="blue_btn" onClick={closeModal}>
+                        계속 장보기
+                    </button>
+                    <button className="black_btn" onClick={navigateToCart}>
+                        장바구니 이동하기
                     </button>
                 </div>
             </div>

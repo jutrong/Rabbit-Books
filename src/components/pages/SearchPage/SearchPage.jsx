@@ -9,6 +9,7 @@ import {
     priceFormat,
     setCartItems,
 } from '../../../utils';
+import Loading from '../../atoms/Common/Loading';
 
 const Search = () => {
     const navigate = useNavigate();
@@ -87,7 +88,7 @@ const Search = () => {
 
     return (
         <div className="search con_wrap">
-            {searchData.length > 0 ? (
+            {allData.length > 0 || searchData.length > 0 ? (
                 <div className="search_container">
                     <strong className="search_title">
                         &#39;<em>{keyword}</em>&#39;에 대한 검색 결과
@@ -122,7 +123,6 @@ const Search = () => {
                                 className="select w_156 right"
                                 onChange={changeSort}
                             >
-                                <option value="">정렬 선택</option>
                                 <option value="recent">최신순</option>
                                 <option value="name">이름순</option>
                                 <option value="highPrice">높은가격순</option>
@@ -234,7 +234,7 @@ const Search = () => {
                     </div>
                 </div>
             ) : allData.length === 0 ? (
-                <div>검색 중입니다...</div>
+                <Loading />
             ) : (
                 <NoSearch keyword={keyword} />
             )}

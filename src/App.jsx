@@ -38,7 +38,6 @@ const App = () => {
             <Route path="/join" element={<Join />} />
             <Route path="/joinComplete" element={<JoinComplete />} />
             <Route path="/orderComplete" element={<OrderComplete />} />
-
         </Routes>
     );
 };

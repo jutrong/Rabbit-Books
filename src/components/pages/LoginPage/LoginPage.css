@@ -1,0 +1,125 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.login-left {
+    color: #000;
+    position: relative;
+}
+
+.login-left > h3 {
+    font-size: 50px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.login-left > .subtitle {
+    font-size: 28px;
+    text-align: left;
+}
+
+.login-left > .info {
+    text-align: left;
+    padding-top: 50px;
+}
+
+.login-left > .info > a {
+    margin: 0;
+    padding-left: 8px;
+    color: #4D47C3;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.login-left > .login-logo {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    top: 66px;
+    left: 152px;
+    z-index: -1;
+}
+
+.login-right {
+    flex-basis: 350px;
+    max-width: 350px;
+}
+
+.login-right > h3 {
+    color: #000;
+    font-size: 30px;
+    padding: 30px 0;
+}
+
+.login-right > .inputs > input {
+    appearance: none;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background: #F0EFFF;
+    height: 62px;
+    width: 100%;
+    padding: 20px;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-right > .inputs > input:not(:first-child) {
+    margin-top: 28px;
+}
+
+.login-right > .inputs > input::placeholder {
+    color: #A7A3FF;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+}
+
+.login-right > .remember {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.login-right .find {
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.login-right .find > span {
+    display: inline-block;
+    padding: 0 4px;
+}
+
+.login-right .find > p {
+    cursor: pointer;
+}
+
+
+.login-right > .login-btn {
+    border-radius: 9px;
+    background: #4D47C3;
+    box-shadow: 0px 4px 61px 0px rgba(77, 71, 195, 0.40);
+    width: 100%;
+    padding: 12px 16px;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}

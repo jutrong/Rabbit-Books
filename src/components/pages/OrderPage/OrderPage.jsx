@@ -54,7 +54,6 @@ const Order = () => {
         };
 
         const json = await postFetch(`${SERVER_URL}/api/orders`, data);
-        console.log(json);
         if (json?.reason) {
             alert(json?.reason);
         } else if (json?.error) {

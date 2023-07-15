@@ -74,10 +74,11 @@ const Search = () => {
     };
 
     useEffect(() => {
-        getServerData();
+        getServerData(); // 서버에서 모든 책 정보를 가져온다.
     }, []);
 
     useEffect(() => {
+        // 책 필터링 시작
         let equalData = allData.filter(
             (data) =>
                 data.name.includes(keyword) || data.author.includes(keyword),

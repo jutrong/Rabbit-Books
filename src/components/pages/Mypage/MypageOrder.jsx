@@ -5,7 +5,6 @@ const MypageOrder = () => {
     const [items, setItems] = useState([]);
     const getMyOrders = useCallback(async () => {
         const json = await getFetch(`${SERVER_URL}/api/orders`);
-        console.log(json);
         setItems(json?.userOrder);
     }, []);
     const cancelData = async (itemId) => {
